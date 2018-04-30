@@ -23,7 +23,7 @@ def drive(a_star, err, prevErr):
 	d = (err - prevErr)*1.0 / TARGETDISTANCE
 	l = MAXMOTOR * d
 	r = MAXMOTOR * d
-	a_star.motors(int(l), (r))
+	a_star.motors(int(l), int(r))
 
 def main():
 	try:
