@@ -68,6 +68,7 @@ def main():
 		print(s)
 		try:
 			distance = parseDistance(s)
+			print(distance)
 		except:
 			continue
 		err = distance - TARGETDISTANCE
