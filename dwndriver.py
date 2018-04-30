@@ -11,7 +11,7 @@ TIMEOUT = 10
 def parseDistance(s):
 	a = s.strip().split(',')
 	print(a)
-	return float(a[len(a)])
+	return float(a[-1])
 
 # in the future, maybe use a better function than random
 def turn(a_star):
