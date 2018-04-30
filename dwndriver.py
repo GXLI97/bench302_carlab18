@@ -10,6 +10,7 @@ TIMEOUT = 10
 
 def parseDistance(s):
 	a = s.split(',')
+	print(a)
 	return float(a[len(a)])
 
 # in the future, maybe use a better function than random
