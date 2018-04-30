@@ -9,7 +9,7 @@ MINMOTOR = 0
 TIMEOUT = 10
 
 def parseDistance(s):
-	a = s.split(',')
+	a = s.strip().split(',')
 	print(a)
 	return float(a[len(a)])
 
