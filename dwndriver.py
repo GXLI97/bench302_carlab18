@@ -15,7 +15,7 @@ def parseDistance(s):
 
 # in the future, maybe use a better function than random
 def turn(a_star):
-	r = random.randInt(-MAXMOTOR/2, MAXMOTOR/2)
+	r = random.randint(-MAXMOTOR/2, MAXMOTOR/2)
 	a_star.motors(0, r)
 
 # somehow need to map a changing error to a motor power
