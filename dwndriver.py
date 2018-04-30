@@ -22,7 +22,7 @@ def drive(a_star, err, prevErr):
 	d = (err - prevErr)*1.0 / TARGETDISTANCE
 	l = MAXMOTOR * d
 	r = MAXMOTOR * d
-	a_star.motors(l, r)
+	a_star.motors(int(l), (r))
 
 def main():
 	try:
@@ -48,15 +48,10 @@ def main():
 	print(res.decode("utf-8"), end='', flush=True)
 	time.sleep(0.5)
 
-	print()
-	print("Printing distances for the next 10 seconds...")
 	time.sleep(0.5)
 	timeout = time.time() + TIMEOUT
 
 	ser.write(b'lec\r')
-	res=ser.read(4)
-	#print(res.decode("utf-8"),end='',flush=True)
-
 
 	prevErr = 0
 	err = 0
@@ -66,12 +61,16 @@ def main():
 			ser.write(b'lec\r')
 			ser.close()
 			break
-		res=ser.read(37)
+		res=ser.readline()
 		if len(res) <= 0:
 			continue
 		s = res.decode('utf-8')
-		distance = parseDistance(s)
-		err = distance - TARGET_DISTANCE
+		print(s)
+		try:
+			distance = parseDistance(s)
+		except:
+			continue
+		err = distance - TARGETDISTANCE
 
 		# if the error is increasing, turn a different way
 		if err > prevErr:
