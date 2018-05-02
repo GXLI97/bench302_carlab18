@@ -5,7 +5,7 @@ from a_star import AStar
 from statistics import mean
 
 TARGETDISTANCE = 1 #meter, I think
-MAXMOTOR = 100
+MAXMOTOR = 50
 MINMOTOR = 0
 TIMEOUT = 10
 
@@ -96,6 +96,13 @@ def main():
 			dd = d1-d2 
 
 			print("Errors: d1 = {:.2f}, d2 = {:.2f}, dd = {:.2f}".format(d1,d2,dd))
+
+			if d1 > 0:
+				a_star.motors(int(l), int(r))
+			else:
+				l = l + random.randint(0, 10)
+				r = r - random.randint(0, 10)
+				a_star.motors(int(l), int(r))
 
 
 if __name__ == '__main__':
