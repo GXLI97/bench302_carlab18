@@ -7,7 +7,7 @@ from statistics import mean
 TARGETDISTANCE = 1 #meter, I think
 MAXMOTOR = 50
 MINMOTOR = 0
-TIMEOUT = 10
+TIMEOUT = 30
 
 def parseDistance(s):
 	a = s.strip().split(',')
@@ -86,7 +86,7 @@ def main():
 
 		if (i%5)== 0:
 			avg = mean(distances[-5:])
-			print("Averaged Distance: {}".format(avg))
+			print("Averaged Distance: {:.2f}".format(avg))
 			errs.append(avg - TARGETDISTANCE)
 
 			# do stuff.
