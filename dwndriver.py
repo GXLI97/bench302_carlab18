@@ -62,7 +62,9 @@ def main():
 	errs = []
 	distances = []
 
+	i = 0
 	while True:
+		i += 1
 		# in the future, we probably want this timeout to be much longer
 		if time.time() > timeout:
 			ser.write(b'lec\r')
@@ -74,14 +76,15 @@ def main():
 		s = res.decode('utf-8')
 		try:
 			dist = parseDistance(s)
-			print("Distance: {}".format(dist))
+			# print("Distance: {}".format(dist))
 			distances.append(dist)
 		except:
 			print("uhoh")
 			continue
 
-		if 0 == 0:
+		if (i%5)== 0:
 			avg = mean(distances[-5:])
+			print("Averaged Distance: {}".format(avg))
 			errs.append(avg - TARGETDISTANCE)
 
 			# do stuff.
@@ -92,7 +95,7 @@ def main():
 			d2 = errs[-3] - errs[-2]
 			dd = d1-d2 
 
-			print("Errors: d1 = {}, d2 = {}, dd = {}".format(d1,d2,dd))
+			# print("Errors: d1 = {}, d2 = {}, dd = {}".format(d1,d2,dd))
 
 
 if __name__ == '__main__':
