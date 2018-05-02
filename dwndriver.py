@@ -78,7 +78,7 @@ def main():
 		s = res.decode('utf-8')
 		try:
 			dist = parseDistance(s)
-			# print("Distance: {}".format(dist))
+			print("Distance: {}".format(dist))
 			distances.append(dist)
 		except:
 			print("uhoh")
