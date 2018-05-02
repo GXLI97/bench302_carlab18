@@ -99,11 +99,11 @@ def main():
 
 			print("Errors: d1 = {:.2f}, d2 = {:.2f}, dd = {:.2f}".format(d1,d2,dd))
 
-			if d1 < 0.1:
+			if d1 > 0.1:
 				a_star.motors(150, 150)
 				continue
 
-			if dd < 0:
+			if dd > 0:
 				# turn in same direction.
 				shift = 10
 				if l>=r:
