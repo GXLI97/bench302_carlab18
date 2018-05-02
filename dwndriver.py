@@ -78,7 +78,7 @@ def main():
 		except:
 			continue
 
-		if (len(dist) % 5) == 0:
+		if (len(distances) % 5) == 0:
 			avg = mean(distances[-5:])
 			err.append(avg - TARGETDISTANCE)
 
