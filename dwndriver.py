@@ -91,40 +91,43 @@ def main():
 
 			# do stuff.
 			if len(errs) < 3:
+				a_star.motors(150, 150)
 				continue
 
-			d1 = errs[-2] - errs[-1]
-			d2 = errs[-3] - errs[-2]
+			d1 = errs[-1] - errs[-2]
+			d2 = errs[-2] - errs[-3]
 			dd = d1-d2 
 
 			print("Errors: d1 = {:.2f}, d2 = {:.2f}, dd = {:.2f}".format(d1,d2,dd))
 
-			if d1 > 0.1:
-				a_star.motors(150, 150)
-				continue
+			a_star.motors(150, 150)
 
-			if dd > 0:
-				# turn in same direction.
-				shift = 10
-				if l>=r:
-					l += shift
-					r -= shift
-				else:
-					l -= shift
-					r += shift
-				a_star.motors(l, r)
-			else:
-				# turn in opposite direction.
-				shift = -10
-				if l>=r:
-					l += shift
-					r -= shift
-				else:
-					l -= shift
-					r += shift
-				a_star.motors(l, r)
+			# if d1 > 0.1:
+			# 	a_star.motors(150, 150)
+			# 	continue
 
-			print("Direction: {} {}".format(l, r))
+			# if dd > 0:
+			# 	# turn in same direction.
+			# 	shift = 10
+			# 	if l>=r:
+			# 		l += shift
+			# 		r -= shift
+			# 	else:
+			# 		l -= shift
+			# 		r += shift
+			# 	a_star.motors(l, r)
+			# else:
+			# 	# turn in opposite direction.
+			# 	shift = -10
+			# 	if l>=r:
+			# 		l += shift
+			# 		r -= shift
+			# 	else:
+			# 		l -= shift
+			# 		r += shift
+			# 	a_star.motors(l, r)
+
+			# print("Direction: {} {}".format(l, r))
 
 if __name__ == '__main__':
 	main()
