@@ -99,13 +99,26 @@ def main():
 
 			print("Errors: d1 = {:.2f}, d2 = {:.2f}, dd = {:.2f}".format(d1,d2,dd))
 
-			if d1 > 0:
-				l, r = 100, 100
-				a_star.motors(int(l), int(r))
+			if dd > 0:
+				# turn in same direction.
+				shift = 5
+				if l>=r:
+					l += shift
+					r -= shift
+				else:
+					l -= shift
+					r += shift
+				a_star.motors(l, r)
 			else:
-				l = l + random.randint(-10, 10)
-				r = r - random.randint(-10, 10)
-				a_star.motors(int(l), int(r))
+				# turn in opposite direction.
+				shift = -5
+				if l>=r:
+					l += shift
+					r -= shift
+				else:
+					l -= shift
+					r += shift
+				a_star.motors(l, r)
 
 
 if __name__ == '__main__':
