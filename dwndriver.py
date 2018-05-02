@@ -84,8 +84,8 @@ def main():
 			print("uhoh")
 			continue
 
-		if (i%5)== 0:
-			avg = mean(distances[-5:])
+		if (i%10)== 0:
+			avg = mean(distances[-10:])
 			print("Averaged Distance: {:.2f}".format(avg))
 			errs.append(avg - TARGETDISTANCE)
 
@@ -99,7 +99,7 @@ def main():
 
 			print("Errors: d1 = {:.2f}, d2 = {:.2f}, dd = {:.2f}".format(d1,d2,dd))
 
-			if d1 > 0.2:
+			if d1 > 0.1:
 				a_star.motors(150, 150)
 				continue
 
