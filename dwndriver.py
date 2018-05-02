@@ -7,7 +7,7 @@ from statistics import mean
 TARGETDISTANCE = 1 #meter, I think
 MAXMOTOR = 50
 MINMOTOR = 0
-TIMEOUT = 30
+TIMEOUT = 10
 
 def parseDistance(s):
 	a = s.strip().split(',')
@@ -103,9 +103,9 @@ def main():
 				a_star.motors(150, 150)
 				continue
 
-			if dd > 0:
+			if dd < 0:
 				# turn in same direction.
-				shift = 20
+				shift = 10
 				if l>=r:
 					l += shift
 					r -= shift
@@ -115,7 +115,7 @@ def main():
 				a_star.motors(l, r)
 			else:
 				# turn in opposite direction.
-				shift = -20
+				shift = -10
 				if l>=r:
 					l += shift
 					r -= shift
