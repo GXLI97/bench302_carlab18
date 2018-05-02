@@ -52,14 +52,15 @@ def main():
 	ser.write(b'\r\r') # go into serial mode.
 	time.sleep(2)
 	res=ser.read(100) # read some things.
-	print(res.decode("utf-8"), end='', flush=True)
+	# print(res.decode("utf-8"), end='', flush=True)
 	time.sleep(0.5)
 	time.sleep(0.5)
 	timeout = time.time() + TIMEOUT
 	ser.write(b'lec\r') # start writing distances.
 
-	prevErr = 0
-	err = 0
+	errs = []
+	distances = []
+
 	while True:
 		# in the future, we probably want this timeout to be much longer
 		if time.time() > timeout:
@@ -71,21 +72,26 @@ def main():
 			continue
 		s = res.decode('utf-8')
 		try:
-			distance = parseDistance(s)
-			print(distance)
+			dist = parseDistance(s)
+			print("Distance: {}".format(dist))
+			distances.append(dist)
 		except:
 			continue
-		err = distance - TARGETDISTANCE
 
-		# if the error is increasing, turn a different way
-		if err > prevErr:
-			turn(a_star)
-		# otherwise, go straight
-		else:
-			drive(a_star, err, prevErr)
-		# maybe in the future, turn() and drive() could be the same function
+		if (len(dist) % 5) == 0:
+			avg = mean(distances[-5:])
+			err.append(avg - TARGETDISTANCE)
 
-		prevErr = err
+			# do stuff.
+			if len(errs) < 3:
+				continue
+
+			d1 = errs[-2] - errs[-1]
+			d2 = errs[-3] - errs[-2]
+			dd = d1-d2 
+			
+			print("Errors: d1 = {}, d2 = {}, dd = {}".format(d1,d2,dd))
+
 
 if __name__ == '__main__':
 	main()
