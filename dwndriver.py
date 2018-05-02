@@ -3,6 +3,7 @@ import time
 import random
 from a_star import AStar
 from statistics import mean, median
+import pickle
 
 TARGETDISTANCE = 1 #meter, I think
 MAXMOTOR = 50
@@ -128,8 +129,8 @@ def main():
 			# 	a_star.motors(l, r)
 
 			# print("Direction: {} {}".format(l, r))
-	import matplotlib.pyplot as plt
-	plt.plot(distances)
+	with open('errors.pkl', 'wb') as f:
+		pickle.dump(mylist, f)
 
 if __name__ == '__main__':
 	main()
