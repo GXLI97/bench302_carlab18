@@ -70,6 +70,7 @@ def main():
 		if time.time() > timeout:
 			ser.write(b'lec\r')
 			ser.close()
+			a_star.motors(0, 0)
 			break
 		res=ser.readline()
 		if len(res) <= 0:
@@ -98,12 +99,12 @@ def main():
 
 			print("Errors: d1 = {:.2f}, d2 = {:.2f}, dd = {:.2f}".format(d1,d2,dd))
 
-			if d1 > 0:
-				a_star.motors(int(l), int(r))
-			else:
-				l = l + random.randint(0, 10)
-				r = r - random.randint(0, 10)
-				a_star.motors(int(l), int(r))
+			# if d1 > 0:
+			# 	a_star.motors(int(l), int(r))
+			# else:
+			# 	l = l + random.randint(0, 10)
+			# 	r = r - random.randint(0, 10)
+			# 	a_star.motors(int(l), int(r))
 
 
 if __name__ == '__main__':
