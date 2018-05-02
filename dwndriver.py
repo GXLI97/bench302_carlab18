@@ -128,6 +128,8 @@ def main():
 			# 	a_star.motors(l, r)
 
 			# print("Direction: {} {}".format(l, r))
+	import matplotlib.pyplot as plt
+	plt.plot(distances)
 
 if __name__ == '__main__':
 	main()
