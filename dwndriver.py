@@ -85,7 +85,7 @@ def main():
 			continue
 
 		if (i%10)== 0:
-			avg = mean(distances[-10:])
+			avg = median(distances[-10:])
 			print("Averaged Distance: {:.2f}".format(avg))
 			errs.append(avg - TARGETDISTANCE)
 
