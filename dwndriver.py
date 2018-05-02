@@ -61,6 +61,7 @@ def main():
 
 	errs = []
 	distances = []
+	l, r = 100, 100
 
 	i = 0
 	while True:
