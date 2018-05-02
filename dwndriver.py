@@ -61,7 +61,7 @@ def main():
 
 	errs = []
 	distances = []
-	l, r = 100, 100
+	l, r = 150, 150
 
 	i = 0
 	while True:
@@ -99,9 +99,13 @@ def main():
 
 			print("Errors: d1 = {:.2f}, d2 = {:.2f}, dd = {:.2f}".format(d1,d2,dd))
 
+			if d1 > 0:
+				a_star.motors(l, r)
+				continue
+				
 			if dd > 0:
 				# turn in same direction.
-				shift = 5
+				shift = 20
 				if l>=r:
 					l += shift
 					r -= shift
@@ -111,7 +115,7 @@ def main():
 				a_star.motors(l, r)
 			else:
 				# turn in opposite direction.
-				shift = -5
+				shift = -20
 				if l>=r:
 					l += shift
 					r -= shift
