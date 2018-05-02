@@ -91,7 +91,7 @@ def main():
 
 			# do stuff.
 			if len(errs) < 3:
-				a_star.motors(150, 150)
+				# a_star.motors(150, 150)
 				continue
 
 			d1 = errs[-1] - errs[-2]
