@@ -2,6 +2,7 @@ import serial
 import time
 import random
 from a_star import AStar
+from statistics import mean
 
 TARGETDISTANCE = 1 #meter, I think
 MAXMOTOR = 100
