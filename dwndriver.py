@@ -83,7 +83,7 @@ def main():
 			continue
 
 		if (i%5)== 0:
-			avg = mean(distances[-10:])
+			avg = mean(distances[-5:])
 			print("Averaged Distance: {}".format(avg))
 			errs.append(avg - TARGETDISTANCE)
 
@@ -95,7 +95,7 @@ def main():
 			d2 = errs[-3] - errs[-2]
 			dd = d1-d2 
 
-			print("Errors: d1 = {}, d2 = {}, dd = {}".format(d1,d2,dd))
+			print("Errors: d1 = {:.2f}, d2 = {:.2f}, dd = {:.2f}".format(d1,d2,dd))
 
 
 if __name__ == '__main__':
