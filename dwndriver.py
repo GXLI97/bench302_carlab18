@@ -40,7 +40,7 @@ def connect_to_serial():
 		baudrate=115200,
 		timeout=0.5
 		)
-    return ser
+	return ser
 
 
 def main():
