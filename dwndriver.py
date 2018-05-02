@@ -130,7 +130,7 @@ def main():
 
 			# print("Direction: {} {}".format(l, r))
 	with open('errors.pkl', 'wb') as f:
-		pickle.dump(mylist, f)
+		pickle.dump(errs, f)
 
 if __name__ == '__main__':
 	main()
