@@ -4,7 +4,7 @@ import random
 from a_star import AStar
 
 TARGETDISTANCE = 1 #meter, I think
-MAXMOTOR = 400
+MAXMOTOR = 100
 MINMOTOR = 0
 TIMEOUT = 10
 
@@ -16,6 +16,7 @@ def parseDistance(s):
 # in the future, maybe use a better function than random
 def turn(a_star):
 	r = random.randint(-MAXMOTOR/2, MAXMOTOR/2)
+	print("Motor set to {} {}".format(0,r))
 	a_star.motors(0, r)
 
 # somehow need to map a changing error to a motor power
@@ -25,34 +26,37 @@ def drive(a_star, err, prevErr):
 	r = MAXMOTOR * d
 	a_star.motors(int(l), int(r))
 
-def main():
+def connect_to_serial():
 	try:
-    		ser = serial.Serial(
-    		port='/dev/serial0',
-    		baudrate=115200,
-    		timeout=0.5
-    		)
-    		print("connected successfully!")
+		ser = serial.Serial(
+		port='/dev/serial0',
+		baudrate=115200,
+		timeout=0.5
+		)
+		print("connected successfully!")
 	except:
-    		ser = serial.Serial(
-    		port='/dev/ttyACM1',
-    		baudrate=115200,
-    		timeout=0.5
-    		)
+		ser = serial.Serial(
+		port='/dev/ttyACM1',
+		baudrate=115200,
+		timeout=0.5
+		)
+    return ser
 
+
+def main():
+	# initialize our AStar motor controller.
 	a_star = AStar()
 
+	ser = connect_to_serial()
 	time.sleep(1)
-	ser.write(b'\r\r')
+	ser.write(b'\r\r') # go into serial mode.
 	time.sleep(2)
-	res=ser.read(100)
+	res=ser.read(100) # read some things.
 	print(res.decode("utf-8"), end='', flush=True)
 	time.sleep(0.5)
-
 	time.sleep(0.5)
 	timeout = time.time() + TIMEOUT
-
-	ser.write(b'lec\r')
+	ser.write(b'lec\r') # start writing distances.
 
 	prevErr = 0
 	err = 0
@@ -66,7 +70,6 @@ def main():
 		if len(res) <= 0:
 			continue
 		s = res.decode('utf-8')
-		print(s)
 		try:
 			distance = parseDistance(s)
 			print(distance)
