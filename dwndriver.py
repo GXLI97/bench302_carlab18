@@ -6,7 +6,7 @@ from a_star import AStar
 TARGETDISTANCE = 1 #meter, I think
 MAXMOTOR = 100
 MINMOTOR = 0
-TIMEOUT = 10
+TIMEOUT = 100
 
 def parseDistance(s):
 	a = s.strip().split(',')
@@ -89,7 +89,7 @@ def main():
 			d1 = errs[-2] - errs[-1]
 			d2 = errs[-3] - errs[-2]
 			dd = d1-d2 
-			
+
 			print("Errors: d1 = {}, d2 = {}, dd = {}".format(d1,d2,dd))
 
 
