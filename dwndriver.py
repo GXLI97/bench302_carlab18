@@ -100,7 +100,7 @@ def main():
 
 			print("Errors: d1 = {:.2f}, d2 = {:.2f}, dd = {:.2f}".format(d1,d2,dd))
 
-			a_star.motors(150, 150)
+			# a_star.motors(160, 150)
 
 			# if d1 > 0.1:
 			# 	a_star.motors(150, 150)
