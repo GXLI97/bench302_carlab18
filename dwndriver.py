@@ -80,7 +80,7 @@ def main():
 			print("uhoh")
 			continue
 
-		if (len(distances) % 5) == 0:
+		if (len(distances) % 0) == 0:
 			avg = mean(distances[-5:])
 			errs.append(avg - TARGETDISTANCE)
 
