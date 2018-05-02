@@ -100,10 +100,11 @@ def main():
 			print("Errors: d1 = {:.2f}, d2 = {:.2f}, dd = {:.2f}".format(d1,d2,dd))
 
 			if d1 > 0:
+				l, r = 100, 100
 				a_star.motors(int(l), int(r))
 			else:
-				l = l + random.randint(0, 10)
-				r = r - random.randint(0, 10)
+				l = l + random.randint(-10, 10)
+				r = r - random.randint(-10, 10)
 				a_star.motors(int(l), int(r))
 
 
