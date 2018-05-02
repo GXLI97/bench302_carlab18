@@ -77,6 +77,7 @@ def main():
 			print("Distance: {}".format(dist))
 			distances.append(dist)
 		except:
+			print("uhoh")
 			continue
 
 		if (len(distances) % 5) == 0:
