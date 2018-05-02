@@ -81,7 +81,7 @@ def main():
 
 		if (len(distances) % 5) == 0:
 			avg = mean(distances[-5:])
-			err.append(avg - TARGETDISTANCE)
+			errs.append(avg - TARGETDISTANCE)
 
 			# do stuff.
 			if len(errs) < 3:
