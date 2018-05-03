@@ -50,7 +50,14 @@ def drive(a_star, delta):
 	time.sleep(DRIVETIME)
 
 def main():
-
+	global TARGETDISTANCE, TIMEOUT, LSTRAIGHT, RSTRAIGHT, DRIVETIME, STOPTIME, K
+	TARGETDISTANCE 	= 1
+	TIMEOUT 		= 60
+	LSTRAIGHT 		= 110
+	RSTRAIGHT 		= 100
+	DRIVETIME 		= 3
+	STOPTIME		= 1
+	K 				= 15
 	if len(sys.argv) == 3:
 		DRIVETIME = float(sys.argv[1])
 		K = float(sys.argv[2])
