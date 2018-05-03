@@ -19,5 +19,5 @@ while 1:
     E = a_star.read_encoders()
     if (E[0]-L > Eopt[0] or E[1]-R > Eopt[1]):
         break
-    print(E)
+    print(E[0] - L, E[1]-R)
     time.sleep(0.05)
