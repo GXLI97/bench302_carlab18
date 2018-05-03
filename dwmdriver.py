@@ -10,7 +10,7 @@ TARGETDISTANCE 	= 1
 TIMEOUT 		= 60
 LSTRAIGHT 		= 110
 RSTRAIGHT 		= 100
-DRIVETIME 		= 3
+DRIVETIME 		= 1
 STOPTIME		= 1
 
 def connect_to_serial():
