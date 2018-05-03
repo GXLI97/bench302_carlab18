@@ -14,6 +14,7 @@ def calcEncodersRight():
 while 1:
     Eopt = calcEncodersRight()
     E = a_star.read_encoders()
-    if (E[0]-L > Eopt[0] and E[1]-R > Eopt[1])
+    if (E[0]-L > Eopt[0] and E[1]-R > Eopt[1]):
+        break
     print(E)
     time.sleep(0.05)
