@@ -23,5 +23,5 @@ while 1:
     err = Kp*err
     L -= err
     R += err
-    a_star.motors()
+    a_star.motors(int(L), int(R))
     time.sleep(0.05)
