@@ -42,7 +42,7 @@ def drive(a_star, delta):
 	K = 20
 	a_star.motors(int(110 + K*delta[0]), int(100 + K*delta[1]))
 	print("Motors on {}, {}".format(int(110 + K*delta[0]), int(100 + K*delta[1])))
-	time.sleep(1)
+	time.sleep(3)
 
 def main():
 
