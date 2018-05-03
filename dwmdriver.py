@@ -68,7 +68,7 @@ def main():
 	DRIVETIME 		= 3
 	STOPTIME		= 1
 	KP 				= 15
-	KD				= 1
+	KD				= 0
 
 	if len(sys.argv) == 4:
 		DRIVETIME = float(sys.argv[1])
