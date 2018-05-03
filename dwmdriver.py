@@ -52,7 +52,7 @@ def drive(a_star, delta, prevDelta):
 	elif r > MAXMOTOR:
 		r = MAXMOTOR
 
-	a_star.motors(-1*int(l), -1*int(r))
+	a_star.motors(int(l), int(r))
 	print("Motors on {}, {}".format(l, r))
 	time.sleep(DRIVETIME)
 
@@ -102,7 +102,7 @@ def main():
 	errs = []
 	distances = []
 
-	a_star.motors(110,100)
+	a_star.motors(LSTRAIGHT,RSTRAIGHT)
 	delta = None
 	prevDelta = None
 	i = 0
