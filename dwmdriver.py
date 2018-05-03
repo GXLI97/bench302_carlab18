@@ -106,4 +106,5 @@ def main():
 		drive(a_star, delta)
 
 
-
+if __name__ == '__main__':
+	main()
