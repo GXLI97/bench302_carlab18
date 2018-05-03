@@ -9,7 +9,7 @@ Renc = a_star.read_encoders()[1]
 start = time.time()
 end = start + 10
 
-Kp = 5
+Kp = .1
 L, R = 100, 100
 a_star.motors(L, R)
 
@@ -20,8 +20,6 @@ while 1:
         break
     E = a_star.read_encoders()
     err = (E[0] - Lenc) - (E[1] - Renc)
-    Lenc = E[0]
-    Renc = E[1]
     err = Kp*err
     print("{:.2f}".format(err))
     L -= err
