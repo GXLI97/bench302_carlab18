@@ -21,8 +21,8 @@ while 1:
     E = a_star.read_encoders()
     err = E[0] - E[1]
     err = Kp*err
-    print(err)
-    L -= err
-    R += err
+    print("{:.2f}".format(err))
+    L += err
+    R -= err
     a_star.motors(int(L), int(R))
     time.sleep(0.05)
