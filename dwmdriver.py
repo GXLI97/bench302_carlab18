@@ -3,6 +3,7 @@ import time
 import random
 import math
 from a_star import AStar
+from statistics import mean, median
 
 
 TARGETDISTANCE 	= 1
@@ -98,7 +99,7 @@ def main():
 		if (i%10) == 0:
 			avg = median(distances[-10:])
 			print("Averaged Distance: {:.2f}".format(avg))
-			
+
 			errs.append(abs(TARGETDISTANCE - avg))
 			if len(errs) < 2:
 				continue
