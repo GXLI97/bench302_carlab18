@@ -18,6 +18,7 @@ while 1:
     Eopt = calcEncodersRight()
     E = a_star.read_encoders()
     if (E[0]-L > Eopt[0] or E[1]-R > Eopt[1]):
+        a_star.motors(0, 0)
         break
     print(E[0] - L, E[1]-R)
     time.sleep(0.05)
