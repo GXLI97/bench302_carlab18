@@ -1,4 +1,4 @@
- import serial
+import serial
 import time
 import random
 import math
@@ -46,7 +46,7 @@ def drive(a_star, delta, prevDelta):
 	elif l > MAXMOTOR:
 		l = MAXMOTOR
 
-	r = LSTRAIGHT + KP * delta[1] + KD*(delta[1] - prevDelta[1])
+	r = LSTRAIGHT + KP*delta[1] + KD*(delta[1] - prevDelta[1])
 	if r < MINMOTOR:
 		r = MINMOTOR
 	elif r > MAXMOTOR:
