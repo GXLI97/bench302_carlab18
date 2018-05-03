@@ -1,6 +1,7 @@
 import serial
 import time
 import random
+import math
 from a_star import AStar
 
 def connect_to_serial():
@@ -33,7 +34,7 @@ def stop(a_star):
 
 def drive(a_star, delta):
 	K = 20
-	a_star.motors(100 + K*delta[0], 100 + K*delta[1])
+	a_star.motors(110 + K*delta[0], 100 + K*delta[1])
 	time.sleep(1)
 
 def main():
@@ -66,7 +67,7 @@ def main():
 	directions = []
 	errs = []
 
-	a_star.motors(100,100)
+	a_star.motors(110,100)
 	i = 0
 	while True:
 		# in the future, we probably want this timeout to be much longer
