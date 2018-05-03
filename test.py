@@ -9,11 +9,11 @@ R = a_star.read_encoders()[1]
 a_star.motors(25, -25)
 
 def calcEncodersRight():
-    return (300, 300)
+    return (2407, 2407)
 
 while 1:
-    l90, r90 = calcEncodersRight()
+    Eopt = calcEncodersRight()
     E = a_star.read_encoders()
-    if (E[0]-L > l90 and E[1]-R > r90)
+    if (E[0]-L > Eopt[0] and E[1]-R > Eopt[1])
     print(E)
     time.sleep(0.05)
