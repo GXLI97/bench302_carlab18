@@ -1,4 +1,4 @@
-import serial
+ import serial
 import time
 import random
 import math
@@ -40,18 +40,18 @@ def drive(a_star, delta, prevDelta):
 	if prevDelta is None:
 		prevDelta = delta
 
-	l = LSTRAIGHT + KP * delta + KD * (delta[0] - prevDelta[0])
+	l = LSTRAIGHT + KP*delta[0] + KD*(delta[0] - prevDelta[0])
 	if l < MINMOTOR:
 		l = MINMOTOR
 	elif l > MAXMOTOR:
 		l = MAXMOTOR
 
-	r = LSTRAIGHT + KP * delta + KD * (delta[1] - prevDelta[1])
+	r = LSTRAIGHT + KP * delta[1] + KD*(delta[1] - prevDelta[1])
 	if r < MINMOTOR:
 		r = MINMOTOR
 	elif r > MAXMOTOR:
 		r = MAXMOTOR
-		
+
 	a_star.motors(-1*int(l), -1*int(r))
 	print("Motors on {}, {}".format(l, r))
 	time.sleep(DRIVETIME)
