@@ -41,14 +41,26 @@ def drive(a_star, delta, prevDelta):
 		prevDelta = delta
 
 	l = LSTRAIGHT + KP * delta + KD * (delta[0] - prevDelta[0])
+	if l < MINMOTOR:
+		l = MINMOTOR
+	elif l > MAXMOTOR:
+		l = MAXMOTOR
+
 	r = LSTRAIGHT + KP * delta + KD * (delta[1] - prevDelta[1])
+	if r < MINMOTOR:
+		r = MINMOTOR
+	elif r > MAXMOTOR:
+		r = MAXMOTOR
+		
 	a_star.motors(-1*int(l), -1*int(r))
 	print("Motors on {}, {}".format(l, r))
 	time.sleep(DRIVETIME)
 
 def main():
-	global TARGETDISTANCE, TIMEOUT, LSTRAIGHT, RSTRAIGHT, DRIVETIME, STOPTIME, KP, KD
+	global MAXMOTOR, MINMOTOR, TARGETDISTANCE, TIMEOUT, LSTRAIGHT, RSTRAIGHT, DRIVETIME, STOPTIME, KP, KD
 
+	MAXMOTOR		= 200
+	MINMOTOR		= 20
 	TARGETDISTANCE 	= 1
 	TIMEOUT 		= 60
 	LSTRAIGHT 		= 110
@@ -57,7 +69,7 @@ def main():
 	STOPTIME		= 1
 	KP 				= 15
 	KD				= 1
-	
+
 	if len(sys.argv) == 4:
 		DRIVETIME = float(sys.argv[1])
 		KP = float(sys.argv[2])
