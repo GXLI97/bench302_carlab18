@@ -37,6 +37,9 @@ def drive(a_star, delta):
 	time.sleep(1)
 
 def main():
+
+	TARGETDISTANCE 	= 1
+	TIMEOUT 		= 10
 	# initialize our AStar motor controller.
 	a_star = AStar()
 
@@ -51,8 +54,7 @@ def main():
 	ser.write(b'lec\r') # start writing distances.
 
 
-	TARGETDISTANCE 	= 1
-	TIMEOUT 		= 10
+	
 
 	# A = np.zeros(2) # the target of the bot
 	xt = (0,0) # define start point of the bot at origin
