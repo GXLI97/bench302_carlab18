@@ -7,6 +7,8 @@ from a_star import AStar
 
 TARGETDISTANCE 	= 1
 TIMEOUT 		= 10
+LSTRAIGHT = 110
+RSTRAIGHT = 100
 
 def connect_to_serial():
 	try:
@@ -38,7 +40,7 @@ def stop(a_star):
 
 def drive(a_star, delta):
 	K = 20
-	a_star.motors(110 + K*delta[0], 100 + K*delta[1])
+	a_star.motors(int(110 + K*delta[0]), int(100 + K*delta[1]))
 	time.sleep(1)
 
 def main():
