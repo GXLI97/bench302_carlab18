@@ -15,9 +15,13 @@ a_star.motors(L, R)
 
 
 while 1:
+    if (time.time() > end):
+        a_star.motors(0, 0)
+        break
     E = a_star.read_encoders()
     err = E[0] - E[1]
     err = K*err
     L -= err
     R += err
     a_star.motors()
+    time.sleep(0.05)
