@@ -2,6 +2,7 @@ import serial
 import time
 import random
 import math
+import sys
 from a_star import AStar
 from statistics import mean, median
 
@@ -12,6 +13,7 @@ LSTRAIGHT 		= 110
 RSTRAIGHT 		= 100
 DRIVETIME 		= 3
 STOPTIME		= 1
+K 				= 15
 
 def connect_to_serial():
 	try:
@@ -42,13 +44,16 @@ def stop(a_star):
 	time.sleep(STOPTIME)
 
 def drive(a_star, delta):
-	K = 15
-	a_star.motors(int(110 + K*delta[0]), int(100 + K*delta[1]))
+	
+	a_star.motors(-1*int(110 + K*delta[0]), -1*int(100 + K*delta[1]))
 	print("Motors on {}, {}".format(int(110 + K*delta[0]), int(100 + K*delta[1])))
 	time.sleep(DRIVETIME)
 
 def main():
 
+	if len(sys.argv) == 3:
+		DRIVETIME = float(sys.argv[1])
+		K = float(sys.argv[2])
 	
 	# initialize our AStar motor controller.
 	a_star = AStar()
