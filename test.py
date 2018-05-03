@@ -7,4 +7,3 @@ while 1:
     left, right = map(int, input().split())
     a_star.motors(left, right)
     print(a_star.read_encoders())
-    time.sleep(0.1)
