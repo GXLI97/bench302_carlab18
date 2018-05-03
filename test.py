@@ -9,7 +9,7 @@ R = a_star.read_encoders()[1]
 a_star.motors(25, -25)
 
 def calcEncodersRight():
-    return (766, -766)
+    return (760, -760)
 
 Eopt = calcEncodersRight()
 print(Eopt)
