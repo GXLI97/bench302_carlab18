@@ -10,7 +10,7 @@ TARGETDISTANCE 	= 1
 TIMEOUT 		= 60
 LSTRAIGHT 		= 110
 RSTRAIGHT 		= 100
-DRIVETIME 		= 1
+DRIVETIME 		= 3
 STOPTIME		= 1
 
 def connect_to_serial():
@@ -42,7 +42,7 @@ def stop(a_star):
 	time.sleep(STOPTIME)
 
 def drive(a_star, delta):
-	K = 20
+	K = 15
 	a_star.motors(int(110 + K*delta[0]), int(100 + K*delta[1]))
 	print("Motors on {}, {}".format(int(110 + K*delta[0]), int(100 + K*delta[1])))
 	time.sleep(DRIVETIME)
