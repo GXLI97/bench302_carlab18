@@ -6,7 +6,7 @@ from a_star import AStar
 
 
 TARGETDISTANCE 	= 1
-TIMEOUT 		= 10
+TIMEOUT 		= 60
 LSTRAIGHT 		= 110
 RSTRAIGHT 		= 100
 
