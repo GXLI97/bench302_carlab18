@@ -20,7 +20,7 @@ while 1:
         break
     E = a_star.read_encoders()
     err = E[0] - E[1]
-    err = K*err
+    err = Kp*err
     L -= err
     R += err
     a_star.motors()
