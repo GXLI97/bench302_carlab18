@@ -14,6 +14,6 @@ def calcEncodersRight():
 while 1:
     l90, r90 = calcEncodersRight()
     E = a_star.read_encoders()
-    if (E[0]-L > l90 && E[1]-R > r90)
+    if (E[0]-L > l90 and E[1]-R > r90)
     print(E)
     time.sleep(0.05)
