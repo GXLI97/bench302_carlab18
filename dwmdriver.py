@@ -7,13 +7,6 @@ from a_star import AStar
 from statistics import mean, median
 
 
-TARGETDISTANCE 	= 1
-TIMEOUT 		= 60
-LSTRAIGHT 		= 110
-RSTRAIGHT 		= 100
-DRIVETIME 		= 3
-STOPTIME		= 1
-K 				= 15
 
 def connect_to_serial():
 	try:
@@ -43,24 +36,32 @@ def stop(a_star):
 	a_star.motors(0, 0)
 	time.sleep(STOPTIME)
 
-def drive(a_star, delta):
-	
-	a_star.motors(-1*int(110 + K*delta[0]), -1*int(100 + K*delta[1]))
-	print("Motors on {}, {}".format(int(110 + K*delta[0]), int(100 + K*delta[1])))
+def drive(a_star, delta, prevDelta):
+	if prevDelta is None:
+		prevDelta = delta
+
+	l = LSTRAIGHT + KP * delta + KD * (delta[0] - prevDelta[0])
+	r = LSTRAIGHT + KP * delta + KD * (delta[1] - prevDelta[1])
+	a_star.motors(-1*int(l), -1*int(r))
+	print("Motors on {}, {}".format(l, r))
 	time.sleep(DRIVETIME)
 
 def main():
-	global TARGETDISTANCE, TIMEOUT, LSTRAIGHT, RSTRAIGHT, DRIVETIME, STOPTIME, K
+	global TARGETDISTANCE, TIMEOUT, LSTRAIGHT, RSTRAIGHT, DRIVETIME, STOPTIME, KP, KD
+
 	TARGETDISTANCE 	= 1
 	TIMEOUT 		= 60
 	LSTRAIGHT 		= 110
 	RSTRAIGHT 		= 100
 	DRIVETIME 		= 3
 	STOPTIME		= 1
-	K 				= 15
-	if len(sys.argv) == 3:
+	KP 				= 15
+	KD				= 1
+	
+	if len(sys.argv) == 4:
 		DRIVETIME = float(sys.argv[1])
-		K = float(sys.argv[2])
+		KP = float(sys.argv[2])
+		KD = float(sys.argv[3])
 	
 	# initialize our AStar motor controller.
 	a_star = AStar()
@@ -90,6 +91,8 @@ def main():
 	distances = []
 
 	a_star.motors(110,100)
+	delta = None
+	prevDelta = None
 	i = 0
 	while True:
 		# in the future, we probably want this timeout to be much longer
@@ -133,7 +136,9 @@ def main():
 
 			stop(a_star)
 			
-			drive(a_star, delta)
+			drive(a_star, delta, prevDelta)
+
+			prevDelta = delta
 
 
 if __name__ == '__main__':
