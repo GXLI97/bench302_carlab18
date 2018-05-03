@@ -107,7 +107,7 @@ def main():
 		delta = (direction[0] - directions[-1][0], direction[1] - directions[-1][1])
 		print("delta: {}".format(delta))
 
-		dist2 = distance(direction)
+		dist2 = distance(direction) + random.uniform(-0.5, 0.5)
 		direction = (direction[0] / dist2, direction[1] / dist2)
 
 		stop(a_star)
