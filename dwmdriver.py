@@ -9,6 +9,8 @@ TARGETDISTANCE 	= 1
 TIMEOUT 		= 60
 LSTRAIGHT 		= 110
 RSTRAIGHT 		= 100
+DRIVETIME 		= 3
+STOPTIME		= 1
 
 def connect_to_serial():
 	try:
@@ -36,13 +38,13 @@ def distance(point):
 
 def stop(a_star):
 	a_star.motors(0, 0)
-	time.sleep(1)
+	time.sleep(STOPTIME)
 
 def drive(a_star, delta):
 	K = 20
 	a_star.motors(int(110 + K*delta[0]), int(100 + K*delta[1]))
 	print("Motors on {}, {}".format(int(110 + K*delta[0]), int(100 + K*delta[1])))
-	time.sleep(3)
+	time.sleep(DRIVETIME)
 
 def main():
 
@@ -72,6 +74,7 @@ def main():
 	x2 = []
 	directions = []
 	errs = []
+	distances = []
 
 	a_star.motors(110,100)
 	i = 0
@@ -86,33 +89,38 @@ def main():
 		try:
 			res = ser.readline()
 			dist = parseDistance(res.decode('utf-8'))
+			distances.append(dist)
+			i += 1
 			print("Distance: {}".format(dist))
 		except:
 			print("Read'n Parse failed")
 			continue
+		if (i%10) == 0:
+			avg = median(distances[-10:])
+			print("Averaged Distance: {:.2f}".format(avg))
+			
+			errs.append(abs(TARGETDISTANCE - avg))
+			if len(errs) < 2:
+				continue
 
-		errs.append(abs(TARGETDISTANCE - dist))
-		if len(errs) < 2:
-			continue
+			directions.append(direction)
+			if errs[-2] - errs[-1] > 0:
+				sgn = 1
+			else:
+				sgn = -1
 
-		directions.append(direction)
-		if errs[-2] - errs[-1] > 0:
-			sgn = 1
-		else:
-			sgn = -1
+			if len(directions) > 2:
+				direction = (sgn * (directions[-1][0] - directions[-2][0]), sgn * (directions[-1][1] - directions[-2][1]))
 
-		if len(directions) > 2:
-			direction = (sgn * (directions[-1][0] - directions[-2][0]), sgn * (directions[-1][1] - directions[-2][1]))
+			delta = (direction[0] - directions[-1][0], direction[1] - directions[-1][1])
+			print("delta: {}".format(delta))
 
-		delta = (direction[0] - directions[-1][0], direction[1] - directions[-1][1])
-		print("delta: {}".format(delta))
+			dist2 = distance(direction) + random.uniform(-0.5, 0.5)
+			direction = (direction[0] / dist2, direction[1] / dist2)
 
-		dist2 = distance(direction) + random.uniform(-0.5, 0.5)
-		direction = (direction[0] / dist2, direction[1] / dist2)
-
-		stop(a_star)
-		
-		drive(a_star, delta)
+			stop(a_star)
+			
+			drive(a_star, delta)
 
 
 if __name__ == '__main__':
