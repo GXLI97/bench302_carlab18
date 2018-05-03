@@ -4,6 +4,10 @@ import random
 import math
 from a_star import AStar
 
+
+TARGETDISTANCE 	= 1
+TIMEOUT 		= 10
+
 def connect_to_serial():
 	try:
 		ser = serial.Serial(
@@ -26,7 +30,7 @@ def parseDistance(s):
 	return float(a[-1])
 
 def distance(point):
-	return math.sqrt(point[1]**2 + point[2]**2)
+	return math.sqrt(point[1]**2 + point[0]**2)
 
 def stop(a_star):
 	a_star.motors(0, 0)
@@ -39,8 +43,7 @@ def drive(a_star, delta):
 
 def main():
 
-	TARGETDISTANCE 	= 1
-	TIMEOUT 		= 10
+	
 	# initialize our AStar motor controller.
 	a_star = AStar()
 
