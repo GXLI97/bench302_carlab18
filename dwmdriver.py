@@ -7,8 +7,8 @@ from a_star import AStar
 
 TARGETDISTANCE 	= 1
 TIMEOUT 		= 10
-LSTRAIGHT = 110
-RSTRAIGHT = 100
+LSTRAIGHT 		= 110
+RSTRAIGHT 		= 100
 
 def connect_to_serial():
 	try:
@@ -41,6 +41,7 @@ def stop(a_star):
 def drive(a_star, delta):
 	K = 20
 	a_star.motors(int(110 + K*delta[0]), int(100 + K*delta[1]))
+	print("Motors on {}, {}".format(int(110 + K*delta[0]), int(100 + K*delta[1])))
 	time.sleep(1)
 
 def main():
@@ -101,10 +102,10 @@ def main():
 			sgn = -1
 
 		if len(directions) > 2:
-			direction = sgn * (directions[-1] - directions[-2])
+			direction = (sgn * (directions[-1][0] - directions[-2][0]), sgn * (directions[-1][1] - directions[-2][1]))
 
-		delta = (direction[0] - directions[-1][0],direction[1] - directions[-1][1])
-
+		delta = (direction[0] - directions[-1][0], direction[1] - directions[-1][1])
+		print("delta: {}".format(delta))
 
 		dist2 = distance(direction)
 		direction = (direction[0] / dist2, direction[1] / dist2)
