@@ -11,6 +11,9 @@ a_star.motors(25, -25)
 def calcEncodersRight():
     return (2407, 2407)
 
+Eopt = calcEncodersRight()
+print(Eopt)
+
 while 1:
     Eopt = calcEncodersRight()
     E = a_star.read_encoders()
