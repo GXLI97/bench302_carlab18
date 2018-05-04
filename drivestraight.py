@@ -6,8 +6,9 @@ a_star = AStar()
 def drive_straight(a_star, dist, forward=True):
     # drives straight for dist feet.
     Kp = 1
+    Ki = .01
     L, R = 100, 100
-
+    errsum = 0
     # get the initial encoder reading:
     (Linit, Rinit) = a_star.read_encoders()
 
@@ -26,8 +27,10 @@ def drive_straight(a_star, dist, forward=True):
             break
         # calculate errors (leaning left)
         err = (Lcurr - Lprev) - (Rcurr - Rprev)
-        print("{}".format(err))
-        errsig = Kp * err
+        errsum += err
+        errsig = Kp * err + Ki * errsum
+
+        print("{}".format(errsig))
         # write to motor
         motorL = 100 - errsig
         motorR = 100 + errsig
