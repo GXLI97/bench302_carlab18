@@ -5,14 +5,12 @@ import sys
 
 
 
-def turn(a_star, degrees, clockwise=1):
+def turn(a_star, degrees, clockwise=1, Kp=2, Ki=.08):
     BOTDIAM = 149.
     WHEELDIAM = 70.
     ENCODERTICKS = 1440.
     OVERFLOW_BUFF = 65536
 
-    Kp = 1
-    Ki = .08
     errsum = 0
     # get the initial encoder reading:
     (Linit, Rinit) = a_star.read_encoders()
@@ -47,11 +45,11 @@ def turn(a_star, degrees, clockwise=1):
 
 def main():
     a_star = AStar()
-    if not len(sys.argv) == 2:
+    if not len(sys.argv) == 4:
         turn(a_star, 90)
 
     else:
-        turn(a_star, float(sys.argv[1]))
+        turn(a_star, float(sys.argv[1]), 1, float(sys.argv[2]), float(sys.argv[3]))
 
 if __name__ == '__main__':
     main()
