@@ -114,7 +114,7 @@ def main():
 
     dend = 4.
     while dend > 1:
-        dend = move_step(se, a_star, dend/2)
+        dend = move_step(ser, a_star, dend/2)
         print("Distance after movement: {:.2f}".format(dend))
     shutdown(ser, a_star)
 
