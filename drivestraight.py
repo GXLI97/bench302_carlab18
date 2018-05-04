@@ -34,19 +34,19 @@ def drive_straight(a_star, dist, forward=1):
         err = ((Lcurr - Lprev + OVERFLOW_BUFF) % OVERFLOW_BUFF) - ((Rcurr - Rprev + OVERFLOW_BUFF) % OVERFLOW_BUFF) 
         errsum += err
         errsig = Kp * err + Ki * errsum
-        print("{:.2f}".format(errsig))
+        # print("{:.2f}".format(errsig))
         # write to motor
         motorL = 100 * forward - errsig
         motorR = 100 * forward + errsig
         a_star.motors(int(motorL), int(motorR))
-        print("Motors on {} {}".format(motorL, motorR))
+        # print("Motors on {} {}".format(motorL, motorR))
         # update previous
         (Lprev, Rprev) = (Lcurr, Rcurr)
         time.sleep(0.1)
 
 def main():
     a_star = AStar()
-    drive_straight(a_star, 1, -1)
+    drive_straight(a_star, 1, 1)
 
 if __name__ == '__main__':
     main()
