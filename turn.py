@@ -17,8 +17,8 @@ def turn(a_star, degrees, clockwise=1, Kp=1, Ki=.08):
 
     enticks = BOTDIAM * degrees * ENCODERTICKS / 360.0 / WHEELDIAM 
     # distance to encoder:
-    Lfinal = Linit + enticks
-    Rfinal = Rinit - enticks
+    Lfinal = Linit + enticks * clockwise
+    Rfinal = Rinit - enticks * clockwise
 
     (Lprev, Rprev) = (Linit, Rinit)
     while 1:
@@ -49,7 +49,7 @@ def main():
         turn(a_star, 90)
 
     else:
-        turn(a_star, float(sys.argv[1]), -1, float(sys.argv[2]), float(sys.argv[3]))
+        turn(a_star, float(sys.argv[1]), 1, float(sys.argv[2]), float(sys.argv[3]))
 
 if __name__ == '__main__':
     main()
