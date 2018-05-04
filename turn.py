@@ -11,6 +11,10 @@ def turn(a_star, degrees, clockwise=1, Kp=1, Ki=.08):
     ENCODERTICKS = 1440.
     OVERFLOW_BUFF = 65536
 
+    if degrees < 0:
+        degrees = -1 * degrees
+        clockwise = -1 * clockwise
+
     errsum = 0
     # get the initial encoder reading:
     (Linit, Rinit) = a_star.read_encoders()
@@ -48,8 +52,9 @@ def main():
     if not len(sys.argv) == 2:
         turn(a_star, 90)
 
-    else:
+    if len(sys.argv) == 2:
         turn(a_star, float(sys.argv[1]))
+
 
 if __name__ == '__main__':
     main()
