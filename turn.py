@@ -9,7 +9,8 @@ def turn(a_star, degrees, clockwise=1):
     BOTDIAM = 149.
     WHEELDIAM = 70.
     ENCODERTICKS = 1440.
-    
+    OVERFLOW_BUFF = 65536
+
     Kp = 1
     Ki = .08
     L, R = 100 * clockwise, 100 * clockwise
