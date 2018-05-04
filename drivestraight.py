@@ -5,8 +5,8 @@ a_star = AStar()
 
 def drive_straight(a_star, dist, forward=True):
     # drives straight for dist feet.
-    Kp = 1
-    Ki = .1
+    Kp = 2
+    Ki = .08
     L, R = 100, 100
     errsum = 0
     # get the initial encoder reading:
