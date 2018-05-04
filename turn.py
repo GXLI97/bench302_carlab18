@@ -30,7 +30,7 @@ def main():
         turn(a_star, 90)
 
     else:
-        turn(a_star, sys.argv[1])
+        turn(a_star, float(sys.argv[1]))
 
 if __name__ == '__main__':
     main()
