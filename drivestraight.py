@@ -5,13 +5,13 @@ a_star = AStar()
 
 def drive_straight(a_star, dist, forward=True):
     # drives straight for dist feet.
-    Kp = 0.01
+    Kp = 1
     L, R = 100, 100
 
     # get the initial encoder reading:
     (Linit, Rinit) = a_star.read_encoders()
 
-    encticks = 1000 # TODO: calculate distance to encoder 
+    encticks = 10000 # TODO: calculate distance to encoder 
     # distance to encoder:
     Lfinal = Linit + encticks
     Rfinal = Rinit + encticks
