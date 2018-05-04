@@ -55,12 +55,12 @@ def main():
 
     ser = connect_to_serial()
 
-    d1 = record_distance()
+    d1 = record_distance(ser)
     drive_straight(a_star, dist=1)
-    d2 = record_distance()
+    d2 = record_distance(ser)
     turn(a_star, degrees=90, clockwise=1)
     drive_straight(a_star, dist=1)
-    d3 = record_distance()
+    d3 = record_distance(ser)
 
     print("Distances {:.2f} {:.2f} {:.2f}".format(d1, d2, d3))
     # record distance.
