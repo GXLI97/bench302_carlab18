@@ -52,7 +52,7 @@ def record_distance(ser):
         except:
             print("Read'n Parse failed")
             continue
-    return mean(distances)
+    return median(distances)
 
 def shutdown(ser, a_star):
     ser.write(b'lec\r')
