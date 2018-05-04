@@ -83,7 +83,7 @@ def main():
 
     ser = connect_to_serial()
 
-    EVAL_DIST
+    EVAL_DIST = 2
 
     d1 = record_distance(ser)
     drive_straight(a_star, dist=EVAL_DIST)
