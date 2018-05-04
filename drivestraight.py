@@ -3,26 +3,37 @@ import time
 
 a_star = AStar()
 
-Lenc = a_star.read_encoders()[0]
-Renc = a_star.read_encoders()[1]
+def drive_straight(a_star, dist, forward=True):
+    # drives straight for dist feet.
+    Kp = 0.01
+    L, R = 100, 100
 
-start = time.time()
-end = start + 10
+    # get the initial encoder reading:
+    (Linit, Rinit) = a_star.read_encoders()
 
-Kp = .01
-L, R = 100, 100
-a_star.motors(L, R)
+    encticks = 1000 # TODO: calculate distance to encoder 
+    # distance to encoder:
+    Lfinal = Linit + encticks
+    Rfinal = Rinit + encticks
 
+    (Lprev, Rprev) = (Linit, Rinit)
+    while 1:
+        # get encoder reading
+        (Lcurr, Rcurr) = a_star.read_encoders()
+        # if we have traveled distance, stop.
+        if(Lcurr > Lfinal or Rcurr > Rfinal):
+            a_star.motors(0, 0)
+            break
+        # calculate errors (leaning left)
+        err = (Lcurr - Lprev) - (Rcurr - Rprev)
+        print("{}".format(err))
+        errsig = Kp * err
+        # write to motor
+        motorL = 100 - errsig
+        motorR = 100 + errsig
+        a_star.motors(int(motorL), int(motorR))
+        # update previous
+        (Lprev, Rprev) = (Lcurr, Rcurr)
+        time.sleep(0.1)
 
-while 1:
-    if (time.time() > end):
-        a_star.motors(0, 0)
-        break
-    E = a_star.read_encoders()
-    err = (E[0] - Lenc) - (E[1] - Renc)
-    err = Kp*err
-    print("{:.2f}".format(err))
-    L -= err
-    R += err
-    a_star.motors(int(L), int(R))
-    time.sleep(0.1)
+drive_straight(a_star, 5)
