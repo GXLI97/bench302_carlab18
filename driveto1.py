@@ -96,12 +96,14 @@ def main():
     print("Distances {:.2f} {:.2f} {:.2f}".format(d1, d2, d3))
 
     # go now to correct location:
-    drive_straight(a_star, dist=2, forward=-1)
+    drive_straight(a_star, dist=EVAL_DIST, forward=-1)
     degrees = calc_angle(EVAL_DIST, d1, d2, d3)
+    print("Calculated turn angle: {:.2f}".format(degrees))
     if degrees > 0:
         turn(a_star, degrees, clockwise=1)
     else:
         turn(a_star, degrees, clockwise=-1)
+    time.sleep(0.5)
     drive_straight(a_star, dist=d2 * 0.7)
 
     shutdown(ser, a_star)
