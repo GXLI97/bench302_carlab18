@@ -5,7 +5,7 @@ import sys
 
 
 
-def turn(a_star, degrees, clockwise=1, Kp=2, Ki=.08):
+def turn(a_star, degrees, clockwise=1, Kp=1, Ki=.08):
     BOTDIAM = 149.
     WHEELDIAM = 70.
     ENCODERTICKS = 1440.
