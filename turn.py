@@ -42,6 +42,7 @@ def turn(a_star, degrees, clockwise=1, Kp=1, Ki=.08):
         # update previous
         (Lprev, Rprev) = (Lcurr, Rcurr)
         time.sleep(0.1)
+    time.sleep(0.1)
 
 def main():
     a_star = AStar()
