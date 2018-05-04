@@ -6,7 +6,6 @@ WHEEL_DIAMETER = 70 # mm
 ENCODER_TICKS = 1440 
 OVERFLOW_BUFF = 65536
 
-a_star = AStar()
 
 def drive_straight(a_star, dist, forward=1):
     # drives straight for dist meters.
@@ -45,4 +44,9 @@ def drive_straight(a_star, dist, forward=1):
         (Lprev, Rprev) = (Lcurr, Rcurr)
         time.sleep(0.1)
 
-drive_straight(a_star, 1, -1)
+def main():
+    a_star = AStar()
+    drive_straight(a_star, 1, -1)
+
+if __name__ == '__main__':
+    main()
