@@ -33,7 +33,7 @@ def turn(a_star, degrees, clockwise=1):
             a_star.motors(0, 0)
             break
         # calculate errors (leaning left)
-        err = ((Lcurr - Lprev + OVERFLOW_BUFF) % OVERFLOW_BUFF) - ((Rcurr - Rprev + OVERFLOW_BUFF) % OVERFLOW_BUFF) 
+        err = ((Lcurr - Lprev + OVERFLOW_BUFF) % OVERFLOW_BUFF) - ((Rprev - Rcurr + OVERFLOW_BUFF) % OVERFLOW_BUFF) 
         errsum += err
         errsig = Kp * err + Ki * errsum
         print("{:.2f}".format(errsig))
