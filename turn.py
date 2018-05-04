@@ -20,7 +20,7 @@ def turn(a_star, degrees, clockwise=1):
     enticks = BOTDIAM * degrees * ENCODERTICKS / 360.0 / WHEELDIAM 
     # distance to encoder:
     Lfinal = Linit + enticks
-    Rfinal = Rinit + enticks
+    Rfinal = Rinit - enticks
 
     (Lprev, Rprev) = (Linit, Rinit)
     while 1:
