@@ -25,7 +25,7 @@ def drive_straight(a_star, dist, forward=1):
     while 1:
         # get encoder reading
         (Lcurr, Rcurr) = a_star.read_encoders()
-        print("Encoder values: {} {}".format(Lcurr, Rcurr))
+        # print("Encoder values: {} {}".format(Lcurr, Rcurr))
         # if we have traveled distance, stop.
         if(Lcurr > Lfinal or Rcurr > Rfinal):
             a_star.motors(0, 0)
