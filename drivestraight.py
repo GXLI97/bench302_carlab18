@@ -8,11 +8,11 @@ OVERFLOW_BUFF = 65536
 
 a_star = AStar()
 
-def drive_straight(a_star, dist, forward=True):
+def drive_straight(a_star, dist, forward=1):
     # drives straight for dist meters.
     Kp = 1
     Ki = .08
-    L, R = 100, 100
+    L, R = 100 * forward, 100 * forward
     errsum = 0
     # get the initial encoder reading:
     (Linit, Rinit) = a_star.read_encoders()
@@ -37,8 +37,8 @@ def drive_straight(a_star, dist, forward=True):
         errsig = Kp * err + Ki * errsum
         print("{:.2f}".format(errsig))
         # write to motor
-        motorL = 100 - errsig
-        motorR = 100 + errsig
+        motorL = 100 * forward - errsig
+        motorR = 100 * forward + errsig
         a_star.motors(int(motorL), int(motorR))
         # update previous
         (Lprev, Rprev) = (Lcurr, Rcurr)
