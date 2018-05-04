@@ -65,7 +65,8 @@ def main():
     print("Distances {:.2f} {:.2f} {:.2f}".format(d1, d2, d3))
     # record distance.
 
-
+if __name__ == '__main__':
+    main()
 
 
 
