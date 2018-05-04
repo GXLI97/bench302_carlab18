@@ -56,7 +56,15 @@ def record_distance(ser):
 
 def calc_angle(dist, d1, d2, d3):
     cosT1 = (dist**2 + d2**2 - d1**2)/(2*dist*d2)
+    if cosT1 > 1:
+        cosT1 = 1
+    elif cosT1 < -1:
+        cosT1 = -1
     cosT2 = (dist**2 + d2**2 - d3**2)/(2*dist*d2)
+    if cosT2 > 1:
+        cosT2 = 1
+    elif cosT2 < -1:
+        cosT2 = -1
     T1 = math.acos(cosT1)
     T2 = math.acos(cosT2)
     if cosT1 > 0 and cosT2 > 0:
