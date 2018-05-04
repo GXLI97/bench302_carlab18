@@ -1,6 +1,7 @@
 from a_star import AStar
 import time
 import math
+import sys
 
 WHEEL_DIAMETER = 70 # mm
 ENCODER_TICKS = 1440 
