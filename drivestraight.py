@@ -52,9 +52,9 @@ def main():
     a_star = AStar()
     
     if len(sys.argv) == 2:
-        drive_straight(a_star, sys.argv[1])
+        drive_straight(a_star, float(sys.argv[1]))
     elif len(sys.argv) == 3:
-        drive_straight(a_star, sys.argv[1], sys.argv[2])
+        drive_straight(a_star, float(sys.argv[1]), int(sys.argv[2]))
     else:
         drive_straight(a_star)
 
