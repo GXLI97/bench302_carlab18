@@ -39,8 +39,7 @@ def drive_straight(a_star, dist, forward=True):
         # write to motor
         motorL = 100 - errsig
         motorR = 100 + errsig
-        if (abs(err) < 1000):
-            a_star.motors(int(motorL), int(motorR))
+        a_star.motors(int(motorL), int(motorR))
         # update previous
         (Lprev, Rprev) = (Lcurr, Rcurr)
         time.sleep(0.1)
