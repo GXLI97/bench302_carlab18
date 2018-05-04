@@ -38,7 +38,7 @@ def turn(a_star, degrees, clockwise=1):
         print("{:.2f}".format(errsig))
         # write to motor
         motorL = 50 * clockwise - errsig
-        motorR = -50 * clockwise - errsig
+        motorR = -50 * clockwise + errsig
         a_star.motors(int(motorL), int(motorR))
         print("Motors on {} {}".format(motorL, motorR))
         # update previous
