@@ -13,7 +13,6 @@ def turn(a_star, degrees, clockwise=1):
 
     Kp = 1
     Ki = .08
-    L, R = 100 * clockwise, 100 * clockwise
     errsum = 0
     # get the initial encoder reading:
     (Linit, Rinit) = a_star.read_encoders()
@@ -39,8 +38,9 @@ def turn(a_star, degrees, clockwise=1):
         print("{:.2f}".format(errsig))
         # write to motor
         motorL = 100 * clockwise - errsig
-        motorR = -100 * clockwise + errsig
+        motorR = -100 * clockwise - errsig
         a_star.motors(int(motorL), int(motorR))
+        print("Motors on {} {}".format(motorL, motorR))
         # update previous
         (Lprev, Rprev) = (Lcurr, Rcurr)
         time.sleep(0.1)
