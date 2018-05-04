@@ -45,6 +45,7 @@ def record_distance(ser):
         try:
             res = ser.readline()
             dist = parseDistance(res.decode('utf-8'))
+            print("Distance: {:.2f}".format(dist))
             distances.append(dist)
         except:
             print("Read'n Parse failed")
