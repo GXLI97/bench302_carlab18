@@ -43,7 +43,6 @@ def drive_straight(a_star, dist, forward=1):
         # update previous
         (Lprev, Rprev) = (Lcurr, Rcurr)
         time.sleep(0.1)
-    time.sleep(0.5)
 
 def main():
     a_star = AStar()

@@ -39,7 +39,7 @@ def parseDistance(s):
 
 def record_distance(ser):
     time.sleep(0.5)
-    NUM_DISTANCES = 10
+    NUM_DISTANCES = 20
     distances = []
     while len(distances) < 10:
         try:
@@ -68,6 +68,7 @@ def main():
     drive_straight(a_star, dist=1)
     d2 = record_distance(ser)
     turn(a_star, degrees=90, clockwise=1)
+    time.sleep(0.5)
     drive_straight(a_star, dist=1)
     d3 = record_distance(ser)
 
