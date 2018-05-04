@@ -51,6 +51,10 @@ def record_distance(ser):
             continue
     return mean(distances)
 
+def shutdown(ser, a_star):
+    ser.write(b'lec\r')
+    ser.close()
+    a_star.motors(0, 0)
 
 def main():
     TIMEOUT = 60
@@ -68,7 +72,7 @@ def main():
     d3 = record_distance(ser)
 
     print("Distances {:.2f} {:.2f} {:.2f}".format(d1, d2, d3))
-    # record distance.
+    shutdown(ser, a_star)
 
 if __name__ == '__main__':
     main()
