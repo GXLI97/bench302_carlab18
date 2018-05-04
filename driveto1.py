@@ -41,9 +41,13 @@ def record_distance(ser):
     NUM_DISTANCES = 10
     distances = []
     while len(distances) < 10:
-        res = ser.readline()
-        dist = parseDistance(res.decode('utf-8'))
-        distances.append(dist)
+        try:
+            res = ser.readline()
+            dist = parseDistance(res.decode('utf-8'))
+            distances.append(dist)
+        except:
+            print("Read'n Parse failed")
+            continue
     return mean(distances)
 
 
