@@ -40,6 +40,7 @@ def drive_straight(a_star, dist, forward=1):
         motorL = 100 * forward - errsig
         motorR = 100 * forward + errsig
         a_star.motors(int(motorL), int(motorR))
+        print("Motors on {} {}".format(motorL, motorR))
         # update previous
         (Lprev, Rprev) = (Lcurr, Rcurr)
         time.sleep(0.1)
