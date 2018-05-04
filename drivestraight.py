@@ -7,7 +7,7 @@ ENCODER_TICKS = 1440
 OVERFLOW_BUFF = 65536
 
 
-def drive_straight(a_star, dist, forward=1):
+def drive_straight(a_star, dist=1, forward=1):
     # drives straight for dist meters.
     Kp = 2
     Ki = .01
@@ -18,8 +18,8 @@ def drive_straight(a_star, dist, forward=1):
 
     encticks = dist/WHEEL_DIAMETER*ENCODER_TICKS * 1000/math.pi # TODO: calculate distance to encoder 
     # distance to encoder:
-    Lfinal = Linit + encticks
-    Rfinal = Rinit + encticks
+    Lfinal = Linit + encticks * forward
+    Rfinal = Rinit + encticks * forward
 
     (Lprev, Rprev) = (Linit, Rinit)
     while 1:
@@ -27,7 +27,10 @@ def drive_straight(a_star, dist, forward=1):
         (Lcurr, Rcurr) = a_star.read_encoders()
         # print("Encoder values: {} {}".format(Lcurr, Rcurr))
         # if we have traveled distance, stop.
-        if(Lcurr > Lfinal or Rcurr > Rfinal):
+        if forward == 1 and (Lcurr > Lfinal or Rcurr > Rfinal):
+            a_star.motors(0, 0)
+            break
+        if forward == -1 and (Lcurr < Lfinal or Rcurr < Rfinal):
             a_star.motors(0, 0)
             break
         # calculate errors (leaning left)
@@ -46,7 +49,13 @@ def drive_straight(a_star, dist, forward=1):
 
 def main():
     a_star = AStar()
-    drive_straight(a_star, 1, 1)
+    
+    if len(sys.argv) == 2:
+        drive_straight(a_star, sys.argv[1])
+    elif len(sys.argv) == 3:
+        drive_straight(a_star, sys.argv[1], sys.argv[2])
+    else:
+        drive_straight(a_star)
 
 if __name__ == '__main__':
     main()
