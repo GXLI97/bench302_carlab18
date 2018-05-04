@@ -46,7 +46,7 @@ def drive_straight(a_star, dist, forward=1):
 
 def main():
     a_star = AStar()
-    drive_straight(a_star, 1, -1)
+    drive_straight(a_star, 1, 1)
 
 if __name__ == '__main__':
     main()
