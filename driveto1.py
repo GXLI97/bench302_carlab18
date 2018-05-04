@@ -38,7 +38,7 @@ def parseDistance(s):
     return float(a[-1])
 
 def record_distance(ser):
-    time.sleep(0.5)
+    time.sleep(1)
     NUM_DISTANCES = 20
     distances = []
     while len(distances) < 10:
