@@ -83,16 +83,7 @@ def shutdown(ser, a_star):
     ser.close()
     a_star.motors(0, 0)
 
-def main():
-    TIMEOUT = 60
-
-    # initialize our AStar motor controller.
-    a_star = AStar()
-
-    ser = connect_to_serial()
-
-    EVAL_DIST = 2
-
+def move_step(ser, a_star, EVAL_DIST):
     d1 = record_distance(ser)
     drive_straight(a_star, dist=EVAL_DIST)
     d2 = record_distance(ser)
@@ -110,8 +101,21 @@ def main():
     time.sleep(0.5)
     turn(a_star, degrees, clockwise=1)
     time.sleep(0.5)
-    drive_straight(a_star, dist=d2 * 0.7)
+    drive_straight(a_star, dist=d2 * 0.5)
+    dend = record_distance(ser)
+    return dend
 
+def main():
+    TIMEOUT = 60
+
+    # initialize our AStar motor controller.
+    a_star = AStar()
+    ser = connect_to_serial()
+
+    dend = 4.
+    while dend > 1:
+        dend = move_step(se, a_star, dend/2)
+        print("Distance after movement: {:.2f}".format(dend))
     shutdown(ser, a_star)
 
 if __name__ == '__main__':
