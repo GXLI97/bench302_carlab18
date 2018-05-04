@@ -34,14 +34,12 @@ def drive_straight(a_star, dist, forward=True):
         err = (Lcurr - Lprev) - (Rcurr - Rprev)
         errsum += err
         errsig = Kp * err + Ki * errsum
-        # overflow case
-        if (abs(err) > 1000):
-            continue
         print("{:.2f}".format(errsig))
         # write to motor
         motorL = 100 - errsig
         motorR = 100 + errsig
-        a_star.motors(int(motorL), int(motorR))
+        if (abs(err) < 1000):
+            a_star.motors(int(motorL), int(motorR))
         # update previous
         (Lprev, Rprev) = (Lcurr, Rcurr)
         time.sleep(0.1)
