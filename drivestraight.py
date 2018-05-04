@@ -1,10 +1,13 @@
 from a_star import AStar
 import time
 
+WHEEL_DIAMETER = 70 # mm
+ENCODER_TICKS = 1440 
+
 a_star = AStar()
 
 def drive_straight(a_star, dist, forward=True):
-    # drives straight for dist feet.
+    # drives straight for dist meters.
     Kp = 2
     Ki = .08
     L, R = 100, 100
@@ -12,7 +15,7 @@ def drive_straight(a_star, dist, forward=True):
     # get the initial encoder reading:
     (Linit, Rinit) = a_star.read_encoders()
 
-    encticks = 10000 # TODO: calculate distance to encoder 
+    encticks = dist/WHEEL_DIAMETER*ENCODER_TICKS * 1000 # TODO: calculate distance to encoder 
     # distance to encoder:
     Lfinal = Linit + encticks
     Rfinal = Rinit + encticks
@@ -39,4 +42,4 @@ def drive_straight(a_star, dist, forward=True):
         (Lprev, Rprev) = (Lcurr, Rcurr)
         time.sleep(0.1)
 
-drive_straight(a_star, 5)
+drive_straight(a_star, 1)
