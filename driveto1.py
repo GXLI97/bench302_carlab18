@@ -39,10 +39,10 @@ def parseDistance(s):
 
 def record_distance(ser):
     time.sleep(1)
-    ser.read(10000000)
+    ser.read(10000000000)
     NUM_DISTANCES = 20
     distances = []
-    while len(distances) < 10:
+    while len(distances) < NUM_DISTANCES:
         try:
             res = ser.readline()
             dist = parseDistance(res.decode('utf-8'))
