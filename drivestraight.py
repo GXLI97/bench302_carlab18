@@ -25,7 +25,7 @@ def drive_straight(a_star, dist, forward=1):
     while 1:
         # get encoder reading
         (Lcurr, Rcurr) = a_star.read_encoders()
-        # print("Encoder values: {} {}".format(Lcurr, Rcurr))
+        print("Encoder values: {} {}".format(Lcurr, Rcurr))
         # if we have traveled distance, stop.
         if(Lcurr > Lfinal or Rcurr > Rfinal):
             a_star.motors(0, 0)
@@ -34,12 +34,12 @@ def drive_straight(a_star, dist, forward=1):
         err = ((Lcurr - Lprev + OVERFLOW_BUFF) % OVERFLOW_BUFF) - ((Rcurr - Rprev + OVERFLOW_BUFF) % OVERFLOW_BUFF) 
         errsum += err
         errsig = Kp * err + Ki * errsum
-        # print("{:.2f}".format(errsig))
+        print("{:.2f}".format(errsig))
         # write to motor
         motorL = 100 * forward - errsig
         motorR = 100 * forward + errsig
         a_star.motors(int(motorL), int(motorR))
-        # print("Motors on {} {}".format(motorL, motorR))
+        print("Motors on {} {}".format(motorL, motorR))
         # update previous
         (Lprev, Rprev) = (Lcurr, Rcurr)
         time.sleep(0.1)
