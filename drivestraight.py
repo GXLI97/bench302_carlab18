@@ -16,7 +16,7 @@ def drive_straight(a_star, dist, forward=1):
     # get the initial encoder reading:
     (Linit, Rinit) = a_star.read_encoders()
 
-    encticks = dist/WHEEL_DIAMETER*ENCODER_TICKS * 1000/math.pi # TODO: calculate distance to encoder 
+    encticks = forward * dist/WHEEL_DIAMETER*ENCODER_TICKS * 1000/math.pi # TODO: calculate distance to encoder 
     # distance to encoder:
     Lfinal = Linit + encticks
     Rfinal = Rinit + encticks
