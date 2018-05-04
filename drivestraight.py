@@ -4,6 +4,7 @@ import math
 
 WHEEL_DIAMETER = 70 # mm
 ENCODER_TICKS = 1440 
+OVERFLOW_BUFF = 65536
 
 a_star = AStar()
 
@@ -31,7 +32,7 @@ def drive_straight(a_star, dist, forward=True):
             a_star.motors(0, 0)
             break
         # calculate errors (leaning left)
-        err = (Lcurr - Lprev) - (Rcurr - Rprev)
+        err = ((Lcurr - Lprev + OVERFLOW_BUFF) % OVERFLOW_BUFF) - ((Rcurr - Rprev + OVERFLOW_BUFF) % OVERFLOW_BUFF) 
         errsum += err
         errsig = Kp * err + Ki * errsum
         print("{:.2f}".format(errsig))
