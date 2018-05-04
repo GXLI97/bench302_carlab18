@@ -28,7 +28,7 @@ def turn(a_star, degrees, clockwise=1):
         (Lcurr, Rcurr) = a_star.read_encoders()
         print("Encoder values: {} {}".format(Lcurr, Rcurr))
         # if we have traveled distance, stop.
-        if(Lcurr > Lfinal or Rcurr > Rfinal):
+        if(Lcurr > Lfinal or Rcurr < Rfinal):
             a_star.motors(0, 0)
             break
         # calculate errors (leaning left)
