@@ -35,7 +35,7 @@ def drive_straight(a_star, dist, forward=True):
         errsum += err
         errsig = Kp * err + Ki * errsum
         # overflow case
-        if (abs(errsig) > 1000):
+        if (abs(err) > 1000):
             continue
         print("{:.2f}".format(errsig))
         # write to motor
