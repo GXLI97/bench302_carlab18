@@ -5,24 +5,44 @@ import sys
 
 
 
-def turn(a_star, degrees):
+def turn(a_star, degrees, clockwise=1):
     BOTDIAM = 149.
     WHEELDIAM = 70.
     ENCODERTICKS = 1440.
+    
+    Kp = 1
+    Ki = .08
+    L, R = 100 * clockwise, 100 * clockwise
+    errsum = 0
+    # get the initial encoder reading:
+    (Linit, Rinit) = a_star.read_encoders()
 
+    enticks = BOTDIAM * degrees * ENCODERTICKS / 360.0 / WHEELDIAM 
+    # distance to encoder:
+    Lfinal = Linit + enticks
+    Rfinal = Rinit + enticks
 
-    ticks = BOTDIAM * degrees * ENCODERTICKS / 360.0 / WHEELDIAM
-
-    l = a_star.read_encoders()[0]
-    r = a_star.read_encoders()[1]
-
-    a_star.motors(100, -100)
+    (Lprev, Rprev) = (Linit, Rinit)
     while 1:
-        e = a_star.read_encoders()
-        if abs(e[1]-r) + abs(e[0]-l) > 2 * ticks:
+        # get encoder reading
+        (Lcurr, Rcurr) = a_star.read_encoders()
+        print("Encoder values: {} {}".format(Lcurr, Rcurr))
+        # if we have traveled distance, stop.
+        if(Lcurr > Lfinal or Rcurr > Rfinal):
             a_star.motors(0, 0)
-            return
-        time.sleep(0.05)
+            break
+        # calculate errors (leaning left)
+        err = ((Lcurr - Lprev + OVERFLOW_BUFF) % OVERFLOW_BUFF) - ((Rcurr - Rprev + OVERFLOW_BUFF) % OVERFLOW_BUFF) 
+        errsum += err
+        errsig = Kp * err + Ki * errsum
+        print("{:.2f}".format(errsig))
+        # write to motor
+        motorL = 100 * clockwise - errsig
+        motorR = -100 * clockwise + errsig
+        a_star.motors(int(motorL), int(motorR))
+        # update previous
+        (Lprev, Rprev) = (Lcurr, Rcurr)
+        time.sleep(0.1)
 
 def main():
     a_star = AStar()
