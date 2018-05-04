@@ -108,10 +108,7 @@ def main():
     degrees = calc_angle(EVAL_DIST, d1, d2, d3)
     print("Calculated turn angle: {:.2f}".format(degrees))
     time.sleep(0.5)
-    if degrees > 0:
-        turn(a_star, degrees, clockwise=1)
-    else:
-        turn(a_star, degrees, clockwise=-1)
+    turn(a_star, degrees, clockwise=1)
     time.sleep(0.5)
     drive_straight(a_star, dist=d2 * 0.7)
 
