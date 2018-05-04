@@ -25,11 +25,12 @@ def turn(a_star, degrees):
         time.sleep(0.05)
 
 def main():
-    if not len(sys.argv) == 2:
-        return
-
     a_star = AStar()
-    turn(a_star, sys.argv[2])
+    if not len(sys.argv) == 2:
+        turn(a_star, 90)
+
+    else:
+        turn(a_star, sys.argv[1])
 
 if __name__ == '__main__':
     main()
