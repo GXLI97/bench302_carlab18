@@ -102,7 +102,7 @@ def main():
         turn(a_star, degrees, clockwise=1)
     else:
         turn(a_star, degrees, clockwise=-1)
-
+    drive_straight(a_star, dist=d2 * 0.7)
 
     shutdown(ser, a_star)
 
