@@ -44,4 +44,4 @@ def drive_straight(a_star, dist, forward=1):
         (Lprev, Rprev) = (Lcurr, Rcurr)
         time.sleep(0.1)
 
-drive_straight(a_star, 1)
+drive_straight(a_star, 1, -1)
