@@ -40,6 +40,7 @@ def parseDistance(s):
 def record_distance(ser):
     time.sleep(1)
     ser.read(100000000)
+    ser.read(100000000)
     NUM_DISTANCES = 20
     distances = []
     while len(distances) < NUM_DISTANCES:
