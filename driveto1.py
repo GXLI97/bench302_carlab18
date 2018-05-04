@@ -52,7 +52,7 @@ def record_distance(ser):
         except:
             print("Read'n Parse failed")
             continue
-    return mean(distances)
+    return median(distances)
 
 def calc_angle(dist, d1, d2, d3):
     cosT1 = (dist**2 + d2**2 - d1**2)/(2*dist*d2)
@@ -90,7 +90,11 @@ def main():
     d2 = record_distance(ser)
     turn(a_star, degrees=90, clockwise=1)
     time.sleep(0.5)
+<<<<<<< HEAD
     drive_straight(a_star, dist=EVAL_DIST)
+=======
+    drive_straight(a_star, dist=1)
+>>>>>>> c3151d70022bdeab15ad1a98ad3b023ec9f5f287
     d3 = record_distance(ser)
 
     print("Distances {:.2f} {:.2f} {:.2f}".format(d1, d2, d3))
