@@ -104,15 +104,16 @@ def calc_angle(di, dr, dl, df):
 
 def zag(ser, a_star):
     # do stuff.
-    d4 = 100
+    di = record_distance(ser)
+
     while d4 > 1:
-        d1, d2, d3, d4 = zigzag(ser, a_star, stride=0.25)
+        d1, d2, d3, d4 = zigzag(ser, a_star, stride=di/8)
         angle = calc_angle(d1, d2, d3, d4)
         print("==================")
         print("angle: {:.2f}".format(angle))
         turn(a_star, -angle)
         time.sleep(0.5)
-        drive_straight(a_star, d4*0.25)
+        drive_straight(a_star, d4/4)
 
 def main():
     TIMEOUT = 60
