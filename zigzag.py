@@ -99,6 +99,15 @@ def calc_angle(di, dr, dl, df):
     phi = math.degrees(math.atan2(1.5*y, x))
     return phi
 
+def zag(ser, a_star):
+    # do stuff.
+    d4 = 100
+    while d4 > 1:
+        d1, d2, d3, d4 = zigzag(ser, a_star, stride=0.25)
+        angle = calc_angle(d1, d2, d3, d4)
+        print("==================")
+        print("angle: {:.2f}".format(angle))
+        turn(a_star, angle)
 
 def main():
     TIMEOUT = 60
@@ -107,12 +116,7 @@ def main():
     a_star = AStar()
     ser = connect_to_serial()
 
-    # do stuff.
-    d1, d2, d3, d4 = zigzag(ser, a_star, stride=0.25)
-    angle = calc_angle(d1, d2, d3, d4)
-    print("==================")
-    print("angle: {:.2f}".format(angle))
-    turn(a_star, angle)
+    zag(ser, a_star)
 
     shutdown(ser, a_star)
 
