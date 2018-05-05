@@ -104,7 +104,7 @@ def main():
     ser = connect_to_serial()
 
     # do stuff.
-    d1, d2, d3, d4 = zigzag(ser, a_star, stride=0.5)
+    d1, d2, d3, d4 = zigzag(ser, a_star, stride=0.25)
     angle = calc_angle(d1, d2, d3, d4)
     print("==================")
     print("angle: {:.2f}".format(angle))
