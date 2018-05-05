@@ -10,7 +10,7 @@ OVERFLOW_BUFF = 65536
 
 def drive_straight(a_star, dist=1, forward=1):
     # drives straight for dist meters.
-    Kp = 2
+    Kp = 1.6
     Ki = .01
     L, R = 105 * forward, 100 * forward
     errsum = 0
