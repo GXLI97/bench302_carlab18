@@ -101,7 +101,7 @@ def move_step(ser, a_star, EVAL_DIST):
     time.sleep(0.5)
     turn(a_star, degrees, clockwise=1)
     time.sleep(0.5)
-    drive_straight(a_star, dist=d2 * 0.5)
+    drive_straight(a_star, dist=d2 * 0.4)
     dend = record_distance(ser)
     return dend
 
