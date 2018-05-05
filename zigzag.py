@@ -88,6 +88,13 @@ def zigzag(ser, a_star, stride):
     print("========================")
     print("Distances: {:.2f} {:2f} {:2f} {:2f}".format(d1, d2, d3, d4))
 
+    return d1, d2, d3, d4
+
+def calc_angle(di, dr, dl, df):
+    print(dl - (3*di+df)/4)
+    print(dr - (di+3*df)/4)
+    print(df-di)
+    return 90
 
 def main():
     TIMEOUT = 60
@@ -97,7 +104,12 @@ def main():
     ser = connect_to_serial()
 
     # do stuff.
-    zigzag(ser, a_star, stride=0.5)
+    d1, d2, d3, d4 = zigzag(ser, a_star, stride=0.5)
+    angle = calc_angle(d1, d2, d3, d4)
+    print("==================")
+    print("angle: {:.2f}".format(angle))
+    turn(a_star, angle)
+
     shutdown(ser, a_star)
 
 if __name__ == '__main__':
