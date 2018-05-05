@@ -91,9 +91,9 @@ def zigzag(ser, a_star, stride):
     return d1, d2, d3, d4
 
 def calc_angle(di, dr, dl, df):
-    print(dl - (3*di+df)/4)
-    print(dr - (di+3*df)/4)
-    print(df-di)
+    print("right err: {:.2f}".format(dr - (3*di+df)/4))
+    print("left err: {:.2f}".format(dl - (di+3*df)/4))
+    print("final- init {:.2f}".format(df-di))
     return 90
 
 def main():
