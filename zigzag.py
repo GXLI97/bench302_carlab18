@@ -41,7 +41,7 @@ def record_distance(ser):
     time.sleep(1)
     ser.read(100000000)
     ser.read(100000000)
-    NUM_DISTANCES = 20
+    NUM_DISTANCES = 10
     distances = []
     while len(distances) < NUM_DISTANCES:
         try:
@@ -59,22 +59,31 @@ def shutdown(ser, a_star):
     ser.close()
     a_star.motors(0, 0)
 
-def zigzag(a_star, stride):
+def zigzag(ser, a_star, stride):
+    d1 = record_distance(ser)
     time.sleep(0.5)
     turn(a_star, 45)
     time.sleep(0.5)
     drive_straight(a_star, stride)
+
+    d2 = record_distance(ser)
     time.sleep(0.5)
     turn(a_star, -80)
     time.sleep(0.5)
     drive_straight(a_star, 2*stride)
+
+    d3 = record_distance(ser)
     time.sleep(0.5)
     turn(a_star, 90)
     time.sleep(0.5)
     drive_straight(a_star, stride)
     time.sleep(0.5)
     turn(a_star, -40)
+
+    d4 = record_distance(ser)
     time.sleep(0.5)
+
+    print("Distances: {:.2f} {:2f} {:2f} {:2f}".format(d1, d2, d3, d4))
 
 
 def main():
@@ -85,7 +94,7 @@ def main():
     ser = connect_to_serial()
 
     # do stuff.
-    zigzag(a_star, stride=0.5)
+    zigzag(ser, a_star, stride=0.5)
     shutdown(ser, a_star)
 
 if __name__ == '__main__':
