@@ -5,7 +5,7 @@ import sys
 
 
 
-def turn(a_star, degrees, clockwise=1, Kp=1.1, Ki=.04):
+def turn(a_star, degrees, clockwise=1, Kp=1, Ki=.04):
     BOTDIAM = 149.
     WHEELDIAM = 70.
     ENCODERTICKS = 1440.
@@ -48,7 +48,7 @@ def turn(a_star, degrees, clockwise=1, Kp=1.1, Ki=.04):
         # print("Motors on {} {}".format(motorL, motorR))
         # update previous
         (Lprev, Rprev) = (Lcurr, Rcurr)
-        time.sleep(0.1)
+        time.sleep(0.05)
 
 def main():
     a_star = AStar()
