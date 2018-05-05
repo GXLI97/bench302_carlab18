@@ -20,7 +20,9 @@ def drive_straight(a_star, dist=1, forward=1):
     encticks = dist/WHEEL_DIAMETER*ENCODER_TICKS * 1000/math.pi # TODO: calculate distance to encoder 
     # distance to encoder:
     Lfinal = Linit + encticks * forward
+    Lfinal = (Lfinal + OVERFLOW_BUFF) % OVERFLOW_BUFF
     Rfinal = Rinit + encticks * forward
+    Rfinal = (Rfinal + OVERFLOW_BUFF) % OVERFLOW_BUFF
 
     (Lprev, Rprev) = (Linit, Rinit)
     while 1:

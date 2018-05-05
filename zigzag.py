@@ -108,6 +108,7 @@ def zag(ser, a_star):
         print("==================")
         print("angle: {:.2f}".format(angle))
         turn(a_star, angle)
+        drive_straight(a_star, d4*0.25)
 
 def main():
     TIMEOUT = 60
