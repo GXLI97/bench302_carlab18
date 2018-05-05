@@ -69,7 +69,7 @@ def zigzag(ser, a_star, stride):
 
     d2 = record_distance(ser)
     time.sleep(0.5)
-    turn(a_star, -80)
+    turn(a_star, -90)
     time.sleep(0.5)
     drive_straight(a_star, 2*stride)
     print("========================")
@@ -80,7 +80,7 @@ def zigzag(ser, a_star, stride):
     time.sleep(0.5)
     drive_straight(a_star, stride)
     time.sleep(0.5)
-    turn(a_star, -40)
+    turn(a_star, -45)
     print("========================")
 
     d4 = record_distance(ser)

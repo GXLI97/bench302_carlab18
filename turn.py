@@ -14,6 +14,8 @@ def turn(a_star, degrees, clockwise=1, Kp=1.3, Ki=.04):
     if degrees < 0:
         degrees = -1 * degrees
         clockwise = -1 * clockwise
+        # TEMPORARY HACK!
+        degrees *= 0.8
 
     errsum = 0
     # get the initial encoder reading:
