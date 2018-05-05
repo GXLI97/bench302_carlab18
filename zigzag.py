@@ -61,19 +61,19 @@ def shutdown(ser, a_star):
 
 def zigzag(a_star, stride):
     time.sleep(0.5)
-    turn(a_star, 45)
+    turn(a_star, 40)
     time.sleep(0.5)
     drive_straight(a_star, stride)
     time.sleep(0.5)
-    turn(a_star, -90)
+    turn(a_star, -85)
     time.sleep(0.5)
     drive_straight(a_star, 2*stride)
     time.sleep(0.5)
-    turn(a_star, 90)
+    turn(a_star, 85)
     time.sleep(0.5)
     drive_straight(a_star, stride)
     time.sleep(0.5)
-    turn(a_star, -45)
+    turn(a_star, -40)
     time.sleep(0.5)
 
 
