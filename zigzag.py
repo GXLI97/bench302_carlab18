@@ -96,7 +96,7 @@ def calc_angle(di, dr, dl, df):
     er = dr - (3*di+df)/4
     y = er - el
 
-    phi = math.degrees(math.atan2(y, x))
+    phi = math.degrees(math.atan2(1.5*y, x))
     return phi
 
 
