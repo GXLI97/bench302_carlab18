@@ -110,7 +110,7 @@ def zag(ser, a_star):
         angle = calc_angle(d1, d2, d3, d4)
         print("==================")
         print("angle: {:.2f}".format(angle))
-        turn(a_star, angle)
+        turn(a_star, -angle)
         time.sleep(0.5)
         break
         drive_straight(a_star, d4*0.25)
