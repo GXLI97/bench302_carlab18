@@ -99,7 +99,7 @@ def calc_angle(di, dr, dl, df):
     print("error left: {:.2f}".format(el))
     print("error right: {:.2f}".format(er))
     print("x: {:.2f}, y: {:.2f}".format(x,y))
-    phi = math.degrees(math.atan2(1.25*y, x))
+    phi = math.degrees(math.atan2(y, x))
     return phi
 
 def zag(ser, a_star):
