@@ -91,10 +91,14 @@ def zigzag(ser, a_star, stride):
     return d1, d2, d3, d4
 
 def calc_angle(di, dr, dl, df):
-    print("right err: {:.2f}".format(dr - (3*di+df)/4))
-    print("left err: {:.2f}".format(dl - (di+3*df)/4))
-    print("final- init {:.2f}".format(df-di))
-    return 90
+    x = di-df
+    el = dl - (di+3*df)/4
+    er = dr - (3*di+df)/4
+    y = er - el
+
+    phi = math.degrees(math.atan2(y, x))
+    return phi
+
 
 def main():
     TIMEOUT = 60
