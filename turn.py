@@ -15,6 +15,9 @@ def turn(a_star, degrees, clockwise=1, Kp=1.3, Ki=.04):
         degrees = -1 * degrees
         clockwise = -1 * clockwise
 
+    # SUS CALIBRATION HACK
+    degrees *= 0.96
+
     errsum = 0
     # get the initial encoder reading:
     (Linit, Rinit) = a_star.read_encoders()
