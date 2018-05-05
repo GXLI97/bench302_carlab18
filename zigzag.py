@@ -59,7 +59,7 @@ def shutdown(ser, a_star):
     ser.close()
     a_star.motors(0, 0)
 
-def zigzag(a_star, stride=1):
+def zigzag(a_star, stride):
     time.sleep(0.5)
     turn(a_star, 45)
     time.sleep(0.5)
@@ -85,7 +85,7 @@ def main():
     ser = connect_to_serial()
 
     # do stuff.
-    zigzag(a_star)
+    zigzag(a_star, stride=0.5)
     shutdown(ser, a_star)
 
 if __name__ == '__main__':
