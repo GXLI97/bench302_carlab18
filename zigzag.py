@@ -105,7 +105,7 @@ def calc_angle(di, dr, dl, df):
 def zag(ser, a_star):
     # do stuff.
     di = record_distance(ser)
-
+    d4 = 100
     while d4 > 1:
         d1, d2, d3, d4 = zigzag(ser, a_star, stride=di/8)
         angle = calc_angle(d1, d2, d3, d4)
