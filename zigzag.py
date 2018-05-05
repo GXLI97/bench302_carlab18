@@ -41,7 +41,7 @@ def record_distance(ser):
     time.sleep(1)
     ser.read(100000000)
     ser.read(100000000)
-    NUM_DISTANCES = 10
+    NUM_DISTANCES = 20
     distances = []
     while len(distances) < NUM_DISTANCES:
         try:
@@ -65,12 +65,14 @@ def zigzag(ser, a_star, stride):
     turn(a_star, 45)
     time.sleep(0.5)
     drive_straight(a_star, stride)
+    print("========================")
 
     d2 = record_distance(ser)
     time.sleep(0.5)
     turn(a_star, -80)
     time.sleep(0.5)
     drive_straight(a_star, 2*stride)
+    print("========================")
 
     d3 = record_distance(ser)
     time.sleep(0.5)
@@ -79,10 +81,11 @@ def zigzag(ser, a_star, stride):
     drive_straight(a_star, stride)
     time.sleep(0.5)
     turn(a_star, -40)
+    print("========================")
 
     d4 = record_distance(ser)
     time.sleep(0.5)
-
+    print("========================")
     print("Distances: {:.2f} {:2f} {:2f} {:2f}".format(d1, d2, d3, d4))
 
 
