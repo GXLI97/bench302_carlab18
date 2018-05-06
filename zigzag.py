@@ -61,7 +61,7 @@ def shutdown(ser, a_star):
     ser.close()
     a_star.motors(0, 0)
 
-def zigzag(ser, a_star, stride, DEBUG=DEBUG):
+def zigzag(ser, a_star, stride, DEBUG=False):
     d1 = record_distance(ser)
     time.sleep(0.25)
     turn(a_star, 45, DEBUG=DEBUG)
