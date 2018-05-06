@@ -22,11 +22,13 @@ def semicircle(a_star, radius, rightTurn=1, Ki=.04, Kp=1.3):
 
     (Lprev, Rprev) = (Linit, Rinit)
     while 1:
+        
+        # get encoder reading
+        (Lcurr, Rcurr) = a_star.read_encoders()
+
         if (Lcurr > Lfinal or Rcurr > Rfinal):
             a_star.motors(0, 0)
             break
-        # get encoder reading
-        (Lcurr, Rcurr) = a_star.read_encoders()
 
         # calculate errors (leaning left)
         err = ((Lcurr - Lprev + OVERFLOW_BUFF) % OVERFLOW_BUFF) - ((Rcurr - Rprev + OVERFLOW_BUFF) % OVERFLOW_BUFF) 
