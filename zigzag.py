@@ -131,20 +131,20 @@ def zigzag(ser, a_star, stride, DEBUG=False):
 def calc_angle(di, dr, dl, df):
     x = di - df
     y = dl - dr
-    return math.degrees(math.atan2(y, x)) + 50
+    return math.degrees(math.atan2(y, x)) + 50 # why +50?
 
 def zag(ser, a_star, DEBUG=False):
     # do stuff.
     di = record_distance(ser)
     d1, d2, d3, d4 = zigzag(ser, a_star, stride=0.25, DEBUG=DEBUG)
-    while d4 > 1 and d3 > 1 and d2 > 1 and d1 > 1:
+    while d4 > 1:
         angle = calc_angle(d1, d2, d3, d4)
         print("==================")
         print("angle: {:.2f}".format(angle))
         time.sleep(0.1)
         turn(a_star, angle, DEBUG=DEBUG)
         time.sleep(0.1)
-        drive_straight(a_star, 0.25, DEBUG=DEBUG)
+        drive_straight(a_star, min(d1,d2,d3,d4), DEBUG=DEBUG)
         d1, d2, d3, d4 = zigzag(ser, a_star, stride=0.25, DEBUG=DEBUG)
 
 def main():
