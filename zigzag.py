@@ -47,40 +47,42 @@ def record_distance(ser):
         try:
             res = ser.readline()
             dist = parseDistance(res.decode('utf-8'))
-            print("Distance: {:.2f}".format(dist))
+            # print("Distance: {:.2f}".format(dist))
             distances.append(dist)
         except:
             print("Read'n Parse failed")
             continue
-    return mean(distances)
+    m - mean(distances)
+    print("Mean distance over {} measurements: {}".format(NUM_DISTANCES, m))
+    return m
 
 def shutdown(ser, a_star):
     ser.write(b'lec\r')
     ser.close()
     a_star.motors(0, 0)
 
-def zigzag(ser, a_star, stride):
+def zigzag(ser, a_star, stride, DEBUG=DEBUG):
     d1 = record_distance(ser)
     time.sleep(0.25)
-    turn(a_star, 45)
+    turn(a_star, 45, DEBUG=DEBUG)
     time.sleep(0.25)
     drive_straight(a_star, stride)
     print("========================")
 
     d2 = record_distance(ser)
     time.sleep(0.25)
-    turn(a_star, -90)
+    turn(a_star, -90, DEBUG=DEBUG)
     time.sleep(0.25)
     drive_straight(a_star, 2*stride)
     print("========================")
 
     d3 = record_distance(ser)
     time.sleep(0.25)
-    turn(a_star, 90)
+    turn(a_star, 90, DEBUG=DEBUG)
     time.sleep(0.25)
-    drive_straight(a_star, stride)
+    drive_straight(a_star, stride, DEBUG=DEBUG)
     time.sleep(0.25)
-    turn(a_star, -45)
+    turn(a_star, -45, DEBUG=DEBUG)
     print("========================")
 
     d4 = record_distance(ser)
@@ -96,26 +98,29 @@ def calc_angle(di, dr, dl, df):
     y = dl - dr
     return math.degrees(math.atan2(y, x)) + 50
 
-def zag(ser, a_star):
+def zag(ser, a_star, DEBUG=False):
     # do stuff.
     di = record_distance(ser)
     d4 = 1000
     while d4 > 1:
-        d1, d2, d3, d4 = zigzag(ser, a_star, stride=0.25)
+        d1, d2, d3, d4 = zigzag(ser, a_star, stride=0.25, DEBUG=DEBUG)
         angle = calc_angle(d1, d2, d3, d4)
         print("==================")
         print("angle: {:.2f}".format(angle))
-        turn(a_star, angle)
+        turn(a_star, angle, DEBUG=DEBUG)
         time.sleep(0.25)
         drive_straight(a_star, 0.25)
 
 def main():
-
+    if len(sys.argv) > 1:
+        DEBUG = True
+    else:
+        DEBUG = False
     # initialize our AStar motor controller.
     a_star = AStar()
     ser = connect_to_serial()
 
-    zag(ser, a_star)
+    zag(ser, a_star, DEBUG)
 
     shutdown(ser, a_star)
 

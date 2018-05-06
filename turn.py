@@ -5,16 +5,20 @@ import sys
 
 
 
-def turn(a_star, degrees, clockwise=1, Kp=1.3, Ki=.04):
+def turn(a_star, degrees, clockwise=1, DEBUG=False):
     BOTDIAM = 149.
     WHEELDIAM = 70.
     ENCODERTICKS = 1440.
     OVERFLOW_BUFF = 65536
+    Kp = 1.3
+    Ki = .04
 
     if degrees < 0:
         degrees = -1 * degrees
         clockwise = -1 * clockwise
 
+    if DEBUG:
+        print("Making a turn of {}".format(degrees))
     # SUS CALIBRATION HACK
     degrees *= 0.96
 

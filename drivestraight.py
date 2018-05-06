@@ -8,12 +8,15 @@ ENCODER_TICKS = 1440
 OVERFLOW_BUFF = 65536
 
 
-def drive_straight(a_star, dist=1, forward=1):
+def drive_straight(a_star, dist=1, forward=1, DEBUG=False):
     # drives straight for dist meters.
     Kp = 1.5
     Ki = .02
     L, R = 105 * forward, 100 * forward
     errsum = 0
+
+    if DEBUG:
+        print("Driving forward this far: {}".format(forward*distance))
     # get the initial encoder reading:
     (Linit, Rinit) = a_star.read_encoders()
 
