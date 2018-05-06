@@ -93,8 +93,8 @@ def zigzag(ser, a_star, stride):
 # TODO: make this more accurate.
 def calc_angle(di, dr, dl, df):
     x = di-df
-    y = 0.5*(dl+df) - 0.5*(dr+di)
-    return math.degrees(math.atan2(y, x))
+    y = dl - dr
+    return math.degrees(math.atan2(y, x)) + 30
 
 def zag(ser, a_star):
     # do stuff.
