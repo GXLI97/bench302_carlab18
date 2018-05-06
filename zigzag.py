@@ -52,7 +52,7 @@ def record_distance(ser):
         except:
             print("Read'n Parse failed")
             continue
-    m - mean(distances)
+    m = mean(distances)
     print("Mean distance over {} measurements: {}".format(NUM_DISTANCES, m))
     return m
 
