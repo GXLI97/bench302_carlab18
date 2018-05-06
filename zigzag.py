@@ -66,7 +66,7 @@ def shutdown(ser, a_star):
     ser.close()
     a_star.motors(0, 0)
 
-def zigzag(ser, a_star, stride, DEBUG=False):
+def zigzag(ser, a_star, stride, TARGET=1, DEBUG=False):
     # d1 = record_distance(ser)
     # time.sleep(0.25)
     # turn(a_star, 45, DEBUG=DEBUG)
@@ -98,9 +98,13 @@ def zigzag(ser, a_star, stride, DEBUG=False):
     # return d1, d2, d3, d4
 
     # Attempt to reorder statements to reduce waiting time
+    d1, d2, d3, d4 = 1000000
+
     time.sleep(0.1)
     turn(a_star, 45, DEBUG=DEBUG)
     d1 = record_distance(ser)
+    if d1 < TARGET:
+        return d1, d2, d3, d4
     time.sleep(0.1)
     drive_straight(a_star, stride, DEBUG=DEBUG)
     print("========================")
@@ -109,6 +113,8 @@ def zigzag(ser, a_star, stride, DEBUG=False):
     time.sleep(0.1)
     turn(a_star, -90, DEBUG=DEBUG)
     d2 = record_distance(ser)
+    if d2 < TARGET:
+        return d1, d2, d3, d4
     time.sleep(0.1)
     drive_straight(a_star, 2*stride, DEBUG=DEBUG)
     print("========================")
@@ -116,9 +122,13 @@ def zigzag(ser, a_star, stride, DEBUG=False):
     time.sleep(0.1)
     turn(a_star, 90, DEBUG=DEBUG)
     d3 = record_distance(ser)
+    if d3 < TARGET:
+        return d1, d2, d3, d4
     time.sleep(0.1)
     drive_straight(a_star, stride, DEBUG=DEBUG)
     d4 = record_distance(ser)
+    if d4 < TARGET:
+        return d1, d2, d3, d4
     time.sleep(0.1)
     turn(a_star, -45, DEBUG=DEBUG)
 
@@ -133,11 +143,11 @@ def calc_angle(di, dr, dl, df):
     y = dl - dr
     return math.degrees(math.atan2(y, x)) + 50 # why +50?
 
-def zag(ser, a_star, DEBUG=False):
+def zag(ser, a_star, TARGET=1, DEBUG=False):
     # do stuff.
     di = record_distance(ser)
     d1, d2, d3, d4 = zigzag(ser, a_star, stride=0.25, DEBUG=DEBUG)
-    while d4 > 1:
+    while d4 > TARGET and d3 > TARGET and d2 > TARGET and d1 > TARGET:
         angle = calc_angle(d1, d2, d3, d4)
         print("==================")
         print("angle: {:.2f}".format(angle))
@@ -145,7 +155,7 @@ def zag(ser, a_star, DEBUG=False):
         turn(a_star, angle, DEBUG=DEBUG)
         time.sleep(0.1)
         drive_straight(a_star, min(d1,d2,d3,d4), DEBUG=DEBUG)
-        d1, d2, d3, d4 = zigzag(ser, a_star, stride=0.25, DEBUG=DEBUG)
+        d1, d2, d3, d4 = zigzag(ser, a_star, stride=0.25, TARGET=TARGET, DEBUG=DEBUG)
 
 def main():
     DEBUG = True
