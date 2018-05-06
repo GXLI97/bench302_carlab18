@@ -15,7 +15,7 @@ def turn(a_star, degrees, clockwise=1, DEBUG=False):
 
     if DEBUG:
         print("Making a turn of {}".format(degrees))
-        
+
     if degrees < 0:
         degrees = -1 * degrees
         clockwise = -1 * clockwise
@@ -53,7 +53,11 @@ def turn(a_star, degrees, clockwise=1, DEBUG=False):
         # write to motor
         motorL = 50 * clockwise - errsig
         motorR = -50 * clockwise - errsig
-        a_star.motors(int(motorL), int(motorR))
+        try:
+            a_star.motors(int(motorL), int(motorR))
+        except:
+            print("\t\tFailed to turn with motor params of {} {}".format(int(motorL), int(motorR)))
+            a_star.motors(int(motorL), int(motorR))
         # print("Motors on {} {}".format(motorL, motorR))
         # update previous
         (Lprev, Rprev) = (Lcurr, Rcurr)
