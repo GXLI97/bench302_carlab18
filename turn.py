@@ -56,7 +56,7 @@ def turn(a_star, degrees, clockwise=1, DEBUG=False):
         try:
             a_star.motors(int(motorL), int(motorR))
         except:
-            print("\t\tFailed to turn with motor params of {} {}".format(int(motorL), int(motorR)))
+            print("\t\tFailed to turn with motor params of {} {} and errsig of {}".format(int(motorL), int(motorR), errsig))
             a_star.motors(int(motorL), int(motorR))
         # print("Motors on {} {}".format(motorL, motorR))
         # update previous
