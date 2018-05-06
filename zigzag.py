@@ -61,62 +61,54 @@ def shutdown(ser, a_star):
 
 def zigzag(ser, a_star, stride):
     d1 = record_distance(ser)
-    time.sleep(0.5)
+    time.sleep(0.25)
     turn(a_star, 45)
-    time.sleep(0.5)
+    time.sleep(0.25)
     drive_straight(a_star, stride)
     print("========================")
 
     d2 = record_distance(ser)
-    time.sleep(0.5)
+    time.sleep(0.25)
     turn(a_star, -90)
-    time.sleep(0.5)
+    time.sleep(0.25)
     drive_straight(a_star, 2*stride)
     print("========================")
 
     d3 = record_distance(ser)
-    time.sleep(0.5)
+    time.sleep(0.25)
     turn(a_star, 90)
-    time.sleep(0.5)
+    time.sleep(0.25)
     drive_straight(a_star, stride)
-    time.sleep(0.5)
+    time.sleep(0.25)
     turn(a_star, -45)
     print("========================")
 
     d4 = record_distance(ser)
-    time.sleep(0.5)
+    time.sleep(0.25)
     print("========================")
     print("Distances: {:.2f} {:2f} {:2f} {:2f}".format(d1, d2, d3, d4))
 
     return d1, d2, d3, d4
 
+# TODO: make this more accurate.
 def calc_angle(di, dr, dl, df):
     x = di-df
-    el = dl - (di+3*df)/4
-    er = dr - (3*di+df)/4
-    y = er - el
-
-    print("error left: {:.2f}".format(el))
-    print("error right: {:.2f}".format(er))
-    print("x: {:.2f}, y: {:.2f}".format(x,y))
-    phi = math.degrees(math.atan2(y, x))
-    return phi
+    y = dl-dr
+    return math.degree(math.atan2(y, x))
 
 def zag(ser, a_star):
     # do stuff.
     di = record_distance(ser)
-    d4 = 100
     while d4 > 1:
         d1, d2, d3, d4 = zigzag(ser, a_star, stride=0.25)
         angle = calc_angle(d1, d2, d3, d4)
         print("==================")
         print("angle: {:.2f}".format(angle))
-        turn(a_star, -angle)
-        time.sleep(0.5)
-        drive_straight(a_star, d4/4)
+        turn(a_star, angle)
+        time.sleep(0.25)
+        drive_straight(a_star, 0.25)
 
 def main():
-    TIMEOUT = 60
 
     # initialize our AStar motor controller.
     a_star = AStar()
