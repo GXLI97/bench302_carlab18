@@ -34,7 +34,7 @@ def connect_to_serial():
 
 def parseDistance(s, ID="0C25"):
 
-    DIST,2,AN0,820C,0.00,0.00,0.00,7.24,AN1,0C25,0.00,0.00,0.00,2.55
+    # DIST,2,AN0,820C,0.00,0.00,0.00,7.24,AN1,0C25,0.00,0.00,0.00,2.55
     a = s.strip().split(',')
     k = 0
     while not a[-6*k -5] == ID:
