@@ -35,7 +35,7 @@ def shutdown(ser, a_star):
     a_star.motors(0, 0)
 
 
-def main:
+def main():
     a_star = AStar()
     try:
         ser = serial.Serial(
