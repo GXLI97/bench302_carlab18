@@ -163,7 +163,7 @@ def main():
     a_star = AStar()
     ser = connect_to_serial()
 
-    zag(ser, a_star, TARGET=TARGET, DEBUG=DEBUG)
+    zag(ser, a_star, TARGET=1, DEBUG=DEBUG)
 
     shutdown(ser, a_star)
 
