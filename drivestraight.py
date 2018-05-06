@@ -16,7 +16,7 @@ def drive_straight(a_star, dist=1, forward=1, DEBUG=False):
     errsum = 0
 
     if DEBUG:
-        print("Driving forward this far: {}".format(forward*distance))
+        print("Driving forward this far: {}".format(forward*dist))
     # get the initial encoder reading:
     (Linit, Rinit) = a_star.read_encoders()
 
