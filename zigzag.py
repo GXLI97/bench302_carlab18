@@ -141,7 +141,7 @@ def zigzag(ser, a_star, stride, TARGET=1, DEBUG=False):
 def calc_angle(di, dr, dl, df):
     x = di - df
     y = dl - dr
-    return math.degrees(math.atan2(y, x)) + 50 # why +50?
+    return math.degrees(math.atan2(y, x)) + 30 # why +50?
 
 def zag(ser, a_star, TARGET=1, DEBUG=False):
     # do stuff.
