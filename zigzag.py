@@ -154,7 +154,8 @@ def zag(ser, a_star, TARGET=1, DEBUG=False):
         time.sleep(0.1)
         turn(a_star, angle, DEBUG=DEBUG)
         time.sleep(0.1)
-        drive_straight(a_star, min(d1,d2,d3,d4), DEBUG=DEBUG)
+        drive_straight(a_star, 0.25, DEBUG=DEBUG)
+        # drive_straight(a_star, min(d1,d2,d3,d4), DEBUG=DEBUG)
         d1, d2, d3, d4 = zigzag(ser, a_star, stride=0.25, TARGET=TARGET, DEBUG=DEBUG)
 
 def main():
