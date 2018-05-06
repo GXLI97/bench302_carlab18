@@ -52,6 +52,9 @@ def main():
         )
     time.sleep(1)
     ser.write(b'\r\r') # go into serial mode.
+    time.sleep(2)
+    res=ser.read(100) # read some things.
+    time.sleep(0.5)
     shutdown(ser, a_star)
 
 
