@@ -53,7 +53,7 @@ def main():
     # initialize our AStar motor controller.
     a_star = AStar()
 
-    semicircle(a_star, amplitude, Ki=Ki, Kp=Kp)
+    semicircle(a_star, 1, Ki=Ki, Kp=Kp)
 
 
 if __name__ == '__main__':
