@@ -142,10 +142,7 @@ def zag(ser, a_star, DEBUG=False):
         d1, d2, d3, d4 = zigzag(ser, a_star, stride=0.25, DEBUG=DEBUG)
 
 def main():
-    if len(sys.argv) > 1:
-        DEBUG = True
-    else:
-        DEBUG = False
+    DEBUG = True
     # initialize our AStar motor controller.
     a_star = AStar()
     ser = connect_to_serial()
