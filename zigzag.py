@@ -98,23 +98,28 @@ def zigzag(ser, a_star, stride, DEBUG=False):
     # return d1, d2, d3, d4
 
     # Attempt to reorder statements to reduce waiting time
+    time.sleep(0.1)
     turn(a_star, 45, DEBUG=DEBUG)
     d1 = record_distance(ser)
+    time.sleep(0.1)
     drive_straight(a_star, stride, DEBUG=DEBUG)
     print("========================")
 
     
-    time.sleep(0.25)
+    time.sleep(0.1)
     turn(a_star, -90, DEBUG=DEBUG)
     d2 = record_distance(ser)
+    time.sleep(0.1)
     drive_straight(a_star, 2*stride, DEBUG=DEBUG)
     print("========================")
 
-    time.sleep(0.25)
+    time.sleep(0.1)
     turn(a_star, 90, DEBUG=DEBUG)
     d3 = record_distance(ser)
+    time.sleep(0.1)
     drive_straight(a_star, stride, DEBUG=DEBUG)
     d4 = record_distance(ser)
+    time.sleep(0.1)
     turn(a_star, -45, DEBUG=DEBUG)
 
     print("========================")
@@ -124,7 +129,7 @@ def zigzag(ser, a_star, stride, DEBUG=False):
 
 # TODO: make this more accurate.
 def calc_angle(di, dr, dl, df):
-    x = di-df
+    x = di - df
     y = dl - dr
     return math.degrees(math.atan2(y, x)) + 50
 
@@ -136,8 +141,9 @@ def zag(ser, a_star, DEBUG=False):
         angle = calc_angle(d1, d2, d3, d4)
         print("==================")
         print("angle: {:.2f}".format(angle))
+        time.sleep(0.1)
         turn(a_star, angle, DEBUG=DEBUG)
-        time.sleep(0.25)
+        time.sleep(0.1)
         drive_straight(a_star, 0.25, DEBUG=DEBUG)
         d1, d2, d3, d4 = zigzag(ser, a_star, stride=0.25, DEBUG=DEBUG)
 
