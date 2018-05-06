@@ -13,12 +13,14 @@ def turn(a_star, degrees, clockwise=1, DEBUG=False):
     Kp = 1.3
     Ki = .04
 
+    if DEBUG:
+        print("Making a turn of {}".format(degrees))
+        
     if degrees < 0:
         degrees = -1 * degrees
         clockwise = -1 * clockwise
 
-    if DEBUG:
-        print("Making a turn of {}".format(degrees))
+
     # SUS CALIBRATION HACK
     degrees *= 0.96
 

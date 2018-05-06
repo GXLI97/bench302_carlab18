@@ -71,14 +71,14 @@ def zigzag(ser, a_star, stride, DEBUG=False):
     time.sleep(0.25)
     turn(a_star, 45, DEBUG=DEBUG)
     time.sleep(0.25)
-    drive_straight(a_star, stride)
+    drive_straight(a_star, stride, DEBUG=DEBUG)
     print("========================")
 
     d2 = record_distance(ser)
     time.sleep(0.25)
     turn(a_star, -90, DEBUG=DEBUG)
     time.sleep(0.25)
-    drive_straight(a_star, 2*stride)
+    drive_straight(a_star, 2*stride, DEBUG=DEBUG)
     print("========================")
 
     d3 = record_distance(ser)
@@ -114,7 +114,7 @@ def zag(ser, a_star, DEBUG=False):
         print("angle: {:.2f}".format(angle))
         turn(a_star, angle, DEBUG=DEBUG)
         time.sleep(0.25)
-        drive_straight(a_star, 0.25)
+        drive_straight(a_star, 0.25, DEBUG=DEBUG)
 
 def main():
     if len(sys.argv) > 1:
