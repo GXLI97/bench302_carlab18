@@ -98,7 +98,7 @@ def zigzag(ser, a_star, stride, TARGET=1, DEBUG=False):
     # return d1, d2, d3, d4
 
     # Attempt to reorder statements to reduce waiting time
-    d1, d2, d3, d4 = 1000000
+    d1, d2, d3, d4 = 1000000, 1000000, 1000000, 1000000
 
     time.sleep(0.1)
     turn(a_star, 45, DEBUG=DEBUG)
