@@ -4,7 +4,7 @@ import sys
 from a_star import AStar
 from statistics import mean, median
 
-def semicircle(a_star, radius, leftTurn=1):
+def arcdrive(a_star, radius, leftTurn=1, arc=180):
     BOTDIAM = 149.
     WHEELDIAM = 70.
     ENCODERTICKS = 1440.
@@ -19,8 +19,8 @@ def semicircle(a_star, radius, leftTurn=1):
 
     (Lprev, Rprev) = (Linit, Rinit)
 
-    Lfinal = Linit + (1000*radius - leftTurn*BOTDIAM/2)/WHEELDIAM*ENCODERTICKS
-    Rfinal = Rinit + (1000*radius + leftTurn*BOTDIAM/2)/WHEELDIAM*ENCODERTICKS
+    Lfinal = Linit + (1000*radius - leftTurn*BOTDIAM/2)/WHEELDIAM*ENCODERTICKS*(arc/180)
+    Rfinal = Rinit + (1000*radius + leftTurn*BOTDIAM/2)/WHEELDIAM*ENCODERTICKS*(arc/180)
     print("Linit: {}\tLfinal: {}\tRinit: {}\tRfinal: {}".format(Linit, Lfinal, Rinit,Rfinal))
 
     (Lprev, Rprev) = (Linit, Rinit)
@@ -60,7 +60,7 @@ def main():
     # initialize our AStar motor controller.
     a_star = AStar()
 
-    semicircle(a_star, 1.0/4)
+    arcdrive(a_star, 1.0/4)
 
 
 if __name__ == '__main__':
