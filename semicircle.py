@@ -19,7 +19,7 @@ def semicircle(a_star, radius, rightTurn=1, Ki=.04, Kp=1.3):
 
     Lfinal = Linit + (1000*radius - BOTDIAM/2)/WHEELDIAM*ENCODERTICKS
     Rfinal = Rinit + (1000*radius + BOTDIAM/2)/WHEELDIAM*ENCODERTICKS
-    print("Lfinal: {}\tLinit: {}\tRfinal: {}\tRinit: {}".format(Lfinal, Linit, Rfinal,Rinit))
+    print("Linit: {}\tLfinal: {}\tRinit: {}\tRfinal: {}".format(Linit, Lfinal, Rinit,Rfinal))
 
     (Lprev, Rprev) = (Linit, Rinit)
     while 1:
@@ -28,7 +28,7 @@ def semicircle(a_star, radius, rightTurn=1, Ki=.04, Kp=1.3):
         (Lcurr, Rcurr) = a_star.read_encoders()
 
         if (Lcurr > Lfinal or Rcurr > Rfinal):
-            print("{} {} {} {}".format(Lcurr, Lfinal, Rcurr, Rfinal))
+            print("Lcurr: {}\tLfinal: {}\tRcurr: {}\tRfinal: {}".format(Lcurr, Lfinal, Rcurr, Rfinal))
             a_star.motors(0, 0)
             break
 
