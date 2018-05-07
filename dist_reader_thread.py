@@ -50,7 +50,7 @@ def read_distances(ser, q):
             res = ser.readline()
             dist = parseDistance(res.decode('utf-8'))
             # print("Distance: {:.2f}".format(dist))
-            q.put((i, dist))
+            q.put([dist])
             i += 1
         except:
             print("Read'n Parse failed")
