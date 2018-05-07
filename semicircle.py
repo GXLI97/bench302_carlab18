@@ -39,8 +39,8 @@ def semicircle(a_star, radius, rightTurn=1, Ki=.04, Kp=1.3):
         errsig = Kp * err + Ki * errsum
         # print("{:.2f}".format(errsig))
         # write to motor
-        motorL = 105  - errsig
-        motorR = 100  + errsig
+        motorL = 105  + errsig
+        motorR = 100  - errsig
         a_star.motors(int(motorL), int(motorR))
         # print("Motors on {} {}".format(int(motorL), int(motorR)))
         # update previous
