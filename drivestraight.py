@@ -12,7 +12,7 @@ def drive_straight(a_star, dist=1, forward=1, DEBUG=False):
     # drives straight for dist meters.
     Kp = 1.5
     Ki = .02
-    L, R = 105 * forward, 100 * forward
+    L, R = 215 * forward, 200 * forward
     errsum = 0
 
     if DEBUG:
@@ -43,8 +43,8 @@ def drive_straight(a_star, dist=1, forward=1, DEBUG=False):
         errsig = Kp * err + Ki * errsum
         # print("{:.2f}".format(errsig))
         # write to motor
-        motorL = 105 * forward - errsig
-        motorR = 100 * forward + errsig
+        motorL = 215 * forward - errsig
+        motorR = 200 * forward + errsig
         a_star.motors(int(motorL), int(motorR))
         # print("Motors on {} {}".format(int(motorL), int(motorR)))
         # update previous
