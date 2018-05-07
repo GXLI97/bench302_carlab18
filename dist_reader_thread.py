@@ -56,7 +56,7 @@ def main():
     q.join()
     while not q.empty():
         print(q.get())
-    q.unjoin()
+    
 
 
 if __name__ == '__main__':
