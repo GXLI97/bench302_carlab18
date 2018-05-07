@@ -33,13 +33,13 @@ def wiggle(a_star, ampl=50, per=0.01, dist=1, forward=1, DEBUG=False):
 
         j = i*0.1
 
-        if  j >= 0 and j < 10:
+        if  j >= 0 and j < 20:
             err += ampl * math.sin(i*per)
-            print("\rGoing Right", end="")
-        if j >= 50 and j <= 60:
-            err -= ampl * math.sin(i*per)
             print("\rGoing Left", end="")
-        if j >= 100:
+        if j >= 60 and j <= 80:
+            err -= ampl * math.sin(i*per)
+            print("\rGoing Right", end="")
+        if j >= 120:
             i = 0
 
         errsum += err
