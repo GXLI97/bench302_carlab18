@@ -31,13 +31,15 @@ def wiggle(a_star, ampl=30, per=0.1, dist=1, forward=1, DEBUG=False):
         # calculate errors (leaning left)
         err = ((Lcurr - Lprev + OVERFLOW_BUFF) % OVERFLOW_BUFF) - ((Rcurr - Rprev + OVERFLOW_BUFF) % OVERFLOW_BUFF)
 
-        if  i >= 0 and i < 10:
+        j = i*0.1
+
+        if  j >= 0 and j < 10:
             err += ampl * math.sin(i*per)
             print("\rGoing Right", end="")
-        if i >= 50 and i <= 60:
+        if j >= 50 and j <= 60:
             err -= ampl * math.sin(i*per)
             print("\rGoing Left", end="")
-        if i >= 100:
+        if j >= 100:
             i = 0
 
         errsum += err
