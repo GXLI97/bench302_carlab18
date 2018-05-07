@@ -4,7 +4,7 @@ import sys
 from a_star import AStar
 from statistics import mean, median
 
-def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1, forwards=1):
+def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1, forward=1):
     BOTDIAM = 149.
     WHEELDIAM = 70.
     ENCODERTICKS = 1440.
@@ -19,8 +19,8 @@ def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1, forwards=1):
 
     (Lprev, Rprev) = (Linit, Rinit)
 
-    Lfinal = Linit + (1000*radius - leftTurn*BOTDIAM/2)/WHEELDIAM*ENCODERTICKS*(arc/180.)*forwards
-    Rfinal = Rinit + (1000*radius + leftTurn*BOTDIAM/2)/WHEELDIAM*ENCODERTICKS*(arc/180.)*forwards
+    Lfinal = Linit + (1000*radius - leftTurn*BOTDIAM/2)/WHEELDIAM*ENCODERTICKS*(arc/180.)*forward
+    Rfinal = Rinit + (1000*radius + leftTurn*BOTDIAM/2)/WHEELDIAM*ENCODERTICKS*(arc/180.)*forward
     print("Linit: {}\tLfinal: {}\tRinit: {}\tRfinal: {}".format(Linit, Lfinal, Rinit,Rfinal))
 
     (Lprev, Rprev) = (Linit, Rinit)
@@ -29,11 +29,11 @@ def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1, forwards=1):
         # get encoder reading
         (Lcurr, Rcurr) = a_star.read_encoders()
 
-        if forwards == 1 and (Lcurr > Lfinal or Rcurr > Rfinal):
+        if forward == 1 and (Lcurr > Lfinal or Rcurr > Rfinal):
             print("Lcurr: {}\tLfinal: {}\tRcurr: {}\tRfinal: {}".format(Lcurr, Lfinal, Rcurr, Rfinal))
             a_star.motors(0, 0)
             break
-        if forwards == -1 and (Lcurr < Lfinal or Rcurr < Rfinal):
+        if forward == -1 and (Lcurr < Lfinal or Rcurr < Rfinal):
             print("Lcurr: {}\tLfinal: {}\tRcurr: {}\tRfinal: {}".format(Lcurr, Lfinal, Rcurr, Rfinal))
             a_star.motors(0, 0)
             break
@@ -45,8 +45,8 @@ def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1, forwards=1):
         errsig = Kp * err + Ki * errsum
         # print("{:.2f}".format(errsig))
         # write to motor
-        motorL = (speed*105 - errsig) * forwards
-        motorR = (speed*100 + errsig) * forwards
+        motorL = speed*105*forward - errsig
+        motorR = speed*100*forward + errsig
         a_star.motors(int(motorL), int(motorR))
         # print("Motors on {} {}".format(int(motorL), int(motorR)))
         # update previous
@@ -57,13 +57,13 @@ def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1, forwards=1):
 def main():
     DEBUG = True
     if len(sys.argv) >= 6:
-        forwards = float(sys.argv[5])
+        forward = float(sys.argv[5])
         speed = float(sys.argv[4])
         leftTurn = float(sys.argv[3])
         arc = float(sys.argv[2])
         radius = float(sys.argv[1])
     else:
-        forwards = 1
+        forward = 1
         leftTurn=1
         arc=180
         radius=1.0/4
@@ -71,7 +71,7 @@ def main():
     # initialize our AStar motor controller.
     a_star = AStar()
 
-    arcdrive(a_star, radius=radius, leftTurn=leftTurn, arc=arc, speed=speed, forwards=forwards)
+    arcdrive(a_star, radius=radius, leftTurn=leftTurn, arc=arc, speed=speed, forward=forward)
 
 
 if __name__ == '__main__':
