@@ -64,7 +64,7 @@ def recordDistances(ser):
 			print("Read'n Parse failed")
 			break
 	m = mean(distances)
-	print("Mean distance over {} measurements: {}".format(NUM_DISTANCES, m))
+	print("Mean distance over {} measurements: {}".format(i, m))
 	return m
 
 def smoothZigZag(ser, a_star):
