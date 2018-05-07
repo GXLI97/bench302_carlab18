@@ -6,7 +6,7 @@ import sys
 
 OVERFLOW_BUFF = 65536
 
-def wiggle(a_star, ampl=30, per=0.1, dist=1, forward=1, DEBUG=False):
+def wiggle(a_star, ampl=50, per=0.01, dist=1, forward=1, DEBUG=False):
     # drives straight for dist meters.
     Kp = 1.5
     Ki = .02
