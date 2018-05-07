@@ -67,73 +67,73 @@ def shutdown(ser, a_star):
     a_star.motors(0, 0)
 
 def zigzag(ser, a_star, stride, TARGET=1, DEBUG=False):
-    # d1 = record_distance(ser)
-    # time.sleep(0.25)
-    # turn(a_star, 45, DEBUG=DEBUG)
-    # time.sleep(0.25)
-    # drive_straight(a_star, stride, DEBUG=DEBUG)
-    # print("========================")
-
-    # d2 = record_distance(ser)
-    # time.sleep(0.25)
-    # turn(a_star, -90, DEBUG=DEBUG)
-    # time.sleep(0.25)
-    # drive_straight(a_star, 2*stride, DEBUG=DEBUG)
-    # print("========================")
-
-    # d3 = record_distance(ser)
-    # time.sleep(0.25)
-    # turn(a_star, 90, DEBUG=DEBUG)
-    # time.sleep(0.25)
-    # drive_straight(a_star, stride, DEBUG=DEBUG)
-    # time.sleep(0.25)
-    # turn(a_star, -45, DEBUG=DEBUG)
-    # print("========================")
-
-    # d4 = record_distance(ser)
-    # time.sleep(0.25)
-    # print("========================")
-    # print("Distances: {:.2f} {:2f} {:2f} {:2f}".format(d1, d2, d3, d4))
-
-    # return d1, d2, d3, d4
-
-    # Attempt to reorder statements to reduce waiting time
-    d1, d2, d3, d4 = 1000000, 1000000, 1000000, 1000000
-
-    time.sleep(0.1)
-    turn(a_star, 45, DEBUG=DEBUG)
     d1 = record_distance(ser)
-    if d1 < TARGET:
-        return d1, d2, d3, d4
-    time.sleep(0.1)
+    time.sleep(0.25)
+    turn(a_star, 45, DEBUG=DEBUG)
+    time.sleep(0.25)
     drive_straight(a_star, stride, DEBUG=DEBUG)
     print("========================")
 
-    
-    time.sleep(0.1)
-    turn(a_star, -90, DEBUG=DEBUG)
     d2 = record_distance(ser)
-    if d2 < TARGET:
-        return d1, d2, d3, d4
-    time.sleep(0.1)
+    time.sleep(0.25)
+    turn(a_star, -90, DEBUG=DEBUG)
+    time.sleep(0.25)
     drive_straight(a_star, 2*stride, DEBUG=DEBUG)
     print("========================")
 
-    time.sleep(0.1)
-    turn(a_star, 90, DEBUG=DEBUG)
     d3 = record_distance(ser)
-    if d3 < TARGET:
-        return d1, d2, d3, d4
-    time.sleep(0.1)
+    time.sleep(0.25)
+    turn(a_star, 90, DEBUG=DEBUG)
+    time.sleep(0.25)
     drive_straight(a_star, stride, DEBUG=DEBUG)
-    d4 = record_distance(ser)
-    if d4 < TARGET:
-        return d1, d2, d3, d4
-    time.sleep(0.1)
+    time.sleep(0.25)
     turn(a_star, -45, DEBUG=DEBUG)
+    print("========================")
 
+    d4 = record_distance(ser)
+    time.sleep(0.25)
     print("========================")
     print("Distances: {:.2f} {:2f} {:2f} {:2f}".format(d1, d2, d3, d4))
+
+    return d1, d2, d3, d4
+
+    # # Attempt to reorder statements to reduce waiting time
+    # d1, d2, d3, d4 = 1000000, 1000000, 1000000, 1000000
+
+    # time.sleep(0.1)
+    # turn(a_star, 45, DEBUG=DEBUG)
+    # d1 = record_distance(ser)
+    # if d1 < TARGET:
+    #     return d1, d2, d3, d4
+    # time.sleep(0.1)
+    # drive_straight(a_star, stride, DEBUG=DEBUG)
+    # print("========================")
+
+    
+    # time.sleep(0.1)
+    # turn(a_star, -90, DEBUG=DEBUG)
+    # d2 = record_distance(ser)
+    # if d2 < TARGET:
+    #     return d1, d2, d3, d4
+    # time.sleep(0.1)
+    # drive_straight(a_star, 2*stride, DEBUG=DEBUG)
+    # print("========================")
+
+    # time.sleep(0.1)
+    # turn(a_star, 90, DEBUG=DEBUG)
+    # d3 = record_distance(ser)
+    # if d3 < TARGET:
+    #     return d1, d2, d3, d4
+    # time.sleep(0.1)
+    # drive_straight(a_star, stride, DEBUG=DEBUG)
+    # d4 = record_distance(ser)
+    # if d4 < TARGET:
+    #     return d1, d2, d3, d4
+    # time.sleep(0.1)
+    # turn(a_star, -45, DEBUG=DEBUG)
+
+    # print("========================")
+    # print("Distances: {:.2f} {:2f} {:2f} {:2f}".format(d1, d2, d3, d4))
 
     return d1, d2, d3, d4
 
