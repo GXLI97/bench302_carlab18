@@ -56,7 +56,7 @@ def recordDistances(ser):
 	i=0
 	while 1:
 		try:
-			res = ser.readlines(timeout=0)
+			res = ser.readlines(timeout=1)
 			print(res)
 		except:
 			break
