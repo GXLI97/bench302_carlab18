@@ -40,7 +40,7 @@ def wiggle(a_star, dist=1, forward=1, DEBUG=False):
         # print("Motors on {} {}".format(int(motorL), int(motorR)))
         # update previous
         (Lprev, Rprev) = (Lcurr, Rcurr)
-        time.sleep(0.05)
+        time.sleep(0.01)
     a_star.motors(0, 0)
 
 def main():
