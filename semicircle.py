@@ -17,8 +17,8 @@ def semicircle(a_star, radius, rightTurn=1, Ki=.04, Kp=1.3):
 
     (Lprev, Rprev) = (Linit, Rinit)
 
-    Lfinal = Linit + (1000*radius + BOTDIAM/2)/WHEELDIAM*ENCODERTICKS
-    Rfinal = Rinit + (1000*radius - BOTDIAM/2)/WHEELDIAM*ENCODERTICKS
+    Lfinal = Linit + (1000*radius - BOTDIAM/2)/WHEELDIAM*ENCODERTICKS
+    Rfinal = Rinit + (1000*radius + BOTDIAM/2)/WHEELDIAM*ENCODERTICKS
     print("Lfinal: {}\tLinit: {}\tRfinal: {}\tRinit: {}".format(Lfinal, Linit, Rfinal,Rinit))
 
     (Lprev, Rprev) = (Linit, Rinit)
