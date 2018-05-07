@@ -26,7 +26,7 @@ def semicircle(a_star, radius, rightTurn=1, Ki=.04, Kp=1.3):
         # get encoder reading
         (Lcurr, Rcurr) = a_star.read_encoders()
 
-        if (Lcurr > Lfinal and Rcurr > Rfinal):
+        if (Lcurr > Lfinal or Rcurr > Rfinal):
             print("{} {} {} {}".format(Lcurr, Lfinal, Rcurr, Rfinal))
             a_star.motors(0, 0)
             break
