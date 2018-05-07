@@ -17,8 +17,8 @@ def semicircle(a_star, radius, rightTurn=1, Ki=.04, Kp=1.3):
 
     (Lprev, Rprev) = (Linit, Rinit)
 
-    Lfinal = Linit + (1000*radius + BOTDIAM/2*rightTurn)/WHEELDIAM*ENCODERTICKS/math.pi
-    Rfinal = Rinit + (1000*radius - BOTDIAM/2*rightTurn)/WHEELDIAM*ENCODERTICKS/math.pi
+    Lfinal = Linit + (1000*radius + BOTDIAM/2)/WHEELDIAM*ENCODERTICKS/math.pi
+    Rfinal = Rinit + (1000*radius - BOTDIAM/2)/WHEELDIAM*ENCODERTICKS/math.pi
 
     (Lprev, Rprev) = (Linit, Rinit)
     while 1:
@@ -33,7 +33,7 @@ def semicircle(a_star, radius, rightTurn=1, Ki=.04, Kp=1.3):
 
         # calculate errors (leaning left)
         # missing logic here to actually make the turn
-        err = ((Lcurr - Lprev + OVERFLOW_BUFF) % OVERFLOW_BUFF) - ((Rcurr - Rprev + OVERFLOW_BUFF) % OVERFLOW_BUFF) 
+        err = ((Lcurr - Lprev + OVERFLOW_BUFF) % OVERFLOW_BUFF)*(radius+BOTDIAM/2) - ((Rcurr - Rprev + OVERFLOW_BUFF) % OVERFLOW_BUFF)*(radius-BOTDIAM/2)
         errsum += err
         errsig = Kp * err + Ki * errsum
         # print("{:.2f}".format(errsig))
@@ -57,7 +57,7 @@ def main():
     # initialize our AStar motor controller.
     a_star = AStar()
 
-    semicircle(a_star, 1, Ki=Ki, Kp=Kp)
+    semicircle(a_star, 1.0/2, Ki=Ki, Kp=Kp)
 
 
 if __name__ == '__main__':
