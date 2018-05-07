@@ -34,7 +34,7 @@ def semicircle(a_star, radius, rightTurn=1, Ki=.04, Kp=1.3):
 
         # calculate errors (leaning left)
         # missing logic here to actually make the turn
-        err = ((Lcurr - Lprev + OVERFLOW_BUFF) % OVERFLOW_BUFF)*(1000*radius+BOTDIAM/2)/(1000*radius) - ((Rcurr - Rprev + OVERFLOW_BUFF) % OVERFLOW_BUFF)*(1000*radius-BOTDIAM/2)/(1000*radius)
+        err = ((Lcurr - Lprev + OVERFLOW_BUFF) % OVERFLOW_BUFF)*(1000*radius-BOTDIAM/2)/(1000*radius) - ((Rcurr - Rprev + OVERFLOW_BUFF) % OVERFLOW_BUFF)*(1000*radius+BOTDIAM/2)/(1000*radius)
         errsum += err
         errsig = Kp * err + Ki * errsum
         # print("{:.2f}".format(errsig))
