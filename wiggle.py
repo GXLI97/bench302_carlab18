@@ -22,25 +22,14 @@ def wiggle(a_star, ampl=50, per=0.01, dist=1, forward=1, DEBUG=False):
     i = 0
 
     start = time.time()
-    end = start + 20
+    end = start + 10
     while time.time() < end:
         i += 1
         # get encoder reading
         (Lcurr, Rcurr) = a_star.read_encoders()
         # print("Encoder values: {} {}".format(Lcurr, Rcurr))
         # calculate errors (leaning left)
-        err = ((Lcurr - Lprev + OVERFLOW_BUFF) % OVERFLOW_BUFF) - ((Rcurr - Rprev + OVERFLOW_BUFF) % OVERFLOW_BUFF)
-
-        j = i*0.1
-
-        if  j >= 0 and j < 20:
-            err += ampl * math.sin(i*per)
-            print("\rGoing Left", end="")
-        if j >= 60 and j <= 80:
-            err -= ampl * math.sin(i*per)
-            print("\rGoing Right", end="")
-        if j >= 120:
-            i = 0
+        err = ((Lcurr - Lprev + OVERFLOW_BUFF) % OVERFLOW_BUFF) - ((Rcurr - Rprev + OVERFLOW_BUFF) % OVERFLOW_BUFF) + ampl*math.sin(per * i)
 
         errsum += err
         errsig = Kp * err + Ki * errsum
