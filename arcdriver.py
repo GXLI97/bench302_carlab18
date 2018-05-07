@@ -97,7 +97,6 @@ def arcdrive(ser, a_star, radius, leftTurn=1, arc=180, speed=1):
         # print("Motors on {} {}".format(int(motorL), int(motorR)))
         # update previous
         (Lprev, Rprev) = (Lcurr, Rcurr)
-        time.sleep(0.05)
     return dist_data
 
 def shutdown(ser, a_star):
