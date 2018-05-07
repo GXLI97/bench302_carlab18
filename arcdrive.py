@@ -64,7 +64,7 @@ def main():
     # initialize our AStar motor controller.
     a_star = AStar()
 
-    arcdrive(a_star, radisu=radius, leftTurn=leftTurn, arc=arc, speed=speed)
+    arcdrive(a_star, radius=radius, leftTurn=leftTurn, arc=arc, speed=speed)
 
 
 if __name__ == '__main__':
