@@ -70,8 +70,8 @@ def arcdrive(ser, a_star, radius, leftTurn=1, arc=180, speed=1):
         try:
             res = ser.readline()
             dist = parseDistance(res.decode('utf-8'))
-            # print("Distance: {:.2f}".format(dist))
-            dist_data.append(dist)
+            print("Distance: {:.2f}".format(dist))
+            # dist_data.append(dist)
         except:
             print("Read'n Parse failed")
             
