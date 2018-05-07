@@ -62,6 +62,7 @@ def main():
     q = Queue()
     p = Process(target=read_distances, args=(ser, q))
     p.start()
+    time.sleep(5)
     while not q.empty():
         print(q.get())
 
