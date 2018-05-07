@@ -50,7 +50,7 @@ def read_distances(ser, q):
             res = ser.readline()
             dist = parseDistance(res.decode('utf-8'))
             # print("Distance: {:.2f}".format(dist))
-            q.put([dist])
+            q.put(dist)
             i += 1
         except:
             print("Read'n Parse failed")
@@ -63,9 +63,10 @@ def main():
     p = Process(target=read_distances, args=(ser, q))
     p.start()
     time.sleep(5)
+    dist_data = []
     while not q.empty():
-        print(q.get())
-
+        dist_data.append(q.get())
+    print(dist_data)
 
 
 if __name__ == '__main__':
