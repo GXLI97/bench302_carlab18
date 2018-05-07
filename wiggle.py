@@ -14,13 +14,6 @@ def wiggle(a_star, dist=1, forward=1, DEBUG=False):
     if DEBUG:
         print("Driving forward this far: {}".format(forward*dist))
     # get the initial encoder reading:
-    (Linit, Rinit) = a_star.read_encoders()
-
-    encticks = dist/WHEEL_DIAMETER*ENCODER_TICKS * 1000/math.pi # TODO: calculate distance to encoder 
-    # distance to encoder:
-    Lfinal = Linit + encticks * forward
-    Rfinal = Rinit + encticks * forward
-
     (Lprev, Rprev) = (Linit, Rinit)
 
     i = 0
