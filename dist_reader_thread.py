@@ -1,4 +1,4 @@
-from multiprocessing import Process, JoinableQueue
+from multiprocessing import Process, Queue
 import serial
 import time
 import random
@@ -59,11 +59,9 @@ def read_distances(ser, q):
 def main():
     ser = connect_to_serial()
     # begin to read distances in a thread.
-    q = JoinableQueue()
+    q = Queue()
     p = Process(target=read_distances, args=(ser, q))
     p.start()
-    time.sleep(2)
-    q.join()
     while not q.empty():
         print(q.get())
 
