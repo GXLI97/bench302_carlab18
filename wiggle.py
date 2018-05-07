@@ -10,7 +10,7 @@ def wiggle(a_star, ampl=30, per=0.1, dist=1, forward=1, DEBUG=False):
     # drives straight for dist meters.
     Kp = 1.5
     Ki = .02
-    L, R = 120 * forward, 100 * forward
+    L, R = 110 * forward, 100 * forward
     errsum = 0
 
     if DEBUG:
@@ -31,14 +31,18 @@ def wiggle(a_star, ampl=30, per=0.1, dist=1, forward=1, DEBUG=False):
         # calculate errors (leaning left)
         err = ((Lcurr - Lprev + OVERFLOW_BUFF) % OVERFLOW_BUFF) - ((Rcurr - Rprev + OVERFLOW_BUFF) % OVERFLOW_BUFF)
 
-        if  i > 10:
+        if  i >= 0 and i < 10:
             err += ampl * math.sin(i*per)
+        if i >= 50 and i <= 60:
+            err -= ampl * math.sin(i*per)
+        if i >= 100:
+            i = 0
 
         errsum += err
         errsig = Kp * err + Ki * errsum
         # print("{:.2f}".format(errsig))
         # write to motor
-        motorL = 120 * forward - errsig
+        motorL = 110 * forward - errsig
         motorR = 100 * forward + errsig
         a_star.motors(int(motorL), int(motorR))
         # print("Motors on {} {}".format(int(motorL), int(motorR)))
