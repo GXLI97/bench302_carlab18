@@ -62,6 +62,7 @@ def main():
     q = JoinableQueue()
     p = Process(target=read_distances, args=(ser, q))
     p.start()
+    time.sleep(2)
     q.join()
     while not q.empty():
         print(q.get())
