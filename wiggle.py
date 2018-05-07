@@ -22,7 +22,7 @@ def wiggle(a_star, ampl=50, per=0.01, dist=1, forward=1, DEBUG=False):
     i = 0
 
     start = time.time()
-    end = start + 20
+    end = start + 30
     while time.time() < end:
         i += 1
         # get encoder reading
