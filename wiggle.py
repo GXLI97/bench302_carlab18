@@ -49,11 +49,11 @@ def wiggle(a_star, dist=1, forward=1, DEBUG=False):
 def main():
     a_star = AStar()
     if len(sys.argv) == 2:
-        drive_straight(a_star, float(sys.argv[1]))
+        wiggle(a_star, float(sys.argv[1]))
     elif len(sys.argv) == 3:
-        drive_straight(a_star, float(sys.argv[1]), int(sys.argv[2]))
+        wiggle(a_star, float(sys.argv[1]), int(sys.argv[2]))
     else:
-        drive_straight(a_star)
+        wiggle(a_star)
 
 if __name__ == '__main__':
     main()
