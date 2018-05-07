@@ -3,8 +3,6 @@ import time
 import math
 import sys
 
-
-
 def turn(a_star, degrees, clockwise=1, DEBUG=False):
     BOTDIAM = 149.
     WHEELDIAM = 70.

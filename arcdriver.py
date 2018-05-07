@@ -1,10 +1,48 @@
+import serial
 import time
+import random
 import math
 import sys
 from a_star import AStar
 from statistics import mean, median
+from drivestraight import drive_straight
+from turn import turn
 
-def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1):
+def connect_to_serial():
+    try:
+        ser = serial.Serial(
+        port='/dev/serial0',
+        baudrate=115200,
+        timeout=0.5
+        )
+        print("connected successfully!")
+    except:
+        ser = serial.Serial(
+        port='/dev/ttyACM1',
+        baudrate=115200,
+        timeout=0.5
+        )
+
+    time.sleep(1)
+    ser.write(b'\r\r') # go into serial mode.
+    time.sleep(2)
+    res=ser.read(100) # read some things.
+    time.sleep(0.5)
+    time.sleep(0.5)
+    ser.write(b'lec\r') # start writing distances.
+    return ser
+
+def parseDistance(s, ID="0C25"):
+
+    # DIST,2,AN0,820C,0.00,0.00,0.00,7.24,AN1,0C25,0.00,0.00,0.00,2.55
+    a = s.strip().split(',')
+    k = 0
+    while not a[-6*k -5] == ID:
+        k += 1
+    # print(a)
+    return float(a[-6*k -1])
+
+def arcdrive(ser, a_star, radius, leftTurn=1, arc=180, speed=1):
     BOTDIAM = 149.
     WHEELDIAM = 70.
     ENCODERTICKS = 1440.
@@ -24,8 +62,20 @@ def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1):
     print("Linit: {}\tLfinal: {}\tRinit: {}\tRfinal: {}".format(Linit, Lfinal, Rinit,Rfinal))
 
     (Lprev, Rprev) = (Linit, Rinit)
+
+    ser.read(100000000)
+    dist_data = []
     while 1:
-        
+
+        try:
+            res = ser.readline()
+            dist = parseDistance(res.decode('utf-8'))
+            # print("Distance: {:.2f}".format(dist))
+            dist_data.append(dist)
+        except:
+            print("Read'n Parse failed")
+            continue
+
         # get encoder reading
         (Lcurr, Rcurr) = a_star.read_encoders()
 
@@ -48,25 +98,22 @@ def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1):
         # update previous
         (Lprev, Rprev) = (Lcurr, Rcurr)
         time.sleep(0.05)
+    return dist_data
 
+def shutdown(ser, a_star):
+    ser.write(b'lec\r')
+    ser.close()
+    a_star.motors(0, 0)
 
 def main():
     DEBUG = True
-    if len(sys.argv) >= 5:
-        speed = float(sys.argv[4])
-        leftTurn = float(sys.argv[3])
-        arc = float(sys.argv[2])
-        radius = float(sys.argv[1])
-    else:
-        leftTurn=1
-        arc=180
-        radius=1.0/4
-        speed=1
     # initialize our AStar motor controller.
     a_star = AStar()
+    ser = connect_to_serial()
 
-    arcdrive(a_star, radius=radius, leftTurn=leftTurn, arc=arc, speed=speed)
-
+    dist_data = arcdrive(ser, a_star, radius=0.5)
+    print(dist_data)
+    shutdown(ser, a_star)
 
 if __name__ == '__main__':
     main()
