@@ -6,7 +6,7 @@ import sys
 
 OVERFLOW_BUFF = 65536
 
-def wiggle(a_star, dist=1, forward=1, DEBUG=False):
+def wiggle(a_star, ampl=30, per=0.1, dist=1, forward=1, DEBUG=False):
     # drives straight for dist meters.
     Kp = 1.5
     Ki = .02
@@ -48,7 +48,7 @@ def main():
     if len(sys.argv) == 2:
         wiggle(a_star, float(sys.argv[1]))
     elif len(sys.argv) == 3:
-        wiggle(a_star, float(sys.argv[1]), int(sys.argv[2]))
+        wiggle(a_star, float(sys.argv[1]), float(sys.argv[2]))
     else:
         wiggle(a_star)
 
