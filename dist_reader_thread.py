@@ -59,7 +59,7 @@ def read_distances(ser, q):
 def main():
     ser = connect_to_serial()
     # begin to read distances in a thread.
-    q = Queue()
+    q = JoinableQueue()
     p = Process(target=read_distances, args=(ser, q))
     p.start()
     q.join()
