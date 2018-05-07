@@ -4,7 +4,7 @@ import sys
 from a_star import AStar
 from statistics import mean, median
 
-def arcdrive(a_star, radius, leftTurn=1, arc=180):
+def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1):
     BOTDIAM = 149.
     WHEELDIAM = 70.
     ENCODERTICKS = 1440.
@@ -41,8 +41,8 @@ def arcdrive(a_star, radius, leftTurn=1, arc=180):
         errsig = Kp * err + Ki * errsum
         # print("{:.2f}".format(errsig))
         # write to motor
-        motorL = 105  - errsig
-        motorR = 100  + errsig
+        motorL = speed*105  - errsig
+        motorR = speed*100  + errsig
         a_star.motors(int(motorL), int(motorR))
         # print("Motors on {} {}".format(int(motorL), int(motorR)))
         # update previous
@@ -51,18 +51,20 @@ def arcdrive(a_star, radius, leftTurn=1, arc=180):
 
 def main():
     DEBUG = True
-    if len(sys.argv) >= 3:
-        leftTurn = float(sys.argv[1])
+    if len(sys.argv) >= 5:
+        speed = float(sys.argv[4])
+        leftTurn = float(sys.argv[3])
         arc = float(sys.argv[2])
-        radius = float(sys.argv[3])
+        radius = float(sys.argv[1])
     else:
         leftTurn=1
         arc=180
         radius=1.0/4
+        speed=1
     # initialize our AStar motor controller.
     a_star = AStar()
 
-    arcdrive(a_star, radius, leftTurn, arc)
+    arcdrive(a_star, radisu=radius, leftTurn=leftTurn, arc=arc, speed=speed)
 
 
 if __name__ == '__main__':
