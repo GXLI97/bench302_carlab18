@@ -4,24 +4,21 @@ import time
 import math
 import sys
 
-a_star = AStar()
-
-def wiggle(forward = 1):
-    L1, R1 = 100*forward, 150*forward
-    a_star.motors(L1, R1)
+def wiggle(a_star):
+    # start going straightish
+    a_star.motors(110, 100)
     time.sleep(2)
-    L2, R2 = 180*forward, 100*forward
-    a_star.motors(L2, R2)
+    a_star.motors(0, 100)
+    time.sleep(0.25)
+    a_star.motors(110, 100)
     time.sleep(2)
-    a_star.motors(L1, R1)
-    time.sleep(2)
-    a_star.motors(L2, R2)
-    time.sleep(2)
-    a_star.motors(0, 0)
+    a_star.motors(110, 0)
+    time.sleep(0.25)
+    a_star.motors(110, 100)
 
 def main():
     a_star = AStar()
-    wiggle(int(sys.argv[1]))
+    wiggle(a_star)
 
 if __name__ == '__main__':
     main()
