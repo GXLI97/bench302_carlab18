@@ -52,15 +52,17 @@ def arcdrive(a_star, radius, leftTurn=1, arc=180):
 def main():
     DEBUG = True
     if len(sys.argv) >= 3:
-        Ki = float(sys.argv[1])
-        Kp = float(sys.argv[2])
+        leftTurn = float(sys.argv[1])
+        arc = float(sys.argv[2])
+        radius = float(sys.argv[3])
     else:
-        Ki=.04
-        Kp=1.3
+        leftTurn=1
+        arc=180
+        radius=1.0/4
     # initialize our AStar motor controller.
     a_star = AStar()
 
-    arcdrive(a_star, 1.0/4)
+    arcdrive(a_star, radius, leftTurn, arc)
 
 
 if __name__ == '__main__':
