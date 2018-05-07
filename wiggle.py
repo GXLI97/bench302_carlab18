@@ -24,18 +24,14 @@ def wiggle(a_star, dist=1, forward=1, DEBUG=False):
     (Lprev, Rprev) = (Linit, Rinit)
 
     i = 0
-    while 1:
+
+    start = time.time()
+    end = start + 5
+    while time.time() < end:
         i += 1
         # get encoder reading
         (Lcurr, Rcurr) = a_star.read_encoders()
         # print("Encoder values: {} {}".format(Lcurr, Rcurr))
-        # if we have traveled distance, stop.
-        if forward == 1 and (Lcurr > Lfinal or Rcurr > Rfinal):
-            a_star.motors(0, 0)
-            break
-        if forward == -1 and (Lcurr < Lfinal or Rcurr < Rfinal):
-            a_star.motors(0, 0)
-            break
         # calculate errors (leaning left)
         err = ((Lcurr - Lprev + OVERFLOW_BUFF) % OVERFLOW_BUFF) - ((Rcurr - Rprev + OVERFLOW_BUFF) % OVERFLOW_BUFF) + math.sin(i*0.05)
         errsum += err
