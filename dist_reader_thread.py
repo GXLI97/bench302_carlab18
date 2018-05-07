@@ -78,7 +78,7 @@ def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1):
 
     Lfinal = Linit + (1000*radius - leftTurn*BOTDIAM/2)/WHEELDIAM*ENCODERTICKS*(arc/180.)
     Rfinal = Rinit + (1000*radius + leftTurn*BOTDIAM/2)/WHEELDIAM*ENCODERTICKS*(arc/180.)
-    print("Linit: {}\tLfinal: {}\tRinit: {}\tRfinal: {}".format(Linit, Lfinal, Rinit,Rfinal))
+    #print("Linit: {}\tLfinal: {}\tRinit: {}\tRfinal: {}".format(Linit, Lfinal, Rinit,Rfinal))
 
     (Lprev, Rprev) = (Linit, Rinit)
     while 1:
@@ -87,7 +87,7 @@ def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1):
         (Lcurr, Rcurr) = a_star.read_encoders()
 
         if (Lcurr > Lfinal or Rcurr > Rfinal):
-            print("Lcurr: {}\tLfinal: {}\tRcurr: {}\tRfinal: {}".format(Lcurr, Lfinal, Rcurr, Rfinal))
+            #print("Lcurr: {}\tLfinal: {}\tRcurr: {}\tRfinal: {}".format(Lcurr, Lfinal, Rcurr, Rfinal))
             # a_star.motors(0, 0)
             break
 
