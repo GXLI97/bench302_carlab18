@@ -56,6 +56,11 @@ def read_distances(ser, q):
             print("Read'n Parse failed")
             continue
 
+def shutdown(ser):
+    ser.write(b'lec\r')
+    ser.close()
+    # a_star.motors(0, 0)
+
 def main():
     ser = connect_to_serial()
     # begin to read distances in a thread.
@@ -67,6 +72,15 @@ def main():
     while not q.empty():
         dist_data.append(q.get())
     print(dist_data)
+
+    time.sleep(2)
+    dist_data = []
+    while not q.empty():
+        dist_data.append(q.get())
+    print(dist_data)
+
+    shutdown(ser)
+    p.terminate()
 
 
 if __name__ == '__main__':
