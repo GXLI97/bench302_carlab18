@@ -1,4 +1,13 @@
 from multiprocessing import Process, JoinableQueue
+import serial
+import time
+import random
+import math
+import sys
+from a_star import AStar
+from statistics import mean, median
+from drivestraight import drive_straight
+from turn import turn
 
 def connect_to_serial():
     try:
@@ -56,7 +65,7 @@ def main():
     q.join()
     while not q.empty():
         print(q.get())
-    
+
 
 
 if __name__ == '__main__':
