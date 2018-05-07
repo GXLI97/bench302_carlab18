@@ -115,14 +115,25 @@ def main():
     p = Process(target=read_distances, args=(ser, q))
     p.start()
 
-    arcdrive(a_star, radius=0.5)
-
+    arcdrive(a_star, radius=0.25)
     dist_data = []
     while not q.empty():
         dist_data.append(q.get())
     print(dist_data)
 
-    arcdrive(a_star, radius=0.5, leftTurn=-1)
+    arcdrive(a_star, radius=0.25, leftTurn=-1)
+    dist_data = []
+    while not q.empty():
+        dist_data.append(q.get())
+    print(dist_data)
+
+    arcdrive(a_star, radius=0.25)
+    dist_data = []
+    while not q.empty():
+        dist_data.append(q.get())
+    print(dist_data)
+
+    arcdrive(a_star, radius=0.25, leftTurn=-1)
     dist_data = []
     while not q.empty():
         dist_data.append(q.get())
