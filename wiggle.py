@@ -29,7 +29,7 @@ def wiggle(a_star, dist=1, forward=1, DEBUG=False):
         (Lcurr, Rcurr) = a_star.read_encoders()
         # print("Encoder values: {} {}".format(Lcurr, Rcurr))
         # calculate errors (leaning left)
-        err = ((Lcurr - Lprev + OVERFLOW_BUFF) % OVERFLOW_BUFF) - ((Rcurr - Rprev + OVERFLOW_BUFF) % OVERFLOW_BUFF) + 10 * math.sin(i*0.2)
+        err = ((Lcurr - Lprev + OVERFLOW_BUFF) % OVERFLOW_BUFF) - ((Rcurr - Rprev + OVERFLOW_BUFF) % OVERFLOW_BUFF) + 20 * math.sin(i*0.2)
         errsum += err
         errsig = Kp * err + Ki * errsum
         # print("{:.2f}".format(errsig))
@@ -41,6 +41,7 @@ def wiggle(a_star, dist=1, forward=1, DEBUG=False):
         # update previous
         (Lprev, Rprev) = (Lcurr, Rcurr)
         time.sleep(0.05)
+    a_star.motors(0, 0)
 
 def main():
     a_star = AStar()
