@@ -57,8 +57,8 @@ def recordDistances(ser):
 	while 1:
 		try:
 			res = ser.readline()
-			dist = parseDistance(res.decode('utf-8'))
-			distances.append(dist)
+			# dist = parseDistance(res.decode('utf-8'))
+			# distances.append(dist)
 			i+=1
 		except:
 			print("Read'n Parse failed")
