@@ -56,10 +56,10 @@ def read_distances(ser, q):
             print("Read'n Parse failed")
             continue
 
-def shutdown(ser):
+def shutdown(ser, a_star):
     ser.write(b'lec\r')
     ser.close()
-    # a_star.motors(0, 0)
+    a_star.motors(0, 0)
 
 def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1):
     BOTDIAM = 149.
@@ -114,21 +114,21 @@ def main():
     q = Queue()
     p = Process(target=read_distances, args=(ser, q))
     p.start()
-    
-    time.sleep(2)
+
+    arcdrive(a_star, radius=0.5)
 
     dist_data = []
     while not q.empty():
         dist_data.append(q.get())
     print(dist_data)
 
-    time.sleep(2)
+    arcdrive(a_star, radius=0.5, leftTurn=-1)
     dist_data = []
     while not q.empty():
         dist_data.append(q.get())
     print(dist_data)
 
-    shutdown(ser)
+    shutdown(ser, a_star)
     p.terminate()
 
 
