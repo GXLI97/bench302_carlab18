@@ -21,7 +21,7 @@ def wiggle(forward = 1):
 
 def main():
     a_star = AStar()
-    wiggle(sys.argv[1])
+    wiggle(int(sys.argv[1]))
 
 if __name__ == '__main__':
     main()
