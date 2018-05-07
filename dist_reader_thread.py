@@ -61,13 +61,62 @@ def shutdown(ser):
     ser.close()
     # a_star.motors(0, 0)
 
+def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1):
+    BOTDIAM = 149.
+    WHEELDIAM = 70.
+    ENCODERTICKS = 1440.
+    OVERFLOW_BUFF = 65536
+    Kp = 2.0
+    Ki = 0.1
+
+    errsum = 0
+
+    # get the initial encoder reading:
+    (Linit, Rinit) = a_star.read_encoders()
+
+    (Lprev, Rprev) = (Linit, Rinit)
+
+    Lfinal = Linit + (1000*radius - leftTurn*BOTDIAM/2)/WHEELDIAM*ENCODERTICKS*(arc/180.)
+    Rfinal = Rinit + (1000*radius + leftTurn*BOTDIAM/2)/WHEELDIAM*ENCODERTICKS*(arc/180.)
+    print("Linit: {}\tLfinal: {}\tRinit: {}\tRfinal: {}".format(Linit, Lfinal, Rinit,Rfinal))
+
+    (Lprev, Rprev) = (Linit, Rinit)
+    while 1:
+        
+        # get encoder reading
+        (Lcurr, Rcurr) = a_star.read_encoders()
+
+        if (Lcurr > Lfinal or Rcurr > Rfinal):
+            print("Lcurr: {}\tLfinal: {}\tRcurr: {}\tRfinal: {}".format(Lcurr, Lfinal, Rcurr, Rfinal))
+            a_star.motors(0, 0)
+            break
+
+        # calculate errors (leaning left)
+        # missing logic here to actually make the turn
+        err = ((Lcurr - Lprev + OVERFLOW_BUFF) % OVERFLOW_BUFF)*(1000*radius + leftTurn*BOTDIAM/2)/(1000*radius) - ((Rcurr - Rprev + OVERFLOW_BUFF) % OVERFLOW_BUFF)*(1000*radius - leftTurn*BOTDIAM/2)/(1000*radius)
+        errsum += err
+        errsig = Kp * err + Ki * errsum
+        # print("{:.2f}".format(errsig))
+        # write to motor
+        motorL = speed*105  - errsig
+        motorR = speed*100  + errsig
+        a_star.motors(int(motorL), int(motorR))
+        # print("Motors on {} {}".format(int(motorL), int(motorR)))
+        # update previous
+        (Lprev, Rprev) = (Lcurr, Rcurr)
+        time.sleep(0.05)
+
 def main():
+    a_star = AStar()
+
     ser = connect_to_serial()
     # begin to read distances in a thread.
     q = Queue()
     p = Process(target=read_distances, args=(ser, q))
     p.start()
-    time.sleep(5)
+    
+    time.sleep(2)
+
     dist_data = []
     while not q.empty():
         dist_data.append(q.get())
