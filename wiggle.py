@@ -6,8 +6,8 @@ import sys
 
 a_star = AStar()
 
-a_star.motor(100, 150)
+a_star.motors(100, 150)
 time.sleep(1)
-a_star.motor(150, 100)
+a_star.motors(150, 100)
 time.sleep(1)
-a_star.motor(0, 0)
+a_star.motors(0, 0)
