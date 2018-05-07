@@ -74,7 +74,7 @@ def arcdrive(ser, a_star, radius, leftTurn=1, arc=180, speed=1):
             dist_data.append(dist)
         except:
             print("Read'n Parse failed")
-            continue
+            
 
         # get encoder reading
         (Lcurr, Rcurr) = a_star.read_encoders()
