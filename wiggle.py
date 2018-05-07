@@ -14,6 +14,7 @@ def wiggle(a_star, dist=1, forward=1, DEBUG=False):
     if DEBUG:
         print("Driving forward this far: {}".format(forward*dist))
     # get the initial encoder reading:
+    (Linit, Rinit) = a_star.read_encoders()
     (Lprev, Rprev) = (Linit, Rinit)
 
     i = 0
