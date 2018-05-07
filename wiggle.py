@@ -4,6 +4,8 @@ import time
 import math
 import sys
 
+OVERFLOW_BUFF = 65536
+
 def wiggle(a_star, dist=1, forward=1, DEBUG=False):
     # drives straight for dist meters.
     Kp = 1.5
