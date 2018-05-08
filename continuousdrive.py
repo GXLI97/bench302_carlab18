@@ -63,7 +63,7 @@ def shutdown(ser, a_star):
     ser.close()
     a_star.motors(0, 0)
 
-def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1.5):
+def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1):
     BOTDIAM = 149.
     WHEELDIAM = 70.
     ENCODERTICKS = 1440.
