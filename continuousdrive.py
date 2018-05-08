@@ -122,7 +122,7 @@ def meander(a_star, q):
     r_sum = 0
     r_prev = 0
 
-    OFFSET = -30
+    OFFSET = -50
 
     while 1:
         arcdrive(a_star, radius=0.25, arc=larc)
