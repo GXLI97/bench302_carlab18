@@ -122,7 +122,7 @@ def meander(a_star, q):
     r_sum = 0
     r_prev = 0
 
-    OFFSET = 20
+    OFFSET = -20
 
     while 1:
         arcdrive(a_star, radius=0.25, arc=larc)
@@ -133,7 +133,6 @@ def meander(a_star, q):
             dist_data.append(q.get_nowait())
         
         print("================")
-        print(dist_data)
 
         if mean(dist_data) < 1:
             break
