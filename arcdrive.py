@@ -60,7 +60,7 @@ def main():
     leftTurn=1
     arc=180
     radius=1.0/4
-    speed=1
+    speed=1.5
     ki = 0.1
     kp = 2.0
     if len(sys.argv) >= 6:
@@ -69,7 +69,7 @@ def main():
         leftTurn = float(sys.argv[3])
         arc = float(sys.argv[2])
         radius = float(sys.argv[1])
-    elif len(sys.argv >= 3):
+    elif len(sys.argv) >= 3:
         ki = float(sys.argv[2])
         kp =float(sys.argv[1])
 
