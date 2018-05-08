@@ -151,7 +151,7 @@ def meander(a_star, q):
         # discretize R.
         if r > 1:
             r = 1
-        elif r < 1:
+        elif r < -1:
             r = -1
         else:
             r = 0
