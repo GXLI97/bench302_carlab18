@@ -111,7 +111,7 @@ def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1.5):
 def meander(a_star, q):
     # begin to read distances in a thread.
     
-    Kp = 40
+    Kp = 50
     Ki = 12
     Kd = 0
 
@@ -167,6 +167,8 @@ def meander(a_star, q):
 
         if m > .02:
             theta = 150
+        if m < -.02:
+            theta *= .1
 
         print("Theta calculation: {:.3f}".format(theta))
 
