@@ -133,22 +133,26 @@ def meander(a_star, q):
         sine = np.sin(2*math.pi / len(x) * x)
 
         r = np.dot(sine, normalized)
+        print("Line slope: {:.2f}".format(m))
         print("Error signal:{:.2f}".format(r))
 
-        if r > 1:
+
+        if r > 0.1:
             print("left turn\n")
             # a_star.motors(0,0)
             # time.sleep(1)
-            arcdrive(a_star, radius=0.25, arc=75)
+            theta = max([r*45, 75])
+            arcdrive(a_star, radius=0.25, arc=theta)
             # a_star.motors(0,0)
             # time.sleep(1)
             while not q.empty():
                 q.get_nowait()
-        elif r < -1:
+        elif r < -0.1:
             print("right turn\n")
             # a_star.motors(0,0)
             # time.sleep(1)
-            arcdrive(a_star, radius=0.25, arc=90, leftTurn=-1)
+            theta = max([-r*45, 90])
+            arcdrive(a_star, radius=0.25, arc=theta, leftTurn=-1)
             # a_star.motors(0,0)
             # time.sleep(1)
             while not q.empty():
