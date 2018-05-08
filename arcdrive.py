@@ -48,7 +48,7 @@ def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1, forward=1,Kp = 1.5,Ki
         (Lprev, Rprev) = (Lcurr, Rcurr)
         time.sleep(0.05)
 
-    a_star.motors(0,0)
+    # a_star.motors(0,0)
 
 def main():
     DEBUG = True
