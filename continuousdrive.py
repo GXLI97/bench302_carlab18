@@ -108,11 +108,9 @@ def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1):
         (Lprev, Rprev) = (Lcurr, Rcurr)
         time.sleep(0.05)
 
-def meander(ser, a_star):
+def meander(a_star, q):
     # begin to read distances in a thread.
-    q = Queue()
-    p = Process(target=read_distances, args=(ser, q))
-    p.start()
+    
     larc = 180
     rarc = 180
     while 1:
@@ -141,7 +139,7 @@ def meander(ser, a_star):
             print("left turn")
             a_star.motors(0,0)
             time.sleep(1)
-            arcdrive(a_star, radius=0.25, arc=60)
+            arcdrive(a_star, radius=0.25, arc=75)
             a_star.motors(0,0)
             time.sleep(1)
             while not q.empty():
@@ -150,7 +148,7 @@ def meander(ser, a_star):
             print("right turn")
             a_star.motors(0,0)
             time.sleep(1)
-            arcdrive(a_star, radius=0.25, arc=60, leftTurn=-1)
+            arcdrive(a_star, radius=0.25, arc=75, leftTurn=-1)
             a_star.motors(0,0)
             time.sleep(1)
             while not q.empty():
@@ -167,7 +165,13 @@ def main():
     a_star = AStar()
 
     ser = connect_to_serial()
-    meander(ser, a_star)
+
+    q = Queue()
+    p = Process(target=read_distances, args=(ser, q))
+    p.start()
+
+
+    meander(a_star, q)
 
 
     shutdown(ser, a_star)
