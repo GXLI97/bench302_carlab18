@@ -20,7 +20,7 @@ def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1, forward=1,Kp = 1.5,Ki
 
     Lfinal = Linit + (1000*radius - leftTurn*BOTDIAM/2)/WHEELDIAM*ENCODERTICKS*(arc/180.)*forward
     Rfinal = Rinit + (1000*radius + leftTurn*BOTDIAM/2)/WHEELDIAM*ENCODERTICKS*(arc/180.)*forward
-    print("Linit: {}\tLfinal: {}\tRinit: {}\tRfinal: {}".format(Linit, Lfinal, Rinit,Rfinal))
+    # print("Linit: {}\tLfinal: {}\tRinit: {}\tRfinal: {}".format(Linit, Lfinal, Rinit,Rfinal))
 
     (Lprev, Rprev) = (Linit, Rinit)
     while 1:
@@ -48,7 +48,7 @@ def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1, forward=1,Kp = 1.5,Ki
         (Lprev, Rprev) = (Lcurr, Rcurr)
         time.sleep(0.05)
 
-    # a_star.motors(0,0)
+    a_star.motors(int(speed*105),int(speed*100))
 
 def main():
     DEBUG = True
