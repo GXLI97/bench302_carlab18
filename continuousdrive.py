@@ -111,7 +111,7 @@ def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1.5):
 def meander(a_star, q):
     # begin to read distances in a thread.
     
-    Kp = 50
+    Kp = 40
     Ki = 15
     Kd = 0
 
