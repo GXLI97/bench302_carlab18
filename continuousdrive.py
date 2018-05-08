@@ -140,7 +140,7 @@ def meander(a_star, q):
         print("Error signal:{:.2f}".format(r))
 
 
-        if r > 0.1:
+        if r > 1:
             print("left turn\n")
             # a_star.motors(0,0)
             # time.sleep(1)
@@ -150,7 +150,7 @@ def meander(a_star, q):
             # time.sleep(1)
             while not q.empty():
                 q.get_nowait()
-        elif r < -0.1:
+        elif r < -1:
             print("right turn\n")
             # a_star.motors(0,0)
             # time.sleep(1)
