@@ -165,6 +165,9 @@ def meander(a_star, q):
         print("Errors: r={:.2f}, r_sum={:.2f}, r_diff={:.2f}".format(r, r_sum, r_diff))
         theta = OFFSET + Kp * r + Ki * r_sum + Kd * r_diff
 
+        if m > .02:
+            theta = 150
+
         print("Theta calculation: {:.3f}".format(theta))
 
         if theta > 10:
