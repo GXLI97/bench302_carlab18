@@ -139,17 +139,16 @@ def meander(ser, a_star):
 
         if r > 1:
             print("left turn")
-            larc = 240
-            rarc = 180
+            larc = 270
+            rarc = 120
         elif r < -1:
             print("right turn")
-            larc = 180
-            rarc = 240
+            larc = 120
+            rarc = 270
         else:
             print("straight")
             larc = 180
             rarc = 180
-        time.sleep(0.5)
 
         
 def main():
