@@ -113,7 +113,7 @@ def meander(a_star, q):
     
     Kp = 20
     Ki = 0
-    Kd = 0
+    Kd = 20
 
     larc = 180
     rarc = 180
@@ -121,6 +121,8 @@ def meander(a_star, q):
     r = 0
     r_sum = 0
     r_prev = 0
+
+    OFFSET = 20
 
     while 1:
         arcdrive(a_star, radius=0.25, arc=larc)
@@ -153,7 +155,7 @@ def meander(a_star, q):
 
         print("Errors: {:.2f} {:.2f} {:.2f}".format(r, r_sum, r_diff))
 
-        theta = Kp * r + Ki * r_sum  + Kd * r_diff
+        theta = OFFSET + Kp * r + Ki * r_sum  + Kd * r_diff
 
         print("Theta calculation: {:.3f}".format(theta))
         a_star.motors(0,0)
