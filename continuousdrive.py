@@ -108,32 +108,55 @@ def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1):
         (Lprev, Rprev) = (Lcurr, Rcurr)
         time.sleep(0.05)
 
-def main():
-    a_star = AStar()
-
-    ser = connect_to_serial()
+def meander(ser, a_star):
     # begin to read distances in a thread.
     q = Queue()
     p = Process(target=read_distances, args=(ser, q))
     p.start()
+    larc = 180
+    rarc = 180
+    while 1:
+        arcdrive(a_star, radius=0.25, arc=larc)
+        arcdrive(a_star, radius=0.25, arc=rarc, leftTurn=-1)
 
-    arcdrive(a_star, radius=0.25)
-    arcdrive(a_star, radius=0.25, leftTurn=-1)
-    dist_data = []
-    while not q.empty():
-        dist_data.append(q.get())
-    print(dist_data)
+        dist_data = []
+        while not q.empty():
+            dist_data.append(q.get())
+        print(dist_data)
 
-    d = np.array(dist_data)
-    x = np.linspace(1, len(dist_data)+1, len(dist_data))
-    m,b = np.polyfit(x, dist_data, 1)
-    line = m * x + b
-    normalized = d - line
+        if mean(dist_data) < 1:
+            break
 
-    sine = np.sin(2*math.pi / len(x) * x)
+        d = np.array(dist_data)
+        x = np.linspace(1, len(dist_data)+1, len(dist_data))
+        m,b = np.polyfit(x, dist_data, 1)
+        line = m * x + b
+        normalized = d - line
 
-    r = np.dot(sine, normalized)
-    print(r)
+        sine = np.sin(2*math.pi / len(x) * x)
+
+        r = np.dot(sine, normalized)
+
+        if r > 1:
+            print("left turn")
+            larc = 240
+            rarc = 180
+        elif r < -1:
+            print("right turn")
+            larc = 180
+            rarc = 240
+        else:
+            print("straight")
+            larc = 180
+            rarc = 180
+        time.sleep(0.5)
+
+        
+def main():
+    a_star = AStar()
+
+    ser = connect_to_serial()
+    meander(ser, a_star)
 
 
     shutdown(ser, a_star)
