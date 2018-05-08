@@ -120,6 +120,9 @@ def meander(a_star, q):
         dist_data = []
         while not q.empty():
             dist_data.append(q.get_nowait())
+        
+        print("================")
+        print(dist_data)
 
         if mean(dist_data) < 1:
             break
@@ -141,7 +144,7 @@ def meander(a_star, q):
             print("left turn\n")
             # a_star.motors(0,0)
             # time.sleep(1)
-            theta = max([r*45, 75])
+            theta = 60
             arcdrive(a_star, radius=0.25, arc=theta)
             # a_star.motors(0,0)
             # time.sleep(1)
@@ -151,7 +154,7 @@ def meander(a_star, q):
             print("right turn\n")
             # a_star.motors(0,0)
             # time.sleep(1)
-            theta = max([-r*45, 90])
+            theta = 75
             arcdrive(a_star, radius=0.25, arc=theta, leftTurn=-1)
             # a_star.motors(0,0)
             # time.sleep(1)
