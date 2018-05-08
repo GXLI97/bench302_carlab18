@@ -112,7 +112,7 @@ def meander(a_star, q):
     # begin to read distances in a thread.
     
     Kp = 10
-    Ki = .1
+    Ki = 0
     Kd = 0
 
     larc = 180
