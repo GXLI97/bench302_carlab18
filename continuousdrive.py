@@ -121,7 +121,7 @@ def meander(a_star, q):
     r = 0
     r_sum = 0
 
-    OFFSET = 0
+    OFFSET = 15
 
     while 1:
         arcdrive(a_star, radius=0.25, arc=larc)
@@ -147,6 +147,7 @@ def meander(a_star, q):
         r = np.dot(sine, normalized)
         print("Line slope: {:.3f}".format(m))
         print("R value: {:.3f}".format(r))
+
         # discretize R.
         if r > 1:
             r = 1
@@ -155,7 +156,8 @@ def meander(a_star, q):
         else:
             r = 0
 
-        r_sum = r + r_sum * 0.5
+        r_sum += r
+        print("Errors: r={:.2f}, r_sum={:.2f}".format(r, r_sum))
         theta = OFFSET + Kp * r + Ki * r_sum
 
         print("Theta calculation: {:.3f}".format(theta))
