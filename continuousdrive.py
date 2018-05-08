@@ -52,7 +52,7 @@ def read_distances(ser, q):
             res = ser.readline()
             dist = parseDistance(res.decode('utf-8'))
             # print("Distance: {:.2f}".format(dist))
-            q.put(dist)
+            q.put_nowait(dist)
             i += 1
         except:
             print("Read'n Parse failed")
@@ -119,7 +119,7 @@ def meander(a_star, q):
 
         dist_data = []
         while not q.empty():
-            dist_data.append(q.get())
+            dist_data.append(q.get_nowait())
 
         if mean(dist_data) < 1:
             break
@@ -143,7 +143,7 @@ def meander(a_star, q):
             # a_star.motors(0,0)
             # time.sleep(1)
             while not q.empty():
-                q.get()
+                q.get_nowait()
         elif r < -1:
             print("right turn\n")
             # a_star.motors(0,0)
@@ -152,13 +152,13 @@ def meander(a_star, q):
             # a_star.motors(0,0)
             # time.sleep(1)
             while not q.empty():
-                q.get()
+                q.get_nowait()
         else:
             print("straight\n")
             # a_star.motors(0,0)
             # time.sleep(1)
             while not q.empty():
-                q.get()
+                q.get_nowait()
 
         
 def main():
