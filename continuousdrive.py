@@ -90,7 +90,7 @@ def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1):
 
         if (Lcurr > Lfinal or Rcurr > Rfinal):
             #print("Lcurr: {}\tLfinal: {}\tRcurr: {}\tRfinal: {}".format(Lcurr, Lfinal, Rcurr, Rfinal))
-            a_star.motors(speed*105, speed*100)
+            a_star.motors(int(speed*105), int(speed*100))
             break
 
         # calculate errors (leaning left)
