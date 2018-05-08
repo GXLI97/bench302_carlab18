@@ -120,7 +120,6 @@ def meander(a_star, q):
         dist_data = []
         while not q.empty():
             dist_data.append(q.get())
-        print(dist_data)
 
         if mean(dist_data) < 1:
             break
@@ -134,9 +133,10 @@ def meander(a_star, q):
         sine = np.sin(2*math.pi / len(x) * x)
 
         r = np.dot(sine, normalized)
+        print(r)
 
         if r > 1:
-            print("left turn")
+            print("left turn\n")
             a_star.motors(0,0)
             time.sleep(1)
             arcdrive(a_star, radius=0.25, arc=75)
@@ -145,7 +145,7 @@ def meander(a_star, q):
             while not q.empty():
                 q.get()
         elif r < -1:
-            print("right turn")
+            print("right turn\n")
             a_star.motors(0,0)
             time.sleep(1)
             arcdrive(a_star, radius=0.25, arc=75, leftTurn=-1)
@@ -154,7 +154,7 @@ def meander(a_star, q):
             while not q.empty():
                 q.get()
         else:
-            print("straight")
+            print("straight\n")
             a_star.motors(0,0)
             time.sleep(1)
             while not q.empty():
