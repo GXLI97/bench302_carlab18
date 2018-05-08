@@ -111,18 +111,16 @@ def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1):
 def meander(a_star, q):
     # begin to read distances in a thread.
     
-    Kp = 20
+    Kp = 50
     Ki = 0
     Kd = 0
 
     larc = 180
-    rarc = 180
+    rarc = 200
 
     r = 0
-    r_sum = 0
-    r_prev = 0
 
-    OFFSET = -50
+    OFFSET = 0
 
     while 1:
         arcdrive(a_star, radius=0.25, arc=larc)
@@ -148,13 +146,15 @@ def meander(a_star, q):
         r = np.dot(sine, normalized)
         print("Line slope: {:.3f}".format(m))
 
-        r_sum = r_sum * 0.5 + r
-        r_diff = r - r_prev
-        r_prev = r
+        # discretize R.
+        if r > 1:
+            r = 1
+        elif r < 1:
+            r = -1
+        else:
+            r = 0
 
-        print("Errors: {:.2f} {:.2f} {:.2f}".format(r, r_sum, r_diff))
-
-        theta = OFFSET + Kp * r + Ki * r_sum  + Kd * r_diff
+        theta = OFFSET + Kp * r 
 
         print("Theta calculation: {:.3f}".format(theta))
         a_star.motors(0,0)
