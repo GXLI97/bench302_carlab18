@@ -113,7 +113,7 @@ def meander(a_star, q):
     
     Kp = 20
     Ki = 0
-    Kd = 20
+    Kd = 0
 
     larc = 180
     rarc = 180
