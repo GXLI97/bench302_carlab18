@@ -161,8 +161,6 @@ def meander(a_star, q):
         theta = OFFSET + Kp * r + Ki * r_sum
 
         print("Theta calculation: {:.3f}".format(theta))
-        a_star.motors(0,0)
-        time.sleep(1)
 
         if theta > 10:
             print("left turn")
@@ -188,9 +186,6 @@ def meander(a_star, q):
             # time.sleep(1)
             while not q.empty():
                 q.get_nowait()
-
-        a_star.motors(0,0)
-        time.sleep(1)
 
         
 def main():
