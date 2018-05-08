@@ -145,8 +145,7 @@ def meander(a_star, q):
         sine = np.sin(2*math.pi / len(x) * x)
 
         r = np.dot(sine, normalized)
-        print("Line slope: {:.2f}".format(m))
-        print("Error signal:{:.2f}".format(r))
+        print("Line slope: {:.3f}".format(m))
 
         r_sum += r
         r_diff = r - r_prev
@@ -156,11 +155,12 @@ def meander(a_star, q):
 
         theta = Kp * r + Ki * r_sum  + Kd * r_diff
 
+        print("Theta calculation: {:.3f}".format(theta))
         a_star.motors(0,0)
         time.sleep(1)
 
         if theta > 10:
-            print("left turn\n of {:.2f}".format(theta))
+            print("left turn")
             # a_star.motors(0,0)
             # time.sleep(1)
             arcdrive(a_star, radius=0.25, arc=theta)
@@ -169,7 +169,7 @@ def meander(a_star, q):
             while not q.empty():
                 q.get_nowait()
         elif theta < -10:
-            print("right turn\n of {:.2f}".format(theta))
+            print("right turn")
             # a_star.motors(0,0)
             # time.sleep(1)
             arcdrive(a_star, radius=0.25, arc=-theta, leftTurn=-1)
