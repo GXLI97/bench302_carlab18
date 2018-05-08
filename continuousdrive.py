@@ -111,8 +111,17 @@ def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1):
 def meander(a_star, q):
     # begin to read distances in a thread.
     
+    Kp = 10
+    Ki = .1
+    Kd = 0
+
     larc = 180
     rarc = 180
+
+    r = 0
+    r_sum = 0
+    r_prev = 0
+
     while 1:
         arcdrive(a_star, radius=0.25, arc=larc)
         arcdrive(a_star, radius=0.25, arc=rarc, leftTurn=-1)
@@ -139,22 +148,30 @@ def meander(a_star, q):
         print("Line slope: {:.2f}".format(m))
         print("Error signal:{:.2f}".format(r))
 
+        r_sum += r
+        r_diff = r - r_prev
+        r_prev = r
 
-        if r > 1:
-            print("left turn\n")
+        print("Errors: {:.2f} {:.2f} {:.2f}".format(r, r_sum, r_diff))
+
+        theta = Kp * r + Ki * r_sum  + Kd * r_diff
+
+        a_star.motors(0,0)
+        time.sleep(1)
+
+        if theta > 10:
+            print("left turn\n of {:.2f}".format(theta))
             # a_star.motors(0,0)
             # time.sleep(1)
-            theta = 60
             arcdrive(a_star, radius=0.25, arc=theta)
             # a_star.motors(0,0)
             # time.sleep(1)
             while not q.empty():
                 q.get_nowait()
-        elif r < -1:
-            print("right turn\n")
+        elif theta < -10:
+            print("right turn\n of {:.2f}".format(theta))
             # a_star.motors(0,0)
             # time.sleep(1)
-            theta = 75
             arcdrive(a_star, radius=0.25, arc=theta, leftTurn=-1)
             # a_star.motors(0,0)
             # time.sleep(1)
@@ -166,6 +183,9 @@ def meander(a_star, q):
             # time.sleep(1)
             while not q.empty():
                 q.get_nowait()
+
+        a_star.motors(0,0)
+        time.sleep(1)
 
         
 def main():
