@@ -4,13 +4,12 @@ import sys
 from a_star import AStar
 from statistics import mean, median
 
-def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1, forward=1):
+def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1, forward=1,Kp = 2.0,Ki = 0.1):
     BOTDIAM = 149.
     WHEELDIAM = 70.
     ENCODERTICKS = 1440.
     OVERFLOW_BUFF = 65536
-    Kp = 2.0
-    Ki = 0.1
+    
 
     errsum = 0
 
