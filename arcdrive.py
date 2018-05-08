@@ -68,7 +68,7 @@ def main():
         arc = float(sys.argv[2])
         radius = float(sys.argv[1])
     elif len(sys.argv) >= 4:
-        radius = float(sys.argv[3])
+        arc = float(sys.argv[3])
         ki = float(sys.argv[2])
         kp =float(sys.argv[1])
     elif len(sys.argv) >= 3:
