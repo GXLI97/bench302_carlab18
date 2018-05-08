@@ -112,7 +112,7 @@ def meander(a_star, q):
     # begin to read distances in a thread.
     
     Kp = 40
-    Ki = 10
+    Ki = 12
     Kd = 0
 
     # should fix this later.
