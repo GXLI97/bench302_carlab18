@@ -133,7 +133,7 @@ def meander(a_star, q):
         sine = np.sin(2*math.pi / len(x) * x)
 
         r = np.dot(sine, normalized)
-        print(r)
+        print("Error signal:{:.2f}".format(r))
 
         if r > 1:
             print("left turn\n")
