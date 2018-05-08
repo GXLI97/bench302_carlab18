@@ -8,6 +8,8 @@ from a_star import AStar
 from statistics import mean, median
 from drivestraight import drive_straight
 from turn import turn
+import numpy as np
+
 
 def connect_to_serial():
     try:
@@ -116,28 +118,15 @@ def main():
     p.start()
 
     arcdrive(a_star, radius=0.25)
-    dist_data = []
-    while not q.empty():
-        dist_data.append(q.get())
-    print(dist_data)
-
     arcdrive(a_star, radius=0.25, leftTurn=-1)
     dist_data = []
     while not q.empty():
         dist_data.append(q.get())
     print(dist_data)
 
-    arcdrive(a_star, radius=0.25)
-    dist_data = []
-    while not q.empty():
-        dist_data.append(q.get())
-    print(dist_data)
 
-    arcdrive(a_star, radius=0.25, leftTurn=-1)
-    dist_data = []
-    while not q.empty():
-        dist_data.append(q.get())
-    print(dist_data)
+
+
 
     shutdown(ser, a_star)
     p.terminate()
