@@ -139,16 +139,28 @@ def meander(ser, a_star):
 
         if r > 1:
             print("left turn")
+            a_star.motors(0,0)
+            time.sleep(1)
             arcdrive(a_star, radius=0.25, arc=60)
+            a_star.motors(0,0)
+            time.sleep(1)
             while not q.empty():
                 q.get()
         elif r < -1:
             print("right turn")
+            a_star.motors(0,0)
+            time.sleep(1)
             arcdrive(a_star, radius=0.25, arc=60, leftTurn=-1)
+            a_star.motors(0,0)
+            time.sleep(1)
             while not q.empty():
                 q.get()
         else:
             print("straight")
+            a_star.motors(0,0)
+            time.sleep(1)
+            while not q.empty():
+                q.get()
 
         
 def main():
