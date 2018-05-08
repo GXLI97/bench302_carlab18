@@ -147,7 +147,7 @@ def meander(a_star, q):
         r = np.dot(sine, normalized)
         print("Line slope: {:.3f}".format(m))
 
-        r_sum += r
+        r_sum = r_sum * 0.5 + r
         r_diff = r - r_prev
         r_prev = r
 
