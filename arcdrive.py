@@ -30,11 +30,9 @@ def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1, forward=1,Kp = 1.8,Ki
 
         if forward == 1 and (Lcurr > Lfinal or Rcurr > Rfinal):
             print("Lcurr: {}\tLfinal: {}\tRcurr: {}\tRfinal: {}".format(Lcurr, Lfinal, Rcurr, Rfinal))
-            a_star.motors(int(speed*105*forward), int(speed*100*forward))
             break
         if forward == -1 and (Lcurr < Lfinal or Rcurr < Rfinal):
             print("Lcurr: {}\tLfinal: {}\tRcurr: {}\tRfinal: {}".format(Lcurr, Lfinal, Rcurr, Rfinal))
-            a_star.motors(int(speed*105*forward), int(speed*100*forward))
             break
 
         # calculate errors (leaning left)
@@ -52,6 +50,7 @@ def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1, forward=1,Kp = 1.8,Ki
         (Lprev, Rprev) = (Lcurr, Rcurr)
         time.sleep(0.05)
 
+    a_star.motors(0,0)
 
 def main():
     DEBUG = True
