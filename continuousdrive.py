@@ -112,13 +112,14 @@ def meander(a_star, q):
     # begin to read distances in a thread.
     
     Kp = 50
-    Ki = 0
+    Ki = 5
     Kd = 0
 
     larc = 180
     rarc = 200
 
     r = 0
+    r_sum = 0
 
     OFFSET = 0
 
@@ -154,7 +155,8 @@ def meander(a_star, q):
         else:
             r = 0
 
-        theta = OFFSET + Kp * r 
+        r_sum = r + r_sum * 0.5
+        theta = OFFSET + Kp * r + Ki * r_sum
 
         print("Theta calculation: {:.3f}".format(theta))
         a_star.motors(0,0)
