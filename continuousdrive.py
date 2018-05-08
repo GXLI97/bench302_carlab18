@@ -112,7 +112,7 @@ def meander(a_star, q):
     # begin to read distances in a thread.
     
     Kp = 30
-    Ki = 10
+    Ki = 15
     Kd = 0
 
     # should fix this later.
@@ -159,7 +159,7 @@ def meander(a_star, q):
         else:
             r = 0
 
-        r_sum = r_sum * 0.8+ r
+        r_sum += r
         r_diff = r - r_prev 
         r_prev = r
         print("Errors: r={:.2f}, r_sum={:.2f}, r_diff={:.2f}".format(r, r_sum, r_diff))
