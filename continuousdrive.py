@@ -63,7 +63,7 @@ def shutdown(ser, a_star):
     ser.close()
     a_star.motors(0, 0)
 
-def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1):
+def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1.25):
     BOTDIAM = 149.
     WHEELDIAM = 70.
     ENCODERTICKS = 1440.
@@ -121,6 +121,7 @@ def meander(a_star, q):
 
     r = 0
     r_sum = 0
+    r_prev = 0
 
     # ideally dont need this.
     OFFSET = 0
@@ -159,8 +160,10 @@ def meander(a_star, q):
             r = 0
 
         r_sum += r
-        print("Errors: r={:.2f}, r_sum={:.2f}".format(r, r_sum))
-        theta = OFFSET + Kp * r + Ki * r_sum
+        r_diff = r - r_prev 
+        r_prev = r
+        print("Errors: r={:.2f}, r_sum={:.2f}, r_diff={:.2f}".format(r, r_sum, r_diff))
+        theta = OFFSET + Kp * r + Ki * r_sum + Kd * r_diff
 
         print("Theta calculation: {:.3f}".format(theta))
 
