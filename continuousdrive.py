@@ -112,7 +112,7 @@ def meander(a_star, q):
     # begin to read distances in a thread.
     
     larc = 180
-    rarc = 180
+    rarc = 150
     while 1:
         arcdrive(a_star, radius=0.25, arc=larc)
         arcdrive(a_star, radius=0.25, arc=rarc, leftTurn=-1)
