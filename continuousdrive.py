@@ -159,7 +159,7 @@ def meander(a_star, q):
         else:
             r = 0
 
-        r_sum += r
+        r_sum = r_sum * 0.5 + r
         r_diff = r - r_prev 
         r_prev = r
         print("Errors: r={:.2f}, r_sum={:.2f}, r_diff={:.2f}".format(r, r_sum, r_diff))
