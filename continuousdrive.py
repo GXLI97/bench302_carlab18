@@ -172,7 +172,7 @@ def meander(a_star, q):
             print("right turn\n of {:.2f}".format(theta))
             # a_star.motors(0,0)
             # time.sleep(1)
-            arcdrive(a_star, radius=0.25, arc=theta, leftTurn=-1)
+            arcdrive(a_star, radius=0.25, arc=-theta, leftTurn=-1)
             # a_star.motors(0,0)
             # time.sleep(1)
             while not q.empty():
