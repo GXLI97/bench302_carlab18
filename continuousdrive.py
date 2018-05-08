@@ -68,8 +68,8 @@ def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1):
     WHEELDIAM = 70.
     ENCODERTICKS = 1440.
     OVERFLOW_BUFF = 65536
-    Kp = 2.0
-    Ki = 0.1
+    Kp = 1.5
+    Ki = 0.01
 
     errsum = 0
 
