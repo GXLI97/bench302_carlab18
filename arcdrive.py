@@ -77,9 +77,9 @@ def main():
     a_star = AStar()
 
     arcdrive(a_star, radius=radius, leftTurn=leftTurn, arc=arc, speed=speed, forward=forward, Ki=ki, Kp=kp)
-    arcdrive(a_star, radius=radius, leftTurn=leftTurn*-1, arc=arc, speed=speed, forward=forward, Ki=ki, Kp=kp)
-    arcdrive(a_star, radius=radius, leftTurn=leftTurn, arc=arc, speed=speed, forward=forward, Ki=ki, Kp=kp)
-    arcdrive(a_star, radius=radius, leftTurn=leftTurn*-1, arc=arc, speed=speed, forward=forward, Ki=ki, Kp=kp)
+    # arcdrive(a_star, radius=radius, leftTurn=leftTurn*-1, arc=arc, speed=speed, forward=forward, Ki=ki, Kp=kp)
+    # arcdrive(a_star, radius=radius, leftTurn=leftTurn, arc=arc, speed=speed, forward=forward, Ki=ki, Kp=kp)
+    # arcdrive(a_star, radius=radius, leftTurn=leftTurn*-1, arc=arc, speed=speed, forward=forward, Ki=ki, Kp=kp)
 
     a_star.motors(0,0)
 
