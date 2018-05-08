@@ -124,8 +124,16 @@ def main():
         dist_data.append(q.get())
     print(dist_data)
 
+    d = np.array(dist_data)
+    x = np.linspace(1, len(dist_data)+1, len(dist_data))
+    m,b = np.polyfit(x, dist_data, 1)
+    line = m * x + b
+    normalized = d - line
 
+    sine = np.sin(2*math.pi / len(x) * x)
 
+    r = np.dot(sine, normalized)
+    print(r)
 
 
     shutdown(ser, a_star)
