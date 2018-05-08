@@ -145,7 +145,7 @@ def meander(a_star, q):
 
         r = np.dot(sine, normalized)
         print("Line slope: {:.3f}".format(m))
-
+        print("R value: {:.3f}".format(r))
         # discretize R.
         if r > 1:
             r = 1
