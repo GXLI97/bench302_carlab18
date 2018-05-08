@@ -72,6 +72,8 @@ def main():
     elif len(sys.argv) >= 3:
         ki = float(sys.argv[2])
         kp =float(sys.argv[1])
+    elif len(sys.argv) >= 2
+        leftTurn = float(sys.argv[1])
 
     # initialize our AStar motor controller.
     a_star = AStar()
