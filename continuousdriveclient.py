@@ -53,6 +53,7 @@ def read_distances(ser, a_star, q, s, TARGETDIST=1):
     while 1:
         try:
             res = ser.readline()
+            print(res.decode('utf-8'))
             dist = parseDistance(res.decode('utf-8'))
             # print('Sending {}'.format(dist))
             s.sendall((str(dist)+',').encode('utf-8'))
