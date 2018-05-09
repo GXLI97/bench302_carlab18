@@ -135,7 +135,7 @@ def meander(a_star, q):
         dist_data = []
         while not q.empty():
             print(".", end="")
-            dist_data.append(q.get_nowait())
+            dist_data.append(q.get())
 
         print("")
         
@@ -199,7 +199,7 @@ def meander(a_star, q):
         
         print("Emptying queue")
         while not q.empty():
-                data = q.get_nowait()
+                data = q.get()
                 if data < 1:
                     break
         # a_star.motors(0,0)
