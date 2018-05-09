@@ -14,6 +14,8 @@ import socket
 import atexit
 # from arcdrive import arcdrive
 
+
+
 def read_distances(a_star, q, conn, TARGETDIST=1):
     while True:
         data = conn.recv(1024).decode()
@@ -24,14 +26,13 @@ def read_distances(a_star, q, conn, TARGETDIST=1):
             q.put_nowait(datum)
             if datum < TARGETDIST:
                 print('exiting...')
-                shutdown(a_star, None, conn)
-    
+                SHUTDOWNFLAG = True
+                return    
 
 
 def shutdown(a_star, p, conn):
     a_star.motors(0, 0)
-    if not p is None:
-        p.terminate()
+    p.terminate()
     conn.close()
 
 def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1.5):
@@ -55,6 +56,8 @@ def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1.5):
 
     (Lprev, Rprev) = (Linit, Rinit)
     while 1:
+        if SHUTDOWNFLAG:
+            sys.exit()
         
         # get encoder reading
         (Lcurr, Rcurr) = a_star.read_encoders()
@@ -96,6 +99,7 @@ def meander(a_star, q):
     r_prev = 0
 
     while 1:
+
         arcdrive(a_star, radius=0.25, arc=larc, speed=SPEED)
         arcdrive(a_star, radius=0.25, arc=rarc, speed=SPEED, leftTurn=-1)
         # print("\n================")
@@ -104,6 +108,8 @@ def meander(a_star, q):
         while not q.empty():
             # print(".", end="")
             dist_datum = q.get()
+            if dist_datum < TARGETDIST:
+                return
             dist_data.append(dist_datum)
 
         # print("")
@@ -112,7 +118,7 @@ def meander(a_star, q):
         if len(dist_data) < 1:
             continue
         if min(dist_data) < TARGETDIST:
-            break
+            return
 
         d = np.array(dist_data)
         x = np.linspace(1, len(dist_data)+1, len(dist_data))
@@ -169,9 +175,9 @@ def meander(a_star, q):
         
         # print("Emptying queue")
         while not q.empty():
-                dist_datum = q.get()
-                if dist_datum < TARGETDIST:
-                    break
+            dist_datum = q.get()
+            if dist_datum < TARGETDIST:
+                return
         # a_star.motors(0,0)
         # time.sleep(0.05)
 
@@ -180,6 +186,9 @@ def main():
     host = '10.9.67.44' 
     port = 50008
     TARGETDIST = 0.5
+
+    global SHUTDOWNFLAG
+    SHUTDOWNFLAG = False
 
     a_star = AStar()
 

@@ -60,7 +60,8 @@ def read_distances(ser, a_star, q, s, TARGETDIST=1):
             q.put_nowait(dist)
             if dist < TARGETDIST:
                 print('exiting,,,,')
-                shutdown(ser, a_star, None, s)
+                SHUTDOWNFLAG = True
+                return
 
         except:
             print("Read'n Parse failed")
@@ -72,8 +73,7 @@ def shutdown(ser, a_star, p, s):
     a_star.motors(0, 0)
     ser.write(b'lec\r')
     ser.close()
-    if not p is None:
-        p.terminate()
+    p.terminate()
     time.sleep(2)
     s.close()
 
@@ -98,7 +98,8 @@ def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1.5):
 
     (Lprev, Rprev) = (Linit, Rinit)
     while 1:
-        
+        if SHUTDOWNFLAG:
+            sys.exit()
         # get encoder reading
         (Lcurr, Rcurr) = a_star.read_encoders()
 
@@ -139,6 +140,7 @@ def meander(a_star, q):
     r_prev = 0
 
     while 1:
+
         arcdrive(a_star, radius=0.25, arc=larc, speed=SPEED)
         arcdrive(a_star, radius=0.25, arc=rarc, speed=SPEED, leftTurn=-1)
         # print("\n================")
@@ -223,6 +225,9 @@ def main():
     host = '10.9.67.44' 
     port = 50008
     TARGETDIST = 0.5
+
+    global SHUTDOWNFLAG
+    SHUTDOWNFLAG = False
 
     a_star = AStar()
 
