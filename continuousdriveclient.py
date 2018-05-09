@@ -60,7 +60,7 @@ def read_distances(ser, q, s, TARGETDIST=1):
             q.put_nowait(dist)
             if dist < TARGETDIST:
                 print('exiting,,,,')
-                sys.exit()
+                break
 
         except:
             print("Read'n Parse failed")
