@@ -47,12 +47,14 @@ def parseDistance(s, ID="0C25"):
     # print(a)
     return float(a[-6*k -1])
 
-def read_distances(ser, q):
+def read_distances(ser, q, s):
     i = 0
     while 1:
         try:
             res = ser.readline()
             dist = parseDistance(res.decode('utf-8'))
+            if not s is None:
+                s.sendall(str(dist).encode('utf-8'))
             # print("Distance: {:.2f}".format(dist))
             q.put_nowait(dist)
             i += 1
@@ -115,7 +117,7 @@ def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1.5):
         (Lprev, Rprev) = (Lcurr, Rcurr)
         time.sleep(0.005)
 
-def meander(a_star, q, s):
+def meander(a_star, q):
     SPEED = 1.75
     
     Kp = 50
@@ -139,8 +141,6 @@ def meander(a_star, q, s):
         while not q.empty():
             print(".", end="")
             dist_datum = q.get()
-            if not s is None:
-                s.sendall(dist_datum.encode('utf-8'))
             dist_data.append(dist_datum)
 
         print("")
@@ -206,8 +206,6 @@ def meander(a_star, q, s):
         print("Emptying queue")
         while not q.empty():
                 dist_datum = q.get()
-                if not s is None:
-                    s.sendall(dist_datum.encode('utf-8'))
                 if dist_datum < 1:
                     break
         # a_star.motors(0,0)
@@ -232,11 +230,11 @@ def main():
         s = None
 
     q = Queue()
-    p = Process(target=read_distances, args=(ser, q))
+    p = Process(target=read_distances, args=(ser, q, s))
     p.start()
 
     try:
-        meander(a_star, q, s)
+        meander(a_star, q)
         shutdown(ser, a_star, p, s)
     except (ErrorNumber, ErrorMessage):
         print(ErrorMessage)
