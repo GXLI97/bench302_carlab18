@@ -191,6 +191,7 @@ def main():
     q = Queue()
     p = Process(target=read_distances, args=(q, conn))
     p.start()
+    p.join()
 
     atexit.register(shutdown, a_star, p, conn)
     try:

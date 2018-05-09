@@ -59,6 +59,7 @@ def read_distances(ser, q, s, TARGETDIST=1):
             # print("Distance: {:.2f}".format(dist))
             q.put_nowait(dist)
             if dist < TARGETDIST:
+                print('exiting,,,,')
                 sys.exit()
 
         except:
@@ -235,6 +236,7 @@ def main():
     q = Queue()
     p = Process(target=read_distances, args=(ser, q, s, TARGETDIST))
     p.start()
+    p.join()
 
     atexit.register(shutdown, ser, a_star, p, s)
     try:
