@@ -130,9 +130,9 @@ def meander(a_star, q):
     OFFSET = 0
 
     while 1:
-        arcdrive(a_star, radius=0.25, arc=larc, speed=1.5)
+        # arcdrive(a_star, radius=0.25, arc=larc, speed=1.5)
         arcdrive(a_star, radius=0.25, arc=rarc, speed=1.5, leftTurn=-1)
-
+        arcdrive(a_star, radius=0.25, arc=larc, speed=1.5)
         return
 
         dist_data = []
