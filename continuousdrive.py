@@ -116,7 +116,7 @@ def meander(a_star, q):
     SPEED = 1.75
     
     Kp = 50
-    Ki = 5
+    Ki = 10
     Kd = 5
 
     # should fix this later.
