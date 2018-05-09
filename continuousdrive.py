@@ -110,6 +110,7 @@ def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1.5):
         # print("Motors on {} {}".format(int(motorL), int(motorR)))
         # update previous
         (Lprev, Rprev) = (Lcurr, Rcurr)
+        time.sleep(0.005)
 
 def meander(a_star, q):
     SPEED = 2
