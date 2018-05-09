@@ -10,7 +10,7 @@ from drivestraight import drive_straight
 from arcdrive import arcdrive
 from turn import turn
 import numpy as np
-from arcdrive import arcdrive
+# from arcdrive import arcdrive
 
 def connect_to_serial():
     try:
