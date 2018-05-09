@@ -199,7 +199,7 @@ def main():
     print("Connection from", addr)
 
     q = Queue()
-    p = Process(target=read_distances, args=(q, conn))
+    p = Process(target=read_distances, args=(q, conn, TARGETDIST))
     p.start()
 
     atexit.register(shutdown, a_star, p, conn)
