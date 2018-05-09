@@ -128,8 +128,8 @@ def meander(a_star, q):
     OFFSET = 0
 
     while 1:
-        arcdrive(a_star, radius=0.25, arc=larc)
-        arcdrive(a_star, radius=0.25, arc=rarc, leftTurn=-1)
+        arcdrive(a_star, radius=0.25, arc=larc, speed=1.5)
+        arcdrive(a_star, radius=0.25, arc=rarc, speed=1.5, leftTurn=-1)
 
         dist_data = []
         while not q.empty():
@@ -178,7 +178,7 @@ def meander(a_star, q):
             print("left turn")
             # a_star.motors(0,0)
             # time.sleep(1)
-            arcdrive(a_star, radius=0.25, arc=theta)
+            arcdrive(a_star, radius=0.25, arc=theta, speed=1.5)
             # a_star.motors(0,0)
             # time.sleep(1)
             while not q.empty():
@@ -187,7 +187,7 @@ def meander(a_star, q):
             print("right turn")
             # a_star.motors(0,0)
             # time.sleep(1)
-            arcdrive(a_star, radius=0.25, arc=-theta, leftTurn=-1)
+            arcdrive(a_star, radius=0.25, arc=-theta, speed=1.5, leftTurn=-1)
             # a_star.motors(0,0)
             # time.sleep(1)
             while not q.empty():
