@@ -75,6 +75,7 @@ def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1.5):
 
 def meander(a_star, q):
     SPEED = 1.75
+    TARGETDIST = 0.5
     
     Kp = 50
     Ki = 10
@@ -104,7 +105,7 @@ def meander(a_star, q):
         
         if len(dist_data) < 1:
             continue
-        if min(dist_data) < 1:
+        if min(dist_data) < TARGETDIST:
             break
 
         d = np.array(dist_data)
@@ -163,7 +164,7 @@ def meander(a_star, q):
         print("Emptying queue")
         while not q.empty():
                 dist_datum = q.get()
-                if dist_datum < 1:
+                if dist_datum < TARGETDIST:
                     break
         # a_star.motors(0,0)
         # time.sleep(0.05)
