@@ -61,7 +61,7 @@ def read_distances(ser, q, v, s, TARGETDIST=1):
             q.put_nowait(dist)
             if dist < TARGETDIST:
                 print('exiting,,,')
-                v.value = 1
+                v.value = True
                 return
 
         except:
@@ -240,7 +240,7 @@ def main():
     s.connect((host, port))
 
 
-    v = Value('V', 0)
+    v = Value('bool', False)
     q = Queue()
     p = Process(target=read_distances, args=(ser, q, v, s, TARGETDIST))
     p.start()

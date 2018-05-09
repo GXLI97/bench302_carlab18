@@ -26,7 +26,7 @@ def read_distances(q, v, conn, TARGETDIST=1):
             q.put_nowait(datum)
             if datum < TARGETDIST:
                 print('exiting...')
-                v.value = 1
+                v.value = True
                 return    
 
 
@@ -188,7 +188,7 @@ def main():
     host = '10.9.67.44' 
     port = 50008
     TARGETDIST = 0.5
-    v = Value('V', 0)
+    v = Value('bool', False)
 
     global SHUTDOWNFLAG
     SHUTDOWNFLAG = False
