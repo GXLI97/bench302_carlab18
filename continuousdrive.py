@@ -133,8 +133,10 @@ def meander(a_star, q):
         arcdrive(a_star, radius=0.25, arc=larc, speed=1.5)
         arcdrive(a_star, radius=0.25, arc=rarc, speed=1.5, leftTurn=-1)
 
+        print("Getting Data")
         dist_data = []
         while not q.empty():
+            print(".", end="")
             dist_data.append(q.get_nowait())
         
         print("================")
