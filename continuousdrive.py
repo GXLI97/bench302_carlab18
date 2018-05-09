@@ -139,7 +139,7 @@ def meander(a_star, q):
             print(".", end="")
             dist_data.append(q.get_nowait())
         
-        print("================")
+        print("\n================")
 
         if min(dist_data) < 1:
             break
