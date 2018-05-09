@@ -91,7 +91,7 @@ def main():
     a_star = AStar()
 
     arcdrive(a_star, radius=radius, leftTurn=leftTurn, arc=arc, speed=speed, forward=forward, Ki=Ki, Kp=Kp,Kd=Kd)
-    drivestraight(a_star, dist=0.005)
+    drive_straight(a_star, dist=0.005)
     arcdrive(a_star, radius=radius, leftTurn=leftTurn*-1, arc=arc, speed=speed, forward=forward, Ki=Ki, Kp=Kp, Kd=Kd)
     # arcdrive(a_star, radius=radius, leftTurn=leftTurn, arc=arc, speed=speed, forward=forward, Ki=ki, Kp=kp)
     # arcdrive(a_star, radius=radius, leftTurn=leftTurn*-1, arc=arc, speed=speed, forward=forward, Ki=ki, Kp=kp)
