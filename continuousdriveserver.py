@@ -74,6 +74,7 @@ def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1.5):
         time.sleep(0.005)
 
 def meander(a_star, q):
+    print('Start of meander')
     SPEED = 1.75
     
     Kp = 50
