@@ -23,13 +23,14 @@ def read_distances(q, conn, TARGETDIST=1):
             datum = float(data_arr[i])
             q.put_nowait(datum)
             if datum < TARGETDIST:
+                print('exiting...')
                 sys.exit()
     
 
 
 def shutdown(a_star, p, conn):
-    p.terminate()
     a_star.motors(0, 0)
+    p.terminate()
     conn.close()
 
 def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1.5):
