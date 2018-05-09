@@ -224,7 +224,7 @@ def meander(a_star, q):
         
 def main():
     host = '10.9.67.44' 
-    port = 50009
+    port = 50008
     TARGETDIST = 0.5
 
     global SHUTDOWNFLAG
