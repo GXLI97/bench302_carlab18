@@ -112,7 +112,7 @@ def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1.5):
         (Lprev, Rprev) = (Lcurr, Rcurr)
 
 def meander(a_star, q):
-    SPEED = 2
+    SPEED = 1.75
     
     Kp = 60
     Ki = 10
