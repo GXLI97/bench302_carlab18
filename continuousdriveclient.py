@@ -240,7 +240,7 @@ def main():
     s.connect((host, port))
 
 
-    v = Value('bool', False)
+    v = Value('b', False)
     q = Queue()
     p = Process(target=read_distances, args=(ser, q, v, s, TARGETDIST))
     p.start()
