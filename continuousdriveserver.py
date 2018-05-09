@@ -19,7 +19,7 @@ import atexit
 def read_distances(a_star, q, conn, TARGETDIST=1):
     while True:
         data = conn.recv(1024).decode()
-        # print('Received {}'.format(data))
+        print('Received {}'.format(data))
         data_arr = data.split(',')
         for i in range(len(data_arr) - 1):
             datum = float(data_arr[i])
