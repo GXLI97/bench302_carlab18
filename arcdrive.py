@@ -45,11 +45,11 @@ def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1, forward=1,Kp=2.5, Ki=
         # print("{:.2f}".format(errsig))
         # write to motor
         if leftTurn == 1:
-            motorL = speed*85*forward - errsig
-            motorR = speed*110*forward + errsig
+            motorL = speed*100*forward - errsig
+            motorR = speed*100*forward + errsig
         elif leftTurn == -1:
-            motorL = speed*110*forward - errsig
-            motorR = speed*80*forward + errsig
+            motorL = speed*100*forward - errsig
+            motorR = speed*100*forward + errsig
         a_star.motors(int(motorL), int(motorR))
         # print("Motors on {} {}".format(int(motorL), int(motorR)))
         # update previous
