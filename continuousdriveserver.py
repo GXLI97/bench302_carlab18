@@ -102,8 +102,9 @@ def meander(a_star, q):
         print("")
         
         
-
-        if len(dist_data) > 0 and min(dist_data) < 1:
+        if len(dist_data) < 1:
+            continue
+        if min(dist_data) < 1:
             break
 
         d = np.array(dist_data)
