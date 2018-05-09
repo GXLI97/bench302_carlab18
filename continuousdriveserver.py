@@ -32,6 +32,7 @@ def read_distances(q, conn, TARGETDIST=1):
 
 def shutdown(a_star, p, conn):
     a_star.motors(0, 0)
+    time.sleep(2)
     p.terminate()
     conn.close()
 

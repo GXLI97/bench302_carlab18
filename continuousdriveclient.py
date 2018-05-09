@@ -72,10 +72,10 @@ def read_distances(ser, q, s, TARGETDIST=1):
 
 def shutdown(ser, a_star, p, s):
     a_star.motors(0, 0)
+    time.sleep(2)
     ser.write(b'lec\r')
     ser.close()
     p.terminate()
-    time.sleep(2)
     s.close()
 
 def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1.5):
