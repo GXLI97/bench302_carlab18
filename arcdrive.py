@@ -4,7 +4,7 @@ import sys
 from a_star import AStar
 from statistics import mean, median
 
-def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1, forward=1,Kp = 1.5,Ki = 0.01,Kd=0):
+def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1, forward=1,Kp=2.5, Ki=0.2,Kd=0.1):
     BOTDIAM = 149.
     WHEELDIAM = 70.
     ENCODERTICKS = 1440.
@@ -46,7 +46,7 @@ def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1, forward=1,Kp = 1.5,Ki
         # write to motor
         if leftTurn == 1:
             motorL = speed*80*forward - errsig
-            motorR = speed*120*forward + errsig
+            motorR = speed*110*forward + errsig
         elif leftTurn == -1:
             motorL = speed*120*forward - errsig
             motorR = speed*80*forward + errsig
