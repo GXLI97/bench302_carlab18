@@ -172,7 +172,7 @@ def main():
     a_star = AStar()
 
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.connect((host, port))
+    s.bind((host, port))
     s.listen(1)
     conn, addr = s.accept()
     print ("Connection from", addr)
