@@ -48,7 +48,7 @@ def parseDistance(s, ID="0C25"):
     # print(a)
     return float(a[-6*k -1])
 
-def read_distances(ser, q, s, TARGETDIST=1):
+def read_distances(ser, a_star, q, s, TARGETDIST=1):
     i = 0
     while 1:
         try:
@@ -60,7 +60,7 @@ def read_distances(ser, q, s, TARGETDIST=1):
             q.put_nowait(dist)
             if dist < TARGETDIST:
                 print('exiting,,,,')
-                break
+                shutdown(ser, a_star, None, s)
 
         except:
             print("Read'n Parse failed")
@@ -69,10 +69,11 @@ def read_distances(ser, q, s, TARGETDIST=1):
 
 
 def shutdown(ser, a_star, p, s):
+    a_star.motors(0, 0)
     ser.write(b'lec\r')
     ser.close()
-    p.terminate()
-    a_star.motors(0, 0)
+    if not p is None:
+        p.terminate()
     time.sleep(2)
     s.close()
 

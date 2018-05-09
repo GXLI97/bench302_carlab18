@@ -14,7 +14,7 @@ import socket
 import atexit
 # from arcdrive import arcdrive
 
-def read_distances(q, conn, TARGETDIST=1):
+def read_distances(a_star, q, conn, TARGETDIST=1):
     while True:
         data = conn.recv(1024).decode()
         # print('Received {}'.format(data))
@@ -24,13 +24,14 @@ def read_distances(q, conn, TARGETDIST=1):
             q.put_nowait(datum)
             if datum < TARGETDIST:
                 print('exiting...')
-                return
+                shutdown(a_star, None, conn)
     
 
 
 def shutdown(a_star, p, conn):
     a_star.motors(0, 0)
-    p.terminate()
+    if not p is None:
+        p.terminate()
     conn.close()
 
 def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1.5):
@@ -189,7 +190,7 @@ def main():
     print ("Connection from", addr)
 
     q = Queue()
-    p = Process(target=read_distances, args=(q, conn))
+    p = Process(target=read_distances, args=(a_star, q, conn))
     p.start()
 
     atexit.register(shutdown, a_star, p, conn)
