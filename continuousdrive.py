@@ -201,8 +201,8 @@ def meander(a_star, q):
             # time.sleep(1)
             while not q.empty():
                 q.get_nowait()
-        a_star.motors(0,0)
-        time.sleep(0.05)
+        # a_star.motors(0,0)
+        # time.sleep(0.05)
 
         
 def main():
