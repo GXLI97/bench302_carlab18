@@ -135,6 +135,8 @@ def meander(a_star, q):
         while not q.empty():
             print(".", end="")
             dist_data.append(q.get_nowait())
+
+        print("")
         
         
 
