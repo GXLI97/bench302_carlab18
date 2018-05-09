@@ -91,7 +91,7 @@ def main():
 
     arcdrive(a_star, radius=radius, leftTurn=leftTurn, arc=arc, speed=speed, forward=forward, Ki=Ki, Kp=Kp,Kd=Kd)
     a_star.motors(0,0)
-    time.sleep(1)
+    time.sleep(0.05)
     arcdrive(a_star, radius=radius, leftTurn=leftTurn*-1, arc=arc, speed=speed, forward=forward, Ki=Ki, Kp=Kp, Kd=Kd)
     # arcdrive(a_star, radius=radius, leftTurn=leftTurn, arc=arc, speed=speed, forward=forward, Ki=ki, Kp=kp)
     # arcdrive(a_star, radius=radius, leftTurn=leftTurn*-1, arc=arc, speed=speed, forward=forward, Ki=ki, Kp=kp)
