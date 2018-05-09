@@ -12,7 +12,7 @@ print ("Connection from", addr)
 while True:
     data = conn.recv(1024)
     if not data: break
-    print("Recieved: "+(data.decode()))
+    print("Received: "+(data.decode()))
     response = input("Reply: ")
     if response == "exit":
         break
