@@ -198,6 +198,7 @@ def main():
     except (ErrorNumber, ErrorMessage):
         print(ErrorMessage)
         shutdown(a_star, p, conn)
+    atexit.unregister(shutdown)
 
 
 

@@ -221,7 +221,7 @@ def main():
     host = '10.9.67.44' 
     port = 50008
     TARGETDIST = 0.5
-    
+
     a_star = AStar()
 
     ser = connect_to_serial()
@@ -243,7 +243,7 @@ def main():
     except (ErrorNumber, ErrorMessage):
         print(ErrorMessage)
         shutdown(ser, a_star, p, s)
-
+    atexit.unregister(shutdown)
 
 
 if __name__ == '__main__':
