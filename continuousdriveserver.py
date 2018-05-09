@@ -15,7 +15,7 @@ import socket
 
 def read_distances(q, conn):
     while True:
-        data = conn.recv(1024)
+        data = conn.recv(1024).decode()
         print('Received {}'.format(data))
         data_arr = data.split(',')
         for i in range(len(data_arr)):
