@@ -184,10 +184,6 @@ def meander(a_star, q):
             arcdrive(a_star, radius=0.25, arc=theta, speed=SPEED)
             # a_star.motors(0,0)
             # time.sleep(1)
-            while not q.empty():
-                data = q.get_nowait()
-                if data < 1:
-                    break
         elif theta < -10:
             print("right turn")
             # a_star.motors(0,0)
@@ -196,15 +192,13 @@ def meander(a_star, q):
             arcdrive(a_star, radius=0.25, arc=-theta, speed=SPEED, leftTurn=-1)
             # a_star.motors(0,0)
             # time.sleep(1)
-            while not q.empty():
-                data = q.get_nowait()
-                if data < 1:
-                    break
         else:
             print("straight")
             # a_star.motors(0,0)
             # time.sleep(1)
-            while not q.empty():
+        
+        print("Emptying queue")
+        while not q.empty():
                 data = q.get_nowait()
                 if data < 1:
                     break
