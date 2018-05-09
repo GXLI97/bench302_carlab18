@@ -2,6 +2,7 @@ import time
 import math
 import sys
 from a_star import AStar
+from drivestraight import drive_straight
 from statistics import mean, median
 
 def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1, forward=1,Kp=2.5, Ki=0.1,Kd=0.1):
@@ -90,8 +91,7 @@ def main():
     a_star = AStar()
 
     arcdrive(a_star, radius=radius, leftTurn=leftTurn, arc=arc, speed=speed, forward=forward, Ki=Ki, Kp=Kp,Kd=Kd)
-    a_star.motors(0,0)
-    time.sleep(0.05)
+    drivestraight(a_star, dist=0.005)
     arcdrive(a_star, radius=radius, leftTurn=leftTurn*-1, arc=arc, speed=speed, forward=forward, Ki=Ki, Kp=Kp, Kd=Kd)
     # arcdrive(a_star, radius=radius, leftTurn=leftTurn, arc=arc, speed=speed, forward=forward, Ki=ki, Kp=kp)
     # arcdrive(a_star, radius=radius, leftTurn=leftTurn*-1, arc=arc, speed=speed, forward=forward, Ki=ki, Kp=kp)
