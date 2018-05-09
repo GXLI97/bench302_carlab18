@@ -213,21 +213,18 @@ def meander(a_star, q):
 
         
 def main():
-    SOCKET = False
-    if len(sys.argv) > 1:
-        SOCKET = True
+    host = '10.9.67.44' 
+    port = 50008
 
     a_star = AStar()
 
     ser = connect_to_serial()
 
-    if SOCKET:
-        host = '10.9.67.44' 
-        port = 50008
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.connect((host, port))
-    else:
-        s = None
+
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.connect((host, port))
+
+
 
     q = Queue()
     p = Process(target=read_distances, args=(ser, q, s))
