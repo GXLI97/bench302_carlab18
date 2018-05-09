@@ -114,8 +114,8 @@ def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1.5):
 def meander(a_star, q):
     # begin to read distances in a thread.
     
-    Kp = 80
-    Ki = 20
+    Kp = 40
+    Ki = 15
     Kd = 0
 
     # should fix this later.
@@ -130,10 +130,8 @@ def meander(a_star, q):
     OFFSET = 0
 
     while 1:
-        # arcdrive(a_star, radius=0.25, arc=larc, speed=1.5)
-        arcdrive(a_star, radius=0.25, arc=rarc, speed=1.5, leftTurn=-1)
         arcdrive(a_star, radius=0.25, arc=larc, speed=1.5)
-        return
+        arcdrive(a_star, radius=0.25, arc=rarc, speed=1.5, leftTurn=-1)
 
         dist_data = []
         while not q.empty():
