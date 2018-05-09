@@ -11,6 +11,7 @@ from arcdrive import arcdrive
 from turn import turn
 import numpy as np
 import socket
+import atexit
 # from arcdrive import arcdrive
 
 def connect_to_serial():
@@ -47,7 +48,7 @@ def parseDistance(s, ID="0C25"):
     # print(a)
     return float(a[-6*k -1])
 
-def read_distances(ser, q, s):
+def read_distances(ser, q, s, TARGETDIST=1):
     i = 0
     while 1:
         try:
@@ -57,7 +58,9 @@ def read_distances(ser, q, s):
             s.sendall((str(dist)+',').encode('utf-8'))
             # print("Distance: {:.2f}".format(dist))
             q.put_nowait(dist)
-            i += 1
+            if dist < TARGETDIST:
+                sys.exit()
+
         except:
             print("Read'n Parse failed")
             continue
@@ -69,7 +72,7 @@ def shutdown(ser, a_star, p, s):
     ser.close()
     p.terminate()
     a_star.motors(0, 0)
-    time.sleep(1)
+    time.sleep(2)
     s.close()
 
 def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1.5):
@@ -217,7 +220,8 @@ def meander(a_star, q):
 def main():
     host = '10.9.67.44' 
     port = 50008
-
+    TARGETDIST = 0.5
+    
     a_star = AStar()
 
     ser = connect_to_serial()
@@ -229,9 +233,10 @@ def main():
 
 
     q = Queue()
-    p = Process(target=read_distances, args=(ser, q, s))
+    p = Process(target=read_distances, args=(ser, q, s, TARGETDIST))
     p.start()
 
+    atexit.register(shutdown, ser, a_star, p, s)
     try:
         meander(a_star, q)
         shutdown(ser, a_star, p, s)

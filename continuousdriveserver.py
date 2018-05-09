@@ -11,15 +11,19 @@ from arcdrive import arcdrive
 from turn import turn
 import numpy as np
 import socket
+import atexit
 # from arcdrive import arcdrive
 
-def read_distances(q, conn):
+def read_distances(q, conn, TARGETDIST=1):
     while True:
         data = conn.recv(1024).decode()
         # print('Received {}'.format(data))
         data_arr = data.split(',')
         for i in range(len(data_arr) - 1):
-            q.put_nowait(float(data_arr[i]))
+            datum = float(data_arr[i])
+            q.put_nowait(datum)
+            if datum < TARGETDIST:
+                sys.exit()
     
 
 
@@ -76,7 +80,7 @@ def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1.5):
 def meander(a_star, q):
     SPEED = 1.75
     TARGETDIST = 0.5
-    
+
     Kp = 50
     Ki = 10
     Kd = 5
@@ -173,6 +177,7 @@ def meander(a_star, q):
 def main():
     host = '10.9.67.44' 
     port = 50008
+    TARGETDIST = 0.5
 
     a_star = AStar()
 
@@ -186,6 +191,7 @@ def main():
     p = Process(target=read_distances, args=(q, conn))
     p.start()
 
+    atexit.register(shutdown, a_star, p, conn, TARGETDIST)
     try:
         meander(a_star, q)
         shutdown(a_star, p, conn)
