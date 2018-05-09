@@ -30,7 +30,7 @@ def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1, forward=1,Kp=2.5, Ki=
         (Lcurr, Rcurr) = a_star.read_encoders()
 
         if forward == 1 and (Lcurr > Lfinal or Rcurr > Rfinal):
-            # print("Lcurr: {}\tLfinal: {}\tRcurr: {}\tRfinal: {}".format(Lcurr, Lfinal, Rcurr,Rfinal))
+            print("Lcurr: {}\tLfinal: {}\tRcurr: {}\tRfinal: {}".format(Lcurr, Lfinal, Rcurr,Rfinal))
             break
         if forward == -1 and (Lcurr < Lfinal or Rcurr < Rfinal):
             break
@@ -90,6 +90,8 @@ def main():
     a_star = AStar()
 
     arcdrive(a_star, radius=radius, leftTurn=leftTurn, arc=arc, speed=speed, forward=forward, Ki=Ki, Kp=Kp,Kd=Kd)
+    a_star.motors(0,0)
+    time.sleep(1)
     arcdrive(a_star, radius=radius, leftTurn=leftTurn*-1, arc=arc, speed=speed, forward=forward, Ki=Ki, Kp=Kp, Kd=Kd)
     # arcdrive(a_star, radius=radius, leftTurn=leftTurn, arc=arc, speed=speed, forward=forward, Ki=ki, Kp=kp)
     # arcdrive(a_star, radius=radius, leftTurn=leftTurn*-1, arc=arc, speed=speed, forward=forward, Ki=ki, Kp=kp)
