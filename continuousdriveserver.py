@@ -36,7 +36,7 @@ def shutdown(a_star, p, conn):
     p.terminate()
     conn.close()
 
-def arcdrive(a_star, v=None, radius, leftTurn=1, arc=180, speed=1.5):
+def arcdrive(a_star, radius, v=None, leftTurn=1, arc=180, speed=1.5):
     BOTDIAM = 149.
     WHEELDIAM = 70.
     ENCODERTICKS = 1440.
@@ -102,8 +102,8 @@ def meander(a_star, q, v):
 
     while 1:
 
-        arcdrive(a_star, v=v, radius=0.25, arc=larc, speed=SPEED)
-        arcdrive(a_star, v=v, radius=0.25, arc=rarc, speed=SPEED, leftTurn=-1)
+        arcdrive(a_star, radius=0.25, v=v, arc=larc, speed=SPEED)
+        arcdrive(a_star, radius=0.25, v=v, arc=rarc, speed=SPEED, leftTurn=-1)
         # print("\n================")
         # print("Getting Data")
         dist_data = []
@@ -159,7 +159,7 @@ def meander(a_star, q, v):
             # a_star.motors(0,0)
             # time.sleep(1)
             # turn(a_star, theta, clockwise=-1)
-            arcdrive(a_star, v=v, radius=0.25, arc=theta, speed=SPEED)
+            arcdrive(a_star, radius=0.25, v=v, arc=theta, speed=SPEED)
             # a_star.motors(0,0)
             # time.sleep(1)
         elif theta < -10:
@@ -167,7 +167,7 @@ def meander(a_star, q, v):
             # a_star.motors(0,0)
             # time.sleep(1)
             # turn(a_star, theta, clockwise=1)
-            arcdrive(a_star, v=v, radius=0.25, arc=-theta, speed=SPEED, leftTurn=-1)
+            arcdrive(a_star, radius=0.25, v=v, arc=-theta, speed=SPEED, leftTurn=-1)
             # a_star.motors(0,0)
             # time.sleep(1)
         else:
