@@ -72,8 +72,8 @@ def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1.5):
     WHEELDIAM = 70.
     ENCODERTICKS = 1440.
     OVERFLOW_BUFF = 65536
-    Kp = 1.5
-    Ki = 0.01
+    Kp = 3
+    Ki = 0.03
 
     errsum = 0
 
@@ -131,8 +131,8 @@ def meander(a_star, q):
     OFFSET = 0
 
     while 1:
-        arcdrive(a_star, radius=0.25, arc=larc, speed=1.5)
-        arcdrive(a_star, radius=0.25, arc=rarc, speed=1.5, leftTurn=-1)
+        arcdrive(a_star, radius=0.125, arc=larc, speed=1.5)
+        arcdrive(a_star, radius=0.125, arc=rarc, speed=1.5, leftTurn=-1)
 
         return
 
