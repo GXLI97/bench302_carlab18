@@ -16,7 +16,7 @@ import socket
 def read_distances(q, conn):
     while True:
         data = conn.recv(1024).decode()
-        print('Received {}'.format(data))
+        # print('Received {}'.format(data))
         data_arr = data.split(',')
         for i in range(len(data_arr) - 1):
             q.put_nowait(float(data_arr[i]))
@@ -186,10 +186,10 @@ def main():
 
     try:
         meander(a_star, q)
-        shutdown(ser, a_star, p, conn)
+        shutdown(a_star, p, conn)
     except (ErrorNumber, ErrorMessage):
         print(ErrorMessage)
-        shutdown(ser, a_star, p, conn)
+        shutdown(a_star, p, conn)
 
 
 

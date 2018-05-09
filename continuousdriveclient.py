@@ -54,7 +54,7 @@ def read_distances(ser, q, s):
             res = ser.readline()
             dist = parseDistance(res.decode('utf-8'))
             if not s is None:
-                print('Sending {}'.format(dist))
+                # print('Sending {}'.format(dist))
                 s.sendall((str(dist)+',').encode('utf-8'))
             # print("Distance: {:.2f}".format(dist))
             q.put_nowait(dist)
