@@ -74,7 +74,6 @@ def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1.5):
         time.sleep(0.005)
 
 def meander(a_star, q):
-    print('Start of meander')
     SPEED = 1.75
     
     Kp = 50
@@ -104,7 +103,7 @@ def meander(a_star, q):
         
         
 
-        if min(dist_data) < 1:
+        if len(dist_data) > 0 and min(dist_data) < 1:
             break
 
         d = np.array(dist_data)
