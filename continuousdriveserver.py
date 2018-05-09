@@ -188,7 +188,7 @@ def main():
     host = '10.9.67.44' 
     port = 50008
     TARGETDIST = 0.5
-    v = Value('bool', False)
+    v = Value(bool, False)
 
     global SHUTDOWNFLAG
     SHUTDOWNFLAG = False
