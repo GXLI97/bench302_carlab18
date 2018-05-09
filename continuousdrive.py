@@ -115,9 +115,9 @@ def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1.5):
 def meander(a_star, q):
     SPEED = 1.75
     
-    Kp = 60
-    Ki = 7
-    Kd = 10
+    Kp = 50
+    Ki = 5
+    Kd = 5
 
     # should fix this later.
     larc = 180
