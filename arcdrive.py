@@ -4,7 +4,7 @@ import sys
 from a_star import AStar
 from statistics import mean, median
 
-def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1, forward=1,Kp = 1.5,Ki = 0.01):
+def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1, forward=1,Kp = 1.5,Ki = 0.01,Kd=0):
     BOTDIAM = 149.
     WHEELDIAM = 70.
     ENCODERTICKS = 1440.
@@ -23,6 +23,7 @@ def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1, forward=1,Kp = 1.5,Ki
     print("Linit: {}\tLfinal: {}\tRinit: {}\tRfinal: {}".format(Linit, Lfinal, Rinit,Rfinal))
 
     (Lprev, Rprev) = (Linit, Rinit)
+    preverr = 0
     while 1:
         
         # get encoder reading
@@ -38,7 +39,9 @@ def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1, forward=1,Kp = 1.5,Ki
         # missing logic here to actually make the turn
         err = ((Lcurr - Lprev + OVERFLOW_BUFF) % OVERFLOW_BUFF)*(1000*radius + leftTurn*BOTDIAM/2)/(1000*radius) - ((Rcurr - Rprev + OVERFLOW_BUFF) % OVERFLOW_BUFF)*(1000*radius - leftTurn*BOTDIAM/2)/(1000*radius)
         errsum += err
-        errsig = Kp * err + Ki * errsum
+        errdiff = err - preverr
+        preverr = err
+        errsig = Kp * err + Ki * errsum + Kd * errdiff
         # print("{:.2f}".format(errsig))
         # write to motor
         motorL = speed*105*forward - errsig
@@ -66,11 +69,13 @@ def main():
         leftTurn = float(sys.argv[3])
         arc = float(sys.argv[2])
         radius = float(sys.argv[1])
+    elif len(sys.argv) >= 5:
+        kd = float(sys.argv[4])
+        ki = float(sys.argv[3])
+        kp =float(sys.argv[2])
+        leftTurn = float(sys.argv[1])
     elif len(sys.argv) >= 4:
-        arc = float(sys.argv[3])
-        ki = float(sys.argv[2])
-        kp =float(sys.argv[1])
-    elif len(sys.argv) >= 3:
+        kd = float(sys.argv[3])
         ki = float(sys.argv[2])
         kp =float(sys.argv[1])
     elif len(sys.argv) >= 2:
@@ -79,7 +84,7 @@ def main():
     # initialize our AStar motor controller.
     a_star = AStar()
 
-    arcdrive(a_star, radius=radius, leftTurn=leftTurn, arc=arc, speed=speed, forward=forward, Ki=ki, Kp=kp)
+    arcdrive(a_star, radius=radius, leftTurn=leftTurn, arc=arc, speed=speed, forward=forward, Ki=ki, Kp=kp,Kd=kd)
     # arcdrive(a_star, radius=radius, leftTurn=leftTurn*-1, arc=arc, speed=speed, forward=forward, Ki=ki, Kp=kp)
     # arcdrive(a_star, radius=radius, leftTurn=leftTurn, arc=arc, speed=speed, forward=forward, Ki=ki, Kp=kp)
     # arcdrive(a_star, radius=radius, leftTurn=leftTurn*-1, arc=arc, speed=speed, forward=forward, Ki=ki, Kp=kp)
