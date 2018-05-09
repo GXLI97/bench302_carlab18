@@ -1,4 +1,4 @@
-from multiprocessing import Process, Queue
+from multiprocessing import Process, Queue, Value
 import serial
 import time
 import random
@@ -16,7 +16,7 @@ import atexit
 
 
 
-def read_distances(q, conn, TARGETDIST=1):
+def read_distances(q, v, conn, TARGETDIST=1):
     while True:
         data = conn.recv(1024).decode()
         print('Received {}'.format(data))
@@ -26,7 +26,7 @@ def read_distances(q, conn, TARGETDIST=1):
             q.put_nowait(datum)
             if datum < TARGETDIST:
                 print('exiting...')
-                SHUTDOWNFLAG = True
+                v.value = True
                 return    
 
 
@@ -36,7 +36,7 @@ def shutdown(a_star, p, conn):
     p.terminate()
     conn.close()
 
-def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1.5):
+def arcdrive(a_star, v=None, radius, leftTurn=1, arc=180, speed=1.5):
     BOTDIAM = 149.
     WHEELDIAM = 70.
     ENCODERTICKS = 1440.
@@ -57,7 +57,8 @@ def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1.5):
 
     (Lprev, Rprev) = (Linit, Rinit)
     while 1:
-        if SHUTDOWNFLAG:
+        if v.value:
+            print('definitely exiting...')
             sys.exit()
         
         # get encoder reading
@@ -83,7 +84,7 @@ def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1.5):
         (Lprev, Rprev) = (Lcurr, Rcurr)
         time.sleep(0.005)
 
-def meander(a_star, q):
+def meander(a_star, q, v):
     SPEED = 1.75
     TARGETDIST = 0.5
 
@@ -101,8 +102,8 @@ def meander(a_star, q):
 
     while 1:
 
-        arcdrive(a_star, radius=0.25, arc=larc, speed=SPEED)
-        arcdrive(a_star, radius=0.25, arc=rarc, speed=SPEED, leftTurn=-1)
+        arcdrive(a_star, v=v, radius=0.25, arc=larc, speed=SPEED)
+        arcdrive(a_star, v=v, radius=0.25, arc=rarc, speed=SPEED, leftTurn=-1)
         # print("\n================")
         # print("Getting Data")
         dist_data = []
@@ -158,7 +159,7 @@ def meander(a_star, q):
             # a_star.motors(0,0)
             # time.sleep(1)
             # turn(a_star, theta, clockwise=-1)
-            arcdrive(a_star, radius=0.25, arc=theta, speed=SPEED)
+            arcdrive(a_star, v=v, radius=0.25, arc=theta, speed=SPEED)
             # a_star.motors(0,0)
             # time.sleep(1)
         elif theta < -10:
@@ -166,7 +167,7 @@ def meander(a_star, q):
             # a_star.motors(0,0)
             # time.sleep(1)
             # turn(a_star, theta, clockwise=1)
-            arcdrive(a_star, radius=0.25, arc=-theta, speed=SPEED, leftTurn=-1)
+            arcdrive(a_star, v=v, radius=0.25, arc=-theta, speed=SPEED, leftTurn=-1)
             # a_star.motors(0,0)
             # time.sleep(1)
         else:
@@ -187,6 +188,7 @@ def main():
     host = '10.9.67.44' 
     port = 50008
     TARGETDIST = 0.5
+    v = Value('V', False)
 
     global SHUTDOWNFLAG
     SHUTDOWNFLAG = False
@@ -200,11 +202,11 @@ def main():
     print("Connection from", addr)
 
     q = Queue()
-    p = Process(target=read_distances, args=(q, conn, TARGETDIST))
+    p = Process(target=read_distances, args=(q, v, conn, TARGETDIST))
     p.start()
 
     atexit.register(shutdown, a_star, p, conn)
-    meander(a_star, q)
+    meander(a_star, q, v)
     shutdown(a_star, p, conn)
     atexit.unregister(shutdown)
 
