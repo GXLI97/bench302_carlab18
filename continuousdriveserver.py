@@ -18,7 +18,7 @@ def read_distances(q, conn):
         data = conn.recv(1024).decode()
         print('Received {}'.format(data))
         data_arr = data.split(',')
-        for i in range(len(data_arr)):
+        for i in range(len(data_arr) - 1):
             q.put_nowait(float(data_arr[i]))
     
 
