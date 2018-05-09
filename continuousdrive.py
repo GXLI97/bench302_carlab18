@@ -223,7 +223,8 @@ def main():
     try:
         meander(a_star, q)
         shutdown(ser, a_star, p)
-    except:
+    except (ErrorNumber, ErrorMessage):
+        print(ErrorMessage)
         shutdown(ser, a_star, p)
 
 
