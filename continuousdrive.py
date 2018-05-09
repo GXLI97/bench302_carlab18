@@ -181,7 +181,7 @@ def meander(a_star, q):
             # a_star.motors(0,0)
             # time.sleep(1)
             # turn(a_star, theta, clockwise=-1)
-            arcdrive(a_star, radius=0.25, arc=theta, speed=1.5)
+            arcdrive(a_star, radius=0.25, arc=theta, speed=1.75)
             # a_star.motors(0,0)
             # time.sleep(1)
             while not q.empty():
@@ -193,7 +193,7 @@ def meander(a_star, q):
             # a_star.motors(0,0)
             # time.sleep(1)
             # turn(a_star, theta, clockwise=1)
-            arcdrive(a_star, radius=0.25, arc=-theta, speed=1.5, leftTurn=-1)
+            arcdrive(a_star, radius=0.25, arc=-theta, speed=1.75, leftTurn=-1)
             # a_star.motors(0,0)
             # time.sleep(1)
             while not q.empty():
