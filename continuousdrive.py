@@ -165,7 +165,7 @@ def meander(a_star, q):
         r_diff = r - r_prev 
         r_prev = r
         print("Errors: r={:.2f}, r_sum={:.2f}, r_diff={:.2f}".format(r, r_sum, r_diff))
-        theta = OFFSET + Kp * r + Ki * r_sum + Kd * r_diff
+        theta = Kp * r + Ki * r_sum + Kd * r_diff
 
         # if we are going directly away
         if m > .02/1.5*SPEED:
