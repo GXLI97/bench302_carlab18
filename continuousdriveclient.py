@@ -53,9 +53,8 @@ def read_distances(ser, q, s):
         try:
             res = ser.readline()
             dist = parseDistance(res.decode('utf-8'))
-            if not s is None:
-                # print('Sending {}'.format(dist))
-                s.sendall((str(dist)+',').encode('utf-8'))
+            # print('Sending {}'.format(dist))
+            s.sendall((str(dist)+',').encode('utf-8'))
             # print("Distance: {:.2f}".format(dist))
             q.put_nowait(dist)
             i += 1
@@ -70,8 +69,8 @@ def shutdown(ser, a_star, p, s):
     ser.close()
     p.terminate()
     a_star.motors(0, 0)
-    if not s is None:
-        s.close()
+    time.sleep(1)
+    s.close()
 
 def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1.5):
     BOTDIAM = 149.
