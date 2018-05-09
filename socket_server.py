@@ -13,7 +13,7 @@ while True:
     data = conn.recv(1024)
     if not data: break
     print("Recieved: "+(data))
-    response = raw_input("Reply: ")
+    response = input("Reply: ")
     if response == "exit":
         break
     conn.sendall(response)
