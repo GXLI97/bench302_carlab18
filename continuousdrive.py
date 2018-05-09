@@ -114,7 +114,7 @@ def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1.5):
 def meander(a_star, q):
     # begin to read distances in a thread.
     
-    Kp = 50
+    Kp = 40
     Ki = 7
     Kd = 0
 
@@ -155,9 +155,9 @@ def meander(a_star, q):
         print("R value: {:.3f}".format(r))
 
         # discretize R.
-        if r > 1:
+        if r > 0.7:
             r = 1
-        elif r < -1:
+        elif r < -0.7:
             r = -1
         else:
             r = 0
