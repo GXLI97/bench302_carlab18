@@ -201,7 +201,7 @@ def meander(a_star, q):
                 if data < 1:
                     break
         else:
-            print("straight\n")
+            print("straight")
             # a_star.motors(0,0)
             # time.sleep(1)
             while not q.empty():
