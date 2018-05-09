@@ -136,15 +136,15 @@ def meander(a_star, q):
     while 1:
         arcdrive(a_star, radius=0.25, arc=larc, speed=SPEED)
         arcdrive(a_star, radius=0.25, arc=rarc, speed=SPEED, leftTurn=-1)
-        print("\n================")
-        print("Getting Data")
+        # print("\n================")
+        # print("Getting Data")
         dist_data = []
         while not q.empty():
-            print(".", end="")
+            # print(".", end="")
             dist_datum = q.get()
             dist_data.append(dist_datum)
 
-        print("")
+        # print("")
         
         
         if len(dist_data) < 1:
@@ -161,8 +161,8 @@ def meander(a_star, q):
         sine = np.sin(2*math.pi / len(x) * x)
 
         r = np.dot(sine, normalized)
-        print("Line slope: {:.3f}".format(m))
-        print("R value: {:.3f}".format(r))
+        # print("Line slope: {:.3f}".format(m))
+        # print("R value: {:.3f}".format(r))
 
         # discretize R.
         if r > 0.7:
@@ -175,14 +175,14 @@ def meander(a_star, q):
         r_sum += r
         r_diff = r - r_prev 
         r_prev = r
-        print("Errors: r={:.2f}, r_sum={:.2f}, r_diff={:.2f}".format(r, r_sum, r_diff))
+        # print("Errors: r={:.2f}, r_sum={:.2f}, r_diff={:.2f}".format(r, r_sum, r_diff))
         theta = Kp * r + Ki * r_sum + Kd * r_diff
 
         # if we are going directly away
         if m > .02/1.5*SPEED:
             theta = 180
 
-        print("Theta calculation: {:.3f}".format(theta))
+        # print("Theta calculation: {:.3f}".format(theta))
 
         if theta > 10:
             print("left turn")
@@ -205,7 +205,7 @@ def meander(a_star, q):
             # a_star.motors(0,0)
             # time.sleep(1)
         
-        print("Emptying queue")
+        # print("Emptying queue")
         while not q.empty():
                 dist_datum = q.get()
                 if dist_datum < TARGETDIST:
