@@ -16,7 +16,7 @@ import atexit
 
 
 
-def read_distances(a_star, q, conn, TARGETDIST=1):
+def read_distances(q, conn, TARGETDIST=1):
     while True:
         data = conn.recv(1024).decode()
         print('Received {}'.format(data))
@@ -196,10 +196,10 @@ def main():
     s.bind((host, port))
     s.listen(1)
     conn, addr = s.accept()
-    print ("Connection from", addr)
+    print("Connection from", addr)
 
     q = Queue()
-    p = Process(target=read_distances, args=(a_star, q, conn))
+    p = Process(target=read_distances, args=(q, conn))
     p.start()
 
     atexit.register(shutdown, a_star, p, conn)
