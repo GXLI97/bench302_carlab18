@@ -236,15 +236,10 @@ def main():
     q = Queue()
     p = Process(target=read_distances, args=(ser, q, s, TARGETDIST))
     p.start()
-    p.join()
 
     atexit.register(shutdown, ser, a_star, p, s)
-    try:
-        meander(a_star, q)
-        shutdown(ser, a_star, p, s)
-    except (ErrorNumber, ErrorMessage):
-        print(ErrorMessage)
-        shutdown(ser, a_star, p, s)
+    meander(a_star, q)
+    shutdown(ser, a_star, p, s)
     atexit.unregister(shutdown)
 
 
