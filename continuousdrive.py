@@ -116,7 +116,7 @@ def meander(a_star, q):
     
     Kp = 60
     Ki = 10
-    Kd = 0
+    Kd = 5
 
     # should fix this later.
     larc = 180
@@ -170,7 +170,7 @@ def meander(a_star, q):
 
         # if we are going directly towards or directly away
         if m > .02:
-            theta = 150
+            theta = 180
 
         print("Theta calculation: {:.3f}".format(theta))
 
