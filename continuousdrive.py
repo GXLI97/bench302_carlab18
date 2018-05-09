@@ -114,8 +114,8 @@ def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1.5):
 def meander(a_star, q):
     # begin to read distances in a thread.
     
-    Kp = 40
-    Ki = 15
+    Kp = 50
+    Ki = 10
     Kd = 0
 
     # should fix this later.
@@ -139,7 +139,7 @@ def meander(a_star, q):
         
         print("================")
 
-        if mean(dist_data) < 1:
+        if min(dist_data) < 1:
             break
 
         d = np.array(dist_data)
@@ -182,7 +182,9 @@ def meander(a_star, q):
             # a_star.motors(0,0)
             # time.sleep(1)
             while not q.empty():
-                q.get_nowait()
+                data = q.get_nowait()
+                if data < 1:
+                    break
         elif theta < -10:
             print("right turn")
             # a_star.motors(0,0)
@@ -191,13 +193,17 @@ def meander(a_star, q):
             # a_star.motors(0,0)
             # time.sleep(1)
             while not q.empty():
-                q.get_nowait()
+                data = q.get_nowait()
+                if data < 1:
+                    break
         else:
             print("straight\n")
             # a_star.motors(0,0)
             # time.sleep(1)
             while not q.empty():
-                q.get_nowait()
+                data = q.get_nowait()
+                if data < 1:
+                    break
         # a_star.motors(0,0)
         # time.sleep(0.05)
 
