@@ -24,7 +24,7 @@ def read_distances(q, conn, TARGETDIST=1):
             q.put_nowait(datum)
             if datum < TARGETDIST:
                 print('exiting...')
-                sys.exit()
+                return
     
 
 
