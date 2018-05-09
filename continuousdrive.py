@@ -129,14 +129,14 @@ def meander(a_star, q):
     while 1:
         arcdrive(a_star, radius=0.25, arc=larc, speed=SPEED)
         arcdrive(a_star, radius=0.25, arc=rarc, speed=SPEED, leftTurn=-1)
-
+        print("\n================")
         print("Getting Data")
         dist_data = []
         while not q.empty():
             print(".", end="")
             dist_data.append(q.get_nowait())
         
-        print("\n================")
+        
 
         if min(dist_data) < 1:
             break
