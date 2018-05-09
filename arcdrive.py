@@ -65,8 +65,9 @@ def main():
     arc=180
     radius=1.0/4
     speed=1.5
-    ki = 0.1
-    kp = 2.0
+    Kp=2.5 
+    Ki=0.1
+    Kd=0.1
     if len(sys.argv) >= 6:
         forward = float(sys.argv[5])
         speed = float(sys.argv[4])
@@ -88,8 +89,8 @@ def main():
     # initialize our AStar motor controller.
     a_star = AStar()
 
-    arcdrive(a_star, radius=radius, leftTurn=leftTurn, arc=arc, speed=speed, forward=forward, Ki=ki, Kp=kp,Kd=kd)
-    arcdrive(a_star, radius=radius, leftTurn=leftTurn*-1, arc=arc, speed=speed, forward=forward, Ki=ki, Kp=kp)
+    arcdrive(a_star, radius=radius, leftTurn=leftTurn, arc=arc, speed=speed, forward=forward, Ki=Ki, Kp=Kp,Kd=Kd)
+    arcdrive(a_star, radius=radius, leftTurn=leftTurn*-1, arc=arc, speed=speed, forward=forward, Ki=Ki, Kp=Kp, Kd=Kd)
     # arcdrive(a_star, radius=radius, leftTurn=leftTurn, arc=arc, speed=speed, forward=forward, Ki=ki, Kp=kp)
     # arcdrive(a_star, radius=radius, leftTurn=leftTurn*-1, arc=arc, speed=speed, forward=forward, Ki=ki, Kp=kp)
 
