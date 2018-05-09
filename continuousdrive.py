@@ -120,8 +120,8 @@ def meander(a_star, q):
     Kd = 0
 
     # should fix this later.
-    larc = 200
-    rarc = 220
+    larc = 220
+    rarc = 240
 
     r = 0
     r_sum = 0
