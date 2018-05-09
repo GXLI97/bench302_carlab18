@@ -110,7 +110,6 @@ def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1.5):
         # print("Motors on {} {}".format(int(motorL), int(motorR)))
         # update previous
         (Lprev, Rprev) = (Lcurr, Rcurr)
-        time.sleep(0.01)
 
 def meander(a_star, q):
     # begin to read distances in a thread.
@@ -120,8 +119,8 @@ def meander(a_star, q):
     Kd = 0
 
     # should fix this later.
-    larc = 220
-    rarc = 240
+    larc = 180
+    rarc = 180
 
     r = 0
     r_sum = 0
