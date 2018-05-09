@@ -13,7 +13,7 @@ import numpy as np
 import socket
 # from arcdrive import arcdrive
 
-def read_distances(q, s):
+def read_distances(q, conn):
     while True:
         data = conn.recv(1024)
         q.put_nowait(float(data.decode()))
@@ -178,7 +178,7 @@ def main():
     print ("Connection from", addr)
 
     q = Queue()
-    p = Process(target=read_distances, args=(q, s))
+    p = Process(target=read_distances, args=(q, conn))
     p.start()
 
     try:
