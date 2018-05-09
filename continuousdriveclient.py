@@ -53,11 +53,11 @@ def read_distances(ser, q, v, s, TARGETDIST=1):
     while 1:
         try:
             res = ser.readline()
-            print(res.decode('utf-8'))
+            # print(res.decode('utf-8'))
             dist = parseDistance(res.decode('utf-8'))
-            print('Sending {}'.format(dist))
+            # print('Sending {}'.format(dist))
             s.sendall((str(dist)+',').encode('utf-8'))
-            print("Distance: {:.2f}".format(dist))
+            # print("Distance: {:.2f}".format(dist))
             q.put_nowait(dist)
             if dist < TARGETDIST:
                 print('exiting,,,')
@@ -225,7 +225,7 @@ def meander(a_star, q, v):
         
 def main():
     host = '10.9.67.44' 
-    port = 50008
+    port = 50009
     TARGETDIST = 0.5
 
     global SHUTDOWNFLAG

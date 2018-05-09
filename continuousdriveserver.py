@@ -19,7 +19,7 @@ import atexit
 def read_distances(q, v, conn, TARGETDIST=1):
     while True:
         data = conn.recv(1024).decode()
-        print('Received {}'.format(data))
+        # print('Received {}'.format(data))
         data_arr = data.split(',')
         for i in range(len(data_arr) - 1):
             datum = float(data_arr[i])
@@ -186,7 +186,7 @@ def meander(a_star, q, v):
         
 def main():
     host = '10.9.67.44' 
-    port = 50008
+    port = 50009
     TARGETDIST = 0.5
     v = Value('b', False)
 
