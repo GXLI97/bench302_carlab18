@@ -112,7 +112,7 @@ def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1.5):
         (Lprev, Rprev) = (Lcurr, Rcurr)
 
 def meander(a_star, q):
-    # begin to read distances in a thread.
+    SPEED = 2
     
     Kp = 60
     Ki = 10
@@ -126,12 +126,9 @@ def meander(a_star, q):
     r_sum = 0
     r_prev = 0
 
-    # ideally dont need this.
-    OFFSET = 0
-
     while 1:
-        arcdrive(a_star, radius=0.25, arc=larc, speed=1.75)
-        arcdrive(a_star, radius=0.25, arc=rarc, speed=1.75, leftTurn=-1)
+        arcdrive(a_star, radius=0.25, arc=larc, speed=SPEED)
+        arcdrive(a_star, radius=0.25, arc=rarc, speed=SPEED, leftTurn=-1)
 
         print("Getting Data")
         dist_data = []
@@ -170,8 +167,8 @@ def meander(a_star, q):
         print("Errors: r={:.2f}, r_sum={:.2f}, r_diff={:.2f}".format(r, r_sum, r_diff))
         theta = OFFSET + Kp * r + Ki * r_sum + Kd * r_diff
 
-        # if we are going directly towards or directly away
-        if m > .02:
+        # if we are going directly away
+        if m > .02/1.5*SPEED:
             theta = 180
 
         print("Theta calculation: {:.3f}".format(theta))
@@ -181,7 +178,7 @@ def meander(a_star, q):
             # a_star.motors(0,0)
             # time.sleep(1)
             # turn(a_star, theta, clockwise=-1)
-            arcdrive(a_star, radius=0.25, arc=theta, speed=1.75)
+            arcdrive(a_star, radius=0.25, arc=theta, speed=SPEED)
             # a_star.motors(0,0)
             # time.sleep(1)
             while not q.empty():
@@ -193,7 +190,7 @@ def meander(a_star, q):
             # a_star.motors(0,0)
             # time.sleep(1)
             # turn(a_star, theta, clockwise=1)
-            arcdrive(a_star, radius=0.25, arc=-theta, speed=1.75, leftTurn=-1)
+            arcdrive(a_star, radius=0.25, arc=-theta, speed=SPEED, leftTurn=-1)
             # a_star.motors(0,0)
             # time.sleep(1)
             while not q.empty():
