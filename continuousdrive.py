@@ -73,7 +73,7 @@ def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1.5):
     ENCODERTICKS = 1440.
     OVERFLOW_BUFF = 65536
     Kp = 20
-    Ki = 0.1
+    Ki = 0.15
 
     errsum = 0
 
