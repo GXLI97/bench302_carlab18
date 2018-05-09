@@ -58,10 +58,13 @@ def read_distances(ser, q):
         except:
             print("Read'n Parse failed")
             continue
+    
 
-def shutdown(ser, a_star):
+
+def shutdown(ser, a_star, p):
     ser.write(b'lec\r')
     ser.close()
+    p.terminate()
     a_star.motors(0, 0)
 
 # def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1.5):
@@ -209,12 +212,12 @@ def main():
     p = Process(target=read_distances, args=(ser, q))
     p.start()
 
+    try:
+        meander(a_star, q)
+        shutdown(ser, a_star, p)
+    except:
+        shutdown(ser, a_star, p)
 
-    meander(a_star, q)
-
-
-    shutdown(ser, a_star)
-    p.terminate()
 
 
 if __name__ == '__main__':
