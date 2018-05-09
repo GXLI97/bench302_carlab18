@@ -62,7 +62,7 @@ def read_distances(ser, q):
     
 
 
-def shutdown(ser, a_star, p):
+def shutdown(ser, a_star, p, s):
     ser.write(b'lec\r')
     ser.close()
     p.terminate()
