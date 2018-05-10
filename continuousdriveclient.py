@@ -58,6 +58,7 @@ def read_distances(ser, q, v, s, TARGETDIST=1):
             try:
                 s.sendall((str(dist)+',').encode('utf-8'))
             except:
+                pass
                 # print('failed to send data')
             q.put_nowait(dist)
             # print("Distance: {:.2f}".format(dist))
