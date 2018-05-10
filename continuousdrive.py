@@ -113,7 +113,7 @@ def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1.5):
         (Lprev, Rprev) = (Lcurr, Rcurr)
         time.sleep(0.005)
 
-def meander(a_star, q, Kp=1000, Ki=10, Kd=0):
+def meander(a_star, q, Kp=1000, Ki=1, Kd=0):
     SPEED = 1.75
     
     # For r control
@@ -134,6 +134,8 @@ def meander(a_star, q, Kp=1000, Ki=10, Kd=0):
     r = 0
     r_sum = 0
     r_prev = 0
+
+    theta_sum = 0
 
     while 1:
         arcdrive(a_star, radius=0.25, arc=larc, speed=SPEED)
@@ -182,7 +184,10 @@ def meander(a_star, q, Kp=1000, Ki=10, Kd=0):
         m_diff = m - m_prev
         prev_m = m
         m_sum += m
-        theta = 3000*m + 90
+        theta = 3000*m + 90 + Ki * theta_sum
+
+        theta_sum += theta
+
         if theta > 180:
             theta = 180
         elif theta < 0:
