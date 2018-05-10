@@ -200,17 +200,15 @@ def main():
     TARGETDIST = 0.5
     v = Value('b', False)
 
-    global SHUTDOWNFLAG
-    SHUTDOWNFLAG = False
-
     a_star = AStar()
 
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     s.bind((host, port))
+    print('Waiting for connection...')
     s.listen(1)
     conn, addr = s.accept()
-    print("Connection from", addr)
+    print("Connection successful from", addr)
 
     q = Queue()
     p = Process(target=read_distances, args=(q, v, conn, TARGETDIST))

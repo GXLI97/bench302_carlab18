@@ -21,7 +21,7 @@ def connect_to_serial():
         baudrate=115200,
         timeout=0.5
         )
-        print("connected successfully!")
+        print("Connected to serial port!")
     except:
         ser = serial.Serial(
         port='/dev/ttyACM1',
@@ -234,9 +234,6 @@ def main():
     port = 50009
     TARGETDIST = 0.5
 
-    global SHUTDOWNFLAG
-    SHUTDOWNFLAG = False
-
     a_star = AStar()
 
     ser = connect_to_serial()
@@ -244,6 +241,7 @@ def main():
 
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.connect((host, port))
+    print('Connected to {} on port {}'.format(host, port))
 
 
     v = Value('b', False)
