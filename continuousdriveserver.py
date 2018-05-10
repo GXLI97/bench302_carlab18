@@ -154,6 +154,9 @@ def meander(a_star, q, v):
 
         # print("Theta calculation: {:.3f}".format(theta))
 
+        a_star.motors(0,0)
+        time.sleep(1)
+        
         if theta > 10:
             print("left turn")
             # a_star.motors(0,0)
@@ -180,8 +183,8 @@ def meander(a_star, q, v):
             dist_datum = q.get()
             if dist_datum < TARGETDIST:
                 return
-        # a_star.motors(0,0)
-        # time.sleep(0.05)
+        a_star.motors(0,0)
+        time.sleep(1)
 
         
 def main():
