@@ -10,6 +10,7 @@ from drivestraight import drive_straight
 from arcdrive import arcdrive
 from turn import turn
 import numpy as np
+import atexit
 # from arcdrive import arcdrive
 
 def connect_to_serial():
@@ -215,12 +216,11 @@ def main():
     p = Process(target=read_distances, args=(ser, q))
     p.start()
 
-    try:
-        meander(a_star, q)
-        shutdown(ser, a_star, p)
-    except (ErrorNumber, ErrorMessage):
-        print(ErrorMessage)
-        shutdown(ser, a_star, p)
+    atexit.register(shutdown, a_star, p)
+    meander(a_star, q)
+    shutdown(ser, a_star, p)
+    atexit.unregister(shutdown)
+
 
 
 
