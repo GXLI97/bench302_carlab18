@@ -24,7 +24,7 @@ def read_distances(q, v, conn, TARGETDIST=1):
         for i in range(len(data_arr) - 1):
             datum = float(data_arr[i])
             q.put_nowait(datum)
-            if datum < TARGETDIST:
+            if datum < 2*TARGETDIST:
                 print('exiting...')
                 v.value = True
                 return    
@@ -158,7 +158,7 @@ def meander(a_star, q, v):
         # if we are going directly away
         if m > .024:
             theta = -180
-        if m < -.024 and mean(dist_data) < 2 * TARGETDIST:
+        if m < -.024 or mean(dist_data) < 2 * TARGETDIST:
             theta *= 0.3
         # if abs(m) < .008:
         #     if theta > 0:
