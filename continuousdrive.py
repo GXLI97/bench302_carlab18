@@ -228,6 +228,14 @@ def meander(a_star, q, Kp=1000, Ki=10, Kd=0):
 
         
 def main():
+    Kp=1000
+    Ki=10
+    Kd=1
+    if len(sys.argv) == 4:
+        Kp = sys.argv[1]
+        Ki = sys.argv[2]
+        Kd = sys.argv[3]
+
     a_star = AStar()
 
     ser = connect_to_serial()
@@ -237,7 +245,7 @@ def main():
     p.start()
 
     atexit.register(shutdown, ser, a_star, p)
-    meander(a_star, q)
+    meander(a_star, q, Kp=Kp, Ki=Ki, Kd=Kd)
     shutdown(ser, a_star, p)
     atexit.unregister(shutdown)
 
