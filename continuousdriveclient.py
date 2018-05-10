@@ -99,11 +99,12 @@ def arcdrive(a_star, radius, v=None, leftTurn=1, arc=180, speed=1.5):
 
     (Lprev, Rprev) = (Linit, Rinit)
     
-    TIMEOUT = 1
+    TIMEOUT = 2
     starttime = time.time()
 
     while 1:
         if time.time() > starttime+TIMEOUT:
+            print('Prematurely exited arcdrive')
             return
         if v.value:
             print('definitely exiting,,,')
