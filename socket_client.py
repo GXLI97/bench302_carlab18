@@ -11,7 +11,7 @@ s.sendall(initialMessage.encode('utf-8'))
  
 while True:
 	data = s.recv(1024)
-	print("Received: {}".format(int(data.decode()))
+	print("Received: {}".format(int(data.decode())))
 	response = input("Reply: ")
 	if response == "exit":
 		break
