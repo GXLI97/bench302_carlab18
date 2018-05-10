@@ -95,8 +95,8 @@ def meander(a_star, q, v):
     SPEED = 1.75
     TARGETDIST = 0.5
 
-    Kp = 50
-    Ki = 10
+    Kp = 80
+    Ki = 15
     Kd = 5
 
     # should fix this later.
