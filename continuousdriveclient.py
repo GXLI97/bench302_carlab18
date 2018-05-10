@@ -150,8 +150,8 @@ def meander(a_star, q, v):
 
     while 1:
 
-        arcdrive(a_star, radius=0.25, v=v, arc=larc, speed=SPEED)
-        arcdrive(a_star, radius=0.25, v=v, arc=rarc, speed=SPEED, leftTurn=-1)
+        arcdrive(a_star, radius=0.2, v=v, arc=larc, speed=SPEED)
+        arcdrive(a_star, radius=0.2, v=v, arc=rarc, speed=SPEED, leftTurn=-1)
         # print("\n================")
         # print("Getting Data")
         dist_data = []
@@ -211,7 +211,7 @@ def meander(a_star, q, v):
             # a_star.motors(0,0)
             # time.sleep(1)
             # turn(a_star, theta, clockwise=-1)
-            arcdrive(a_star, radius=0.25, v=v, arc=theta, speed=SPEED)
+            arcdrive(a_star, radius=0.2, v=v, arc=theta, speed=SPEED)
             # a_star.motors(0,0)
             # time.sleep(1)
         elif theta < -10:
@@ -219,7 +219,7 @@ def meander(a_star, q, v):
             # a_star.motors(0,0)
             # time.sleep(1)
             # turn(a_star, theta, clockwise=1)
-            arcdrive(a_star, radius=0.25, v=v, arc=-theta, speed=SPEED, leftTurn=-1)
+            arcdrive(a_star, radius=0.2, v=v, arc=-theta, speed=SPEED, leftTurn=-1)
             # a_star.motors(0,0)
             # time.sleep(1)
         else:
