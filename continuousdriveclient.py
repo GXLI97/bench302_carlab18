@@ -49,7 +49,7 @@ def parseDistance(s, ID="0C25"):
     return float(a[-6*k -1])
 
 def read_distances(ser, q, v, s, TARGETDIST=1):
-    i = 0
+    dist = ''
     while 1:
         try:
             res = ser.readline()
@@ -57,17 +57,17 @@ def read_distances(ser, q, v, s, TARGETDIST=1):
             dist = parseDistance(res.decode('utf-8'))
             # print('Sending {}'.format(dist))
             q.put_nowait(dist)
-            s.sendall((str(dist)+',').encode('utf-8'))
             # print("Distance: {:.2f}".format(dist))
             if dist < TARGETDIST:
                 print('exiting,,,')
                 v.value = True
                 return
-
         except:
             print("Read'n Parse failed")
-            continue
-    
+        try:
+            s.sendall((str(dist)+',').encode('utf-8'))
+        except:
+            print('failed to send data')
 
 
 def shutdown(ser, a_star, p, s):

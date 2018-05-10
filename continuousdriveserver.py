@@ -24,7 +24,7 @@ def read_distances(q, v, conn, TARGETDIST=1):
         for i in range(len(data_arr) - 1):
             datum = float(data_arr[i])
             q.put_nowait(datum)
-            if datum < 2*TARGETDIST:
+            if datum < 3*TARGETDIST:
                 print('exiting...')
                 v.value = True
                 return    
