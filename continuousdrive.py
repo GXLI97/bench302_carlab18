@@ -116,9 +116,18 @@ def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1.5):
 def meander(a_star, q):
     SPEED = 1.75
     
-    Kp = 50
+    # For r control
+    # Kp = 50
+    # Ki = 10
+    # Kd = 5
+
+    # For m control
+    Kp = 1000
     Ki = 10
-    Kd = 5
+    Kd = 0
+    m = 0
+    m_sum = 0
+    m_pre = 0
 
     # should fix this later.
     larc = 180
@@ -168,12 +177,25 @@ def meander(a_star, q):
         r_sum += r
         r_diff = r - r_prev 
         r_prev = r
-        print("Errors: r={:.2f}, r_sum={:.2f}, r_diff={:.2f}".format(r, r_sum, r_diff))
-        theta = Kp * r + Ki * r_sum + Kd * r_diff
+        # print("Errors: r={:.2f}, r_sum={:.2f}, r_diff={:.2f}".format(r, r_sum, r_diff))
+        # theta = Kp * r + Ki * r_sum + Kd * r_diff
 
-        # if we are going directly away
-        if m > .02/1.5*SPEED:
+
+        m_diff = m - m_prev
+        prev_m = m
+        m_sum += m
+        theta = Kp * m + Ki * m_sum + Kd * m_diff
+        theta += 90
+        if theta > 180:
             theta = 180
+        elif theta < 0:
+            theta = 0
+        if not r == 0:
+            theta *= r
+        print("Errors: m={:.2f}, m_sum={:.2f}, m_diff={:.2f}".format(m, m_sum, m_diff))
+        # if we are going directly away
+        # if m > .02/1.5*SPEED:
+        #     theta = 180
 
         print("Theta calculation: {:.3f}".format(theta))
 
@@ -198,7 +220,7 @@ def meander(a_star, q):
             # a_star.motors(0,0)
             # time.sleep(1)
         
-        print("Emptying queue")
+        # print("Emptying queue")
         while not q.empty():
                 data = q.get()
                 if data < 1:
