@@ -135,7 +135,7 @@ def meander(a_star, q, v):
 
     # should fix this later.
     larc = 180
-    rarc = 180
+    rarc = 160
 
     r = 0
     r_sum = 0
@@ -174,9 +174,9 @@ def meander(a_star, q, v):
         # print("R value: {:.3f}".format(r))
 
         # discretize R.
-        if r > 0.7:
+        if r > 0.5:
             r = 1
-        elif r < -0.7:
+        elif r < -0.5:
             r = -1
         else:
             r = 0
@@ -187,9 +187,15 @@ def meander(a_star, q, v):
         # print("Errors: r={:.2f}, r_sum={:.2f}, r_diff={:.2f}".format(r, r_sum, r_diff))
         theta = Kp * r + Ki * r_sum + Kd * r_diff
 
-        # if we are going directly away
-        if m > .02/1.5*SPEED:
-            theta = 180
+        if m > .024:
+            theta = -180
+        if m < -.024:
+            theta *= 0.3
+        if abs(m) < .008:
+            if theta > 0:
+                theta = 90
+            if theta < 0:
+                theta = -90
 
         # print("Theta calculation: {:.3f}".format(theta))
 
