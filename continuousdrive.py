@@ -73,8 +73,8 @@ def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1.5):
     WHEELDIAM = 70.
     ENCODERTICKS = 1440.
     OVERFLOW_BUFF = 65536
-    Kp = 20
-    Ki = 0.15
+    Kp = 25
+    Ki = 0.20
 
     errsum = 0
 
@@ -181,7 +181,7 @@ def meander(a_star, q, Kp=1000, Ki=.3, Kd=0):
         theta = Kp * r + Ki * r_sum + Kd * r_diff
 
         if m > .024:
-            theta = 180
+            theta = -180
         if m < -.024:
             theta *= 0.3
 
