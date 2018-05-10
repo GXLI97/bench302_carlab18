@@ -10,7 +10,6 @@ from drivestraight import drive_straight
 from arcdrive import arcdrive
 from turn import turn
 import numpy as np
-import socket
 # from arcdrive import arcdrive
 
 def connect_to_serial():
@@ -62,13 +61,11 @@ def read_distances(ser, q):
     
 
 
-def shutdown(ser, a_star, p, s):
+def shutdown(ser, a_star, p):
     ser.write(b'lec\r')
     ser.close()
     p.terminate()
     a_star.motors(0, 0)
-    if not s is None:
-        s.close()
 
 def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1.5):
     BOTDIAM = 149.
@@ -115,7 +112,7 @@ def arcdrive(a_star, radius, leftTurn=1, arc=180, speed=1.5):
         (Lprev, Rprev) = (Lcurr, Rcurr)
         time.sleep(0.005)
 
-def meander(a_star, q, s):
+def meander(a_star, q):
     SPEED = 1.75
     
     Kp = 50
@@ -138,10 +135,7 @@ def meander(a_star, q, s):
         dist_data = []
         while not q.empty():
             print(".", end="")
-            dist_datum = q.get()
-            if not s is None:
-                s.sendall(dist_datum.encode('utf-8'))
-            dist_data.append(dist_datum)
+            dist_data.append(q.get())
 
         print("")
         
@@ -205,42 +199,28 @@ def meander(a_star, q, s):
         
         print("Emptying queue")
         while not q.empty():
-                dist_datum = q.get()
-                if not s is None:
-                    s.sendall(dist_datum.encode('utf-8'))
-                if dist_datum < 1:
+                data = q.get()
+                if data < 1:
                     break
         # a_star.motors(0,0)
         # time.sleep(0.05)
 
         
 def main():
-    SOCKET = False
-    if len(sys.argv) > 1:
-        SOCKET = True
-
     a_star = AStar()
 
     ser = connect_to_serial()
-
-    if SOCKET:
-        host = '10.9.67.44' 
-        port = 50008
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.connect((host, port))
-    else:
-        s = None
 
     q = Queue()
     p = Process(target=read_distances, args=(ser, q))
     p.start()
 
     try:
-        meander(a_star, q, s)
-        shutdown(ser, a_star, p, s)
+        meander(a_star, q)
+        shutdown(ser, a_star, p)
     except (ErrorNumber, ErrorMessage):
         print(ErrorMessage)
-        shutdown(ser, a_star, p, s)
+        shutdown(ser, a_star, p)
 
 
 
