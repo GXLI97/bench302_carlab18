@@ -135,9 +135,9 @@ def meander(a_star, q, v):
         # print("R value: {:.3f}".format(r))
 
         # discretize R.
-        if r > 0.7:
+        if r > 0.5:
             r = 1
-        elif r < -0.7:
+        elif r < -0.5:
             r = -1
         else:
             r = 0
@@ -149,13 +149,20 @@ def meander(a_star, q, v):
         theta = Kp * r + Ki * r_sum + Kd * r_diff
 
         # if we are going directly away
-        if m > .02/1.5*SPEED:
-            theta = 180
+        if m > .024:
+            theta = -180
+        if m < -.024:
+            theta *= 0.3
+        if abs(m) < .008:
+            if theta > 0:
+                theta = 90
+            if theta < 0:
+                theta = -90
 
         # print("Theta calculation: {:.3f}".format(theta))
 
-        a_star.motors(0,0)
-        time.sleep(1)
+        # a_star.motors(0,0)
+        # time.sleep(1)
         
         if theta > 10:
             print("left turn")
@@ -183,8 +190,8 @@ def meander(a_star, q, v):
             dist_datum = q.get()
             if dist_datum < TARGETDIST:
                 return
-        a_star.motors(0,0)
-        time.sleep(1)
+        # a_star.motors(0,0)
+        # time.sleep(1)
 
         
 def main():
