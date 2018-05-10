@@ -216,7 +216,7 @@ def main():
     p = Process(target=read_distances, args=(ser, q))
     p.start()
 
-    atexit.register(shutdown, a_star, p)
+    atexit.register(shutdown, ser, a_star, p)
     meander(a_star, q)
     shutdown(ser, a_star, p)
     atexit.unregister(shutdown)
