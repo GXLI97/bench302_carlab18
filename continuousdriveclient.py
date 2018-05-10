@@ -141,8 +141,12 @@ def meander(a_star, q, v):
     r_sum = 0
     r_prev = 0
 
+    TIMEOUT = 1
+    starttime = time.time()
     while 1:
-
+        if time.time() > starttime+TIMEOUT:
+            return
+            
         arcdrive(a_star, radius=0.25, v=v, arc=larc, speed=SPEED)
         arcdrive(a_star, radius=0.25, v=v, arc=rarc, speed=SPEED, leftTurn=-1)
         # print("\n================")
