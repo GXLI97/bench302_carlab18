@@ -167,9 +167,9 @@ def meander(a_star, q, Kp=1000, Ki=.3, Kd=0):
         print("R value: {:.3f}".format(r))
 
         # discretize R.
-        if r > 0.7:
+        if r > 0.5:
             r = 1
-        elif r < -0.7:
+        elif r < -0.5:
             r = -1
         else:
             r = 0
@@ -185,7 +185,7 @@ def meander(a_star, q, Kp=1000, Ki=.3, Kd=0):
         if m < -.024:
             theta *= 0.3
         if abs(m) < .008:
-            if theta >= 0:
+            if theta > 0:
                 theta = 90
             if theta < 0:
                 theta = -90
