@@ -189,7 +189,7 @@ def meander(a_star, q, v):
 
         if m > .024:
             theta = -180
-        if m < -.024:
+        if m < -.024 or mean(dist_data) < 2*TARGETDIST:
             theta *= 0.3
         # if abs(m) < .008:
         #     if theta > 0:
