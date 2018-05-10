@@ -13,8 +13,8 @@ while True:
     data = conn.recv(1024)
     if not data: break
     print("Received: "+(data.decode()))
-    # response = input("Reply: ")
-    # if response == "exit":
-    #     break
-    # conn.sendall(response.encode())
+    response = input("Reply: ")
+    if response == "exit":
+        break
+    conn.sendall(response.encode())
 conn.close()
