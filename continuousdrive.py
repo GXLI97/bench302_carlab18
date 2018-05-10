@@ -129,7 +129,7 @@ def meander(a_star, q, Kp=1000, Ki=.3, Kd=0):
 
     # should fix this later.
     larc = 180
-    rarc = 180
+    rarc = 160
 
     r = 0
     r_sum = 0
