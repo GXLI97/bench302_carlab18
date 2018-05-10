@@ -98,7 +98,13 @@ def arcdrive(a_star, radius, v=None, leftTurn=1, arc=180, speed=1.5):
     #print("Linit: {}\tLfinal: {}\tRinit: {}\tRfinal: {}".format(Linit, Lfinal, Rinit,Rfinal))
 
     (Lprev, Rprev) = (Linit, Rinit)
+    
+    TIMEOUT = 1
+    starttime = time.time()
+
     while 1:
+        if time.time() > starttime+TIMEOUT:
+            return
         if v.value:
             print('definitely exiting,,,')
             sys.exit()
@@ -141,12 +147,8 @@ def meander(a_star, q, v):
     r_sum = 0
     r_prev = 0
 
-    TIMEOUT = 1
-    starttime = time.time()
     while 1:
-        if time.time() > starttime+TIMEOUT:
-            return
-            
+
         arcdrive(a_star, radius=0.25, v=v, arc=larc, speed=SPEED)
         arcdrive(a_star, radius=0.25, v=v, arc=rarc, speed=SPEED, leftTurn=-1)
         # print("\n================")
