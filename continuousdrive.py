@@ -184,10 +184,8 @@ def meander(a_star, q, Kp=1000, Ki=.3, Kd=0):
         m_diff = m - m_prev
         prev_m = m
         m_sum += m
-        theta = 3000*m + 90 + Ki * theta_sum
-
-        theta_sum += theta
-
+        theta = Kp*m + Ki*m_sum + Kd*m_diff 
+        theta += 90
         if theta > 180:
             theta = 180
         elif theta < 0:
