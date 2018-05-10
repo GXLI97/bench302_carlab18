@@ -232,9 +232,9 @@ def main():
     Ki=10
     Kd=1
     if len(sys.argv) == 4:
-        Kp = sys.argv[1]
-        Ki = sys.argv[2]
-        Kd = sys.argv[3]
+        Kp = float(sys.argv[1])
+        Ki = float(sys.argv[2])
+        Kd = float(sys.argv[3])
 
     a_star = AStar()
 
