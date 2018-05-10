@@ -191,11 +191,11 @@ def meander(a_star, q, v):
             theta = -180
         if m < -.024:
             theta *= 0.3
-        if abs(m) < .008:
-            if theta > 0:
-                theta = 90
-            if theta < 0:
-                theta = -90
+        # if abs(m) < .008:
+        #     if theta > 0:
+        #         theta = 90
+        #     if theta < 0:
+        #         theta = -90
 
         # print("Theta calculation: {:.3f}".format(theta))
 
