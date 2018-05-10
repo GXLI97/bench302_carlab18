@@ -185,13 +185,14 @@ def meander(a_star, q, Kp=1000, Ki=.3, Kd=0):
         prev_m = m
         m_sum += m
         theta = Kp*m + Ki*m_sum + Kd*m_diff 
-        theta += 90
         if theta > 180:
             theta = 180
         elif theta < 0:
             theta = 0
         if not r == 0:
             theta *= r
+            theta += 90
+        
         print("Errors: m={:.2f}, m_sum={:.2f}, m_diff={:.2f}".format(m, m_sum, m_diff))
         # if we are going directly away
         # if m > .02/1.5*SPEED:
