@@ -117,15 +117,15 @@ def meander(a_star, q, Kp=1000, Ki=.3, Kd=0):
     SPEED = 1.75
     
     # For r control
-    # Kp = 50
-    # Ki = 10
-    # Kd = 5
+    Kp = 50
+    Ki = 10
+    Kd = 5
 
-    # For m control
+    # # For m control
     
-    m = 0
-    m_sum = 0
-    m_prev = 0
+    # m = 0
+    # m_sum = 0
+    # m_prev = 0
 
     # should fix this later.
     larc = 180
@@ -177,23 +177,30 @@ def meander(a_star, q, Kp=1000, Ki=.3, Kd=0):
         r_sum += r
         r_diff = r - r_prev 
         r_prev = r
-        # print("Errors: r={:.2f}, r_sum={:.2f}, r_diff={:.2f}".format(r, r_sum, r_diff))
-        # theta = Kp * r + Ki * r_sum + Kd * r_diff
+        print("Errors: r={:.2f}, r_sum={:.2f}, r_diff={:.2f}".format(r, r_sum, r_diff))
+        theta = Kp * r + Ki * r_sum + Kd * r_diff
 
-
-        m_diff = m - m_prev
-        prev_m = m
-        m_sum += m
-        theta = Kp*m + Ki*m_sum + Kd*m_diff 
-        if theta > 180:
+        if m > .024:
             theta = 180
-        elif theta < 0:
-            theta = 0
-        if not r == 0:
-            theta *= r
-            theta += 90
+        if m < -.024:
+            theta *= 0.3
+
+
+        # m_diff = m - m_prev
+        # prev_m = m
+        # m_sum += m
+        # theta = Kp*m + Ki*m_sum + Kd*m_diff 
+        # if theta > 180:
+        #     theta = 180
+        # elif theta < 0:
+        #     theta = 0
+        # if r == 0 :
+        # if not r == 0:
+        #     theta *= r
+        #     theta += 90
+
         
-        print("Errors: m={:.2f}, m_sum={:.2f}, m_diff={:.2f}".format(m, m_sum, m_diff))
+        # print("Errors: m={:.2f}, m_sum={:.2f}, m_diff={:.2f}".format(m, m_sum, m_diff))
         # if we are going directly away
         # if m > .02/1.5*SPEED:
         #     theta = 180
