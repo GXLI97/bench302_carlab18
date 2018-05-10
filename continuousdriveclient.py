@@ -56,9 +56,9 @@ def read_distances(ser, q, v, s, TARGETDIST=1):
             # print(res.decode('utf-8'))
             dist = parseDistance(res.decode('utf-8'))
             # print('Sending {}'.format(dist))
+            q.put_nowait(dist)
             s.sendall((str(dist)+',').encode('utf-8'))
             # print("Distance: {:.2f}".format(dist))
-            q.put_nowait(dist)
             if dist < TARGETDIST:
                 print('exiting,,,')
                 v.value = True
