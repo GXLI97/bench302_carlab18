@@ -42,18 +42,16 @@ def parseDistance(s, ID="0C25"):
 
     # DIST,2,AN0,820C,0.00,0.00,0.00,7.24,AN1,0C25,0.00,0.00,0.00,2.55
     a = s.strip().split(',')
-    k = 0
-    while not a[-6*k -5] == ID:
-        k += 1
-    # print(a)
-    return float(a[-6*k -1])
+    k = a.index(ID)
+    return float(a[k+4])
+
 
 def read_distances(ser, q, v, s, TARGETDIST=1):
     while 1:
         try:
-            res = ser.readline()
+            res = ser.readline().decode('utf-8')
             # print(res.decode('utf-8'))
-            dist = parseDistance(res.decode('utf-8'))
+            dist = parseDistance(res)
             # print('Sending {}'.format(dist))
             try:
                 s.sendall((str(dist)+',').encode('utf-8'))
@@ -67,7 +65,8 @@ def read_distances(ser, q, v, s, TARGETDIST=1):
                 v.value = True
                 return
         except:
-            print("Read'n Parse failed")
+            print("Read'n Parse failed on:\n{}".format(res))
+
         
 
 
