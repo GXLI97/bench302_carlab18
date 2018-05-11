@@ -41,12 +41,8 @@ def connect_to_serial():
 def parseDistance(s, ID="0C25"):
 
     # DIST,2,AN0,820C,0.00,0.00,0.00,7.24,AN1,0C25,0.00,0.00,0.00,2.55
-    print(s)
     a = s.strip().split(',')
-    print(a)
     k = a.index(ID)
-    print(k)
-    print(float(a[k+4]))
     return float(a[k+4])
 
 

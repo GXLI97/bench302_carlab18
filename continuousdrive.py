@@ -49,7 +49,7 @@ def read_distances(ser, q):
     while 1:
         try:
             res = ser.readline().decode('utf-8')
-            dist = parseDistance()
+            dist = parseDistance(res)
             # print("Distance: {:.2f}".format(dist))
             q.put_nowait(dist)
             i += 1
