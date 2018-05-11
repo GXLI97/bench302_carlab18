@@ -92,7 +92,7 @@ def arcdrive(a_star, radius, v=None, leftTurn=1, arc=180, speed=1.5):
         time.sleep(0.005)
 
 def meander(a_star, q, v):
-    SPEED = 1.75
+    SPEED = 1.5
     TARGETDIST = 0.5
 
     Kp = 80
